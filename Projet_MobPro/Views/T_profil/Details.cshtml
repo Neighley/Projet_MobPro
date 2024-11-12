@@ -1,0 +1,106 @@
+﻿@model Projet_MobPro.Models.T_profil
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_profil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_naissance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_naissance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adresse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.code_postal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.code_postal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ville)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ville)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ruelle_p)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ruelle_p)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_niveau_experience.nom_niveau_experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_niveau_experience.nom_niveau_experience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_role.nom_role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_role.nom_role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_type_contrat.nom_type_contrat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,56 @@
+﻿@model Projet_MobPro.Models.T_profil_langues
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>T_profil_langues</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.level_langues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.level_langues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_langues.nom_langue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_langues.nom_langue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_profil.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_profil.nom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,48 @@
+﻿@model Projet_MobPro.Models.T_entreprise
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>T_entreprise</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_num_tel.telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_num_tel.telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_site.adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_site.adresse)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

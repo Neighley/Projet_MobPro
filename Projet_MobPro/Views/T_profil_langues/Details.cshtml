@@ -1,0 +1,50 @@
+﻿@model Projet_MobPro.Models.T_profil_langues
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_profil_langues</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.level_langues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.level_langues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_langues.nom_langue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_langues.nom_langue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_profil.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_profil.nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
