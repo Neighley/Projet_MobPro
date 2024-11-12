@@ -29,11 +29,9 @@ namespace Projet_MobPro.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<T_competences> T_competences { get; set; }
         public virtual DbSet<T_entreprise> T_entreprise { get; set; }
         public virtual DbSet<T_langues> T_langues { get; set; }
-        public virtual DbSet<T_niveau_experience> T_niveau_experience { get; set; }
         public virtual DbSet<T_num_tel> T_num_tel { get; set; }
         public virtual DbSet<T_offre_emploi> T_offre_emploi { get; set; }
         public virtual DbSet<T_profil> T_profil { get; set; }
@@ -43,5 +41,6 @@ namespace Projet_MobPro.Models
         public virtual DbSet<T_site> T_site { get; set; }
         public virtual DbSet<T_statut> T_statut { get; set; }
         public virtual DbSet<T_type_contrat> T_type_contrat { get; set; }
+        public virtual DbSet<T_niveau_experience> T_niveau_experience { get; set; }
     }
 }
