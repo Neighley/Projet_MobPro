@@ -270,6 +270,8 @@
     <Content Include="App_Data\Mobilite_Pro_BDD_log.ldf">
       <DependentUpon>Mobilite_Pro_BDD.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\ScriptBDD\Add_AutoIncrement_In_Tables.sql" />
+    <Content Include="App_Data\ScriptBDD\Add_Role_In_AspNetUser.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile1.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile2.SQL" />
     <Content Include="App_Data\ScriptBDD\TextFile3.sql" />
@@ -375,11 +377,6 @@
     <Content Include="Views\AspNetUserLogins\Details.cshtml" />
     <Content Include="Views\AspNetUserLogins\Edit.cshtml" />
     <Content Include="Views\AspNetUserLogins\Index.cshtml" />
-    <Content Include="Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Views\AspNetUsers\Edit.cshtml" />
-    <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\T_competences\Create.cshtml" />
     <Content Include="Views\T_competences\Delete.cshtml" />
     <Content Include="Views\T_competences\Details.cshtml" />
@@ -445,6 +442,11 @@
     <Content Include="Views\T_type_contrat\Details.cshtml" />
     <Content Include="Views\T_type_contrat\Edit.cshtml" />
     <Content Include="Views\T_type_contrat\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

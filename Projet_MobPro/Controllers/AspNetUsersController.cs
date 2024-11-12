@@ -17,7 +17,8 @@ namespace Projet_MobPro.Controllers
         // GET: AspNetUsers
         public ActionResult Index()
         {
-            return View(db.AspNetUsers.ToList());
+            var aspNetUsers = db.AspNetUsers.Include(a => a.T_role);
+            return View(aspNetUsers.ToList());
         }
 
         // GET: AspNetUsers/Details/5
@@ -38,6 +39,7 @@ namespace Projet_MobPro.Controllers
         // GET: AspNetUsers/Create
         public ActionResult Create()
         {
+            ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUsers aspNetUsers)
+        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,role_id")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace Projet_MobPro.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", aspNetUsers.role_id);
             return View(aspNetUsers);
         }
 
@@ -70,6 +73,7 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", aspNetUsers.role_id);
             return View(aspNetUsers);
         }
 
@@ -78,7 +82,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUsers aspNetUsers)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,role_id")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace Projet_MobPro.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", aspNetUsers.role_id);
             return View(aspNetUsers);
         }
 

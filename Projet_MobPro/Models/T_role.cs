@@ -18,6 +18,7 @@ namespace Projet_MobPro.Models
         public T_role()
         {
             this.T_profil = new HashSet<T_profil>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
         public int id { get; set; }
@@ -25,5 +26,7 @@ namespace Projet_MobPro.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil> T_profil { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

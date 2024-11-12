@@ -30,21 +30,20 @@
             @Html.DisplayNameFor(model => model.ville)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ruelle_p)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </th>
-        <th>
+        <!--<th>
             @Html.DisplayNameFor(model => model.T_niveau_experience.nom_niveau_experience)
-        </th>
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.T_role.nom_role)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
         </th>
-        <th></th>
+        <th>
+            Actions
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -68,14 +67,11 @@
             @Html.DisplayFor(modelItem => item.ville)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ruelle_p)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
-        <td>
+        <!--<td>
             @Html.DisplayFor(modelItem => item.T_niveau_experience.nom_niveau_experience)
-        </td>
+        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.T_role.nom_role)
         </td>

@@ -55,19 +55,20 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="role_id" Type="int" />
         </EntityType>
         <EntityType Name="T_competences">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_competence" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="T_entreprise">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom" Type="nvarchar" MaxLength="255" />
           <Property Name="num_tel_id" Type="int" />
           <Property Name="site_id" Type="int" />
@@ -76,14 +77,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_langue" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="T_niveau_experience">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_niveau_experience" Type="varchar" MaxLength="255" />
           <Property Name="domaine" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -91,14 +92,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="telephone" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="T_offre_emploi">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom" Type="nvarchar" MaxLength="255" />
           <Property Name="description" Type="nvarchar(max)" />
           <Property Name="date_publication" Type="date" />
@@ -133,7 +134,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom" Type="nvarchar" MaxLength="255" />
           <Property Name="prenom" Type="nvarchar" MaxLength="255" />
           <Property Name="date_naissance" Type="date" />
@@ -172,14 +173,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_role" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="T_site">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="adresse" Type="nvarchar" MaxLength="255" />
           <Property Name="code_postal" Type="nvarchar" MaxLength="10" />
           <Property Name="ville" Type="nvarchar" MaxLength="100" />
@@ -188,17 +189,17 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="statut" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="T_type_contrat">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_type_contrat" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__T_entrepr__num_t__5CD6CB2B">
+        <Association Name="FK__T_entrepr__num_t__3F115E1A">
           <End Role="T_num_tel" Type="Self.T_num_tel" Multiplicity="0..1" />
           <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -210,7 +211,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_entrepr__site___5DCAEF64">
+        <Association Name="FK__T_entrepr__site___3E1D39E1">
           <End Role="T_site" Type="Self.T_site" Multiplicity="0..1" />
           <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -222,7 +223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__compe__628FA481">
+        <Association Name="FK__T_offre_e__compe__42E1EEFE">
           <End Role="T_competences" Type="Self.T_competences" Multiplicity="1" />
           <End Role="T_offre_emploi_competences" Type="Self.T_offre_emploi_competences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,7 +235,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__entre__5EBF139D">
+        <Association Name="FK__T_offre_e__entre__3D2915A8">
           <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="0..1" />
           <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -246,7 +247,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__langu__6477ECF3">
+        <Association Name="FK__T_offre_e__langu__3A4CA8FD">
           <End Role="T_langues" Type="Self.T_langues" Multiplicity="1" />
           <End Role="T_offre_emploi_langues" Type="Self.T_offre_emploi_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -258,7 +259,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__offre__6383C8BA">
+        <Association Name="FK__T_offre_e__offre__2BFE89A6">
           <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="1" />
           <End Role="T_offre_emploi_competences" Type="Self.T_offre_emploi_competences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -270,7 +271,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__offre__656C112C">
+        <Association Name="FK__T_offre_e__offre__2CF2ADDF">
           <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="1" />
           <End Role="T_offre_emploi_langues" Type="Self.T_offre_emploi_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,7 +283,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__site___5FB337D6">
+        <Association Name="FK__T_offre_e__site___2DE6D218">
           <End Role="T_site" Type="Self.T_site" Multiplicity="0..1" />
           <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -294,7 +295,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__statu__60A75C0F">
+        <Association Name="FK__T_offre_e__statu__2EDAF651">
           <End Role="T_statut" Type="Self.T_statut" Multiplicity="0..1" />
           <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -306,7 +307,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__type___619B8048">
+        <Association Name="FK__T_offre_e__type___2FCF1A8A">
           <End Role="T_type_contrat" Type="Self.T_type_contrat" Multiplicity="0..1" />
           <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -318,7 +319,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___compe__693CA210">
+        <Association Name="FK__T_profil___compe__41EDCAC5">
           <End Role="T_competences" Type="Self.T_competences" Multiplicity="1" />
           <End Role="T_profil_competences" Type="Self.T_profil_competences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -330,7 +331,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___langu__6B24EA82">
+        <Association Name="FK__T_profil___langu__395884C4">
           <End Role="T_langues" Type="Self.T_langues" Multiplicity="1" />
           <End Role="T_profil_langues" Type="Self.T_profil_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -342,7 +343,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___profi__6A30C649">
+        <Association Name="FK__T_profil___profi__19DFD96B">
           <End Role="T_profil" Type="Self.T_profil" Multiplicity="1" />
           <End Role="T_profil_competences" Type="Self.T_profil_competences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -354,7 +355,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___profi__6C190EBB">
+        <Association Name="FK__T_profil___profi__1AD3FDA4">
           <End Role="T_profil" Type="Self.T_profil" Multiplicity="1" />
           <End Role="T_profil_langues" Type="Self.T_profil_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -366,7 +367,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil__role_i__66603565">
+        <Association Name="FK__T_profil__role_i__1EA48E88">
           <End Role="T_role" Type="Self.T_role" Multiplicity="0..1" />
           <End Role="T_profil" Type="Self.T_profil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -378,7 +379,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil__type_c__6754599E">
+        <Association Name="FK__T_profil__type_c__282DF8C2">
           <End Role="T_type_contrat" Type="Self.T_type_contrat" Multiplicity="0..1" />
           <End Role="T_profil" Type="Self.T_profil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -387,6 +388,18 @@
             </Principal>
             <Dependent Role="T_profil">
               <PropertyRef Name="type_contrat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_T_role">
+          <End Role="T_role" Type="Self.T_role" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="role_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -491,69 +504,73 @@
           <EntitySet Name="T_site" EntityType="Self.T_site" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_statut" EntityType="Self.T_statut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_type_contrat" EntityType="Self.T_type_contrat" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__T_entrepr__num_t__5CD6CB2B" Association="Self.FK__T_entrepr__num_t__5CD6CB2B">
+          <AssociationSet Name="FK__T_entrepr__num_t__3F115E1A" Association="Self.FK__T_entrepr__num_t__3F115E1A">
             <End Role="T_num_tel" EntitySet="T_num_tel" />
             <End Role="T_entreprise" EntitySet="T_entreprise" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_entrepr__site___5DCAEF64" Association="Self.FK__T_entrepr__site___5DCAEF64">
+          <AssociationSet Name="FK__T_entrepr__site___3E1D39E1" Association="Self.FK__T_entrepr__site___3E1D39E1">
             <End Role="T_site" EntitySet="T_site" />
             <End Role="T_entreprise" EntitySet="T_entreprise" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__compe__628FA481" Association="Self.FK__T_offre_e__compe__628FA481">
+          <AssociationSet Name="FK__T_offre_e__compe__42E1EEFE" Association="Self.FK__T_offre_e__compe__42E1EEFE">
             <End Role="T_competences" EntitySet="T_competences" />
             <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__entre__5EBF139D" Association="Self.FK__T_offre_e__entre__5EBF139D">
+          <AssociationSet Name="FK__T_offre_e__entre__3D2915A8" Association="Self.FK__T_offre_e__entre__3D2915A8">
             <End Role="T_entreprise" EntitySet="T_entreprise" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__langu__6477ECF3" Association="Self.FK__T_offre_e__langu__6477ECF3">
+          <AssociationSet Name="FK__T_offre_e__langu__3A4CA8FD" Association="Self.FK__T_offre_e__langu__3A4CA8FD">
             <End Role="T_langues" EntitySet="T_langues" />
             <End Role="T_offre_emploi_langues" EntitySet="T_offre_emploi_langues" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__offre__6383C8BA" Association="Self.FK__T_offre_e__offre__6383C8BA">
+          <AssociationSet Name="FK__T_offre_e__offre__2BFE89A6" Association="Self.FK__T_offre_e__offre__2BFE89A6">
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
             <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__offre__656C112C" Association="Self.FK__T_offre_e__offre__656C112C">
+          <AssociationSet Name="FK__T_offre_e__offre__2CF2ADDF" Association="Self.FK__T_offre_e__offre__2CF2ADDF">
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
             <End Role="T_offre_emploi_langues" EntitySet="T_offre_emploi_langues" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__site___5FB337D6" Association="Self.FK__T_offre_e__site___5FB337D6">
+          <AssociationSet Name="FK__T_offre_e__site___2DE6D218" Association="Self.FK__T_offre_e__site___2DE6D218">
             <End Role="T_site" EntitySet="T_site" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__statu__60A75C0F" Association="Self.FK__T_offre_e__statu__60A75C0F">
+          <AssociationSet Name="FK__T_offre_e__statu__2EDAF651" Association="Self.FK__T_offre_e__statu__2EDAF651">
             <End Role="T_statut" EntitySet="T_statut" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__type___619B8048" Association="Self.FK__T_offre_e__type___619B8048">
+          <AssociationSet Name="FK__T_offre_e__type___2FCF1A8A" Association="Self.FK__T_offre_e__type___2FCF1A8A">
             <End Role="T_type_contrat" EntitySet="T_type_contrat" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___compe__693CA210" Association="Self.FK__T_profil___compe__693CA210">
+          <AssociationSet Name="FK__T_profil___compe__41EDCAC5" Association="Self.FK__T_profil___compe__41EDCAC5">
             <End Role="T_competences" EntitySet="T_competences" />
             <End Role="T_profil_competences" EntitySet="T_profil_competences" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___langu__6B24EA82" Association="Self.FK__T_profil___langu__6B24EA82">
+          <AssociationSet Name="FK__T_profil___langu__395884C4" Association="Self.FK__T_profil___langu__395884C4">
             <End Role="T_langues" EntitySet="T_langues" />
             <End Role="T_profil_langues" EntitySet="T_profil_langues" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___profi__6A30C649" Association="Self.FK__T_profil___profi__6A30C649">
+          <AssociationSet Name="FK__T_profil___profi__19DFD96B" Association="Self.FK__T_profil___profi__19DFD96B">
             <End Role="T_profil" EntitySet="T_profil" />
             <End Role="T_profil_competences" EntitySet="T_profil_competences" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___profi__6C190EBB" Association="Self.FK__T_profil___profi__6C190EBB">
+          <AssociationSet Name="FK__T_profil___profi__1AD3FDA4" Association="Self.FK__T_profil___profi__1AD3FDA4">
             <End Role="T_profil" EntitySet="T_profil" />
             <End Role="T_profil_langues" EntitySet="T_profil_langues" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil__role_i__66603565" Association="Self.FK__T_profil__role_i__66603565">
+          <AssociationSet Name="FK__T_profil__role_i__1EA48E88" Association="Self.FK__T_profil__role_i__1EA48E88">
             <End Role="T_role" EntitySet="T_role" />
             <End Role="T_profil" EntitySet="T_profil" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil__type_c__6754599E" Association="Self.FK__T_profil__type_c__6754599E">
+          <AssociationSet Name="FK__T_profil__type_c__282DF8C2" Association="Self.FK__T_profil__type_c__282DF8C2">
             <End Role="T_type_contrat" EntitySet="T_type_contrat" />
             <End Role="T_profil" EntitySet="T_profil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_T_role" Association="Self.FK_AspNetUsers_T_role">
+            <End Role="T_role" EntitySet="T_role" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -633,6 +650,8 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="T_profil" Relationship="Self.FK_T_profil_AspNetUsers" FromRole="AspNetUsers" ToRole="T_profil" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="role_id" Type="Int32" />
+          <NavigationProperty Name="T_role" Relationship="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role" FromRole="AspNetUsers" ToRole="T_role" />
         </EntityType>
         <EntityType Name="T_competences">
           <Key>
@@ -753,6 +772,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nom_role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="T_profil" Relationship="Self.FK__T_profil__role_i__66603565" FromRole="T_role" ToRole="T_profil" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role" FromRole="T_role" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="T_site">
           <Key>
@@ -1072,6 +1092,10 @@
             <End Role="T_niveau_experience" EntitySet="T_niveau_experience" />
             <End Role="T_profil" EntitySet="T_profil" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_T_role" Association="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role">
+            <End Role="T_role" EntitySet="T_role" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="T_niveau_experience">
           <Key>
@@ -1091,6 +1115,18 @@
             </Principal>
             <Dependent Role="T_profil">
               <PropertyRef Name="niveau_experience_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_T_role">
+          <End Type="Mobilite_Pro_BDDModel.T_role" Role="T_role" Multiplicity="0..1" />
+          <End Type="Mobilite_Pro_BDDModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="role_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1130,6 +1166,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />

@@ -17,11 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.PasswordHash)
         </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            Actions
+            @Html.DisplayNameFor(model => model.T_role.nom_role)
         </th>
         <th></th>
     </tr>
@@ -36,6 +37,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_role.nom_role)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

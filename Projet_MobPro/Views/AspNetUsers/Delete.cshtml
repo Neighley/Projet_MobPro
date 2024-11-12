@@ -99,6 +99,14 @@
             @Html.DisplayFor(model => model.UserName)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.T_role.nom_role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_role.nom_role)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {

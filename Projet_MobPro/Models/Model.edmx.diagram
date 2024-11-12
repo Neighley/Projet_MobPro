@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_competences" Width="1.5" PointX="8.875" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_langues" Width="1.5" PointX="7.5" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_role" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_role" Width="1.5" PointX="0.625" PointY="21" IsExpanded="true" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_site" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_statut" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_type_contrat" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
@@ -41,6 +41,7 @@
         <AssociationConnector Association="Mobilite_Pro_BDDModel.T_offre_emploi_langues" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" Width="1.5" PointX="7.375" PointY="0.875" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_profil_T_niveau_experience" />
+        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

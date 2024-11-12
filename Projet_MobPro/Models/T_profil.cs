@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace Projet_MobPro.Models
 {
     using System;
@@ -24,23 +22,15 @@ namespace Projet_MobPro.Models
         }
     
         public int id { get; set; }
-        [Display(Name = "Nom")]
         public string nom { get; set; }
-        [Display(Name = "Prénom")]
         public string prenom { get; set; }
-        [Display(Name = "Date de naissance")]
         public Nullable<System.DateTime> date_naissance { get; set; }
-        [Display(Name = "Adresse")]
         public string adresse { get; set; }
-        [Display(Name = "Code postal")]
         public string code_postal { get; set; }
-        [Display(Name = "Ville")]
         public string ville { get; set; }
         public string ruelle_p { get; set; }
         public Nullable<int> role_id { get; set; }
-        [Display(Name = "Contrat recherché")]
         public Nullable<int> type_contrat_id { get; set; }
-        [Display(Name = "Niveau d'expérience")]
         public Nullable<int> niveau_experience_id { get; set; }
         public string AspNetUser_id { get; set; }
     
