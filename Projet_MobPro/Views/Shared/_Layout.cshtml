@@ -20,6 +20,8 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Accueil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Utilisateurs", "Index", "AspNetUsers", new { area = "" }, new { @class = "nav-link" })</li>
+
                     <li>@Html.ActionLink("À propos de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
@@ -31,7 +33,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mon application ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Application créée par JEJA</p>
         </footer>
     </div>
 

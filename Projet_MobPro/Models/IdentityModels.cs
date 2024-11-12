@@ -21,7 +21,7 @@ namespace Projet_MobPro.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("Mobilite_Pro_BDD", throwIfV1Schema: false)
         {
         }
 
