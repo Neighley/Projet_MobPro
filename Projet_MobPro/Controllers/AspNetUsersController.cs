@@ -18,7 +18,7 @@ namespace Projet_MobPro.Controllers
         // GET: AspNetUsers
         public ActionResult Index()
         {
-            // Récupération du role_id de l'utilisateur pour gérer ses droits
+            // Récupération du role_id de l'utilisateur ACTUEL pour gérer ses droits
             var currentUserId = User.Identity.GetUserId();
             AspNetUsers currentUser = null;
 
