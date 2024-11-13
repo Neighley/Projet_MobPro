@@ -6,6 +6,7 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -20,8 +21,10 @@ namespace Projet_MobPro.Models
             this.T_profil = new HashSet<T_profil>();
             this.AspNetUsers = new HashSet<AspNetUsers>();
         }
-    
+
+        [Display(Name = "ID")]
         public int id { get; set; }
+        [Display(Name = "Nom du rôle")]
         public string nom_role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
