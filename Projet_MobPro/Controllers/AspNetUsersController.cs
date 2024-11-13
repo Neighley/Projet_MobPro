@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,6 +18,16 @@ namespace Projet_MobPro.Controllers
         // GET: AspNetUsers
         public ActionResult Index()
         {
+            // Récupération du role_id de l'utilisateur pour gérer ses droits
+            var currentUserId = User.Identity.GetUserId();
+            AspNetUsers currentUser = null;
+
+            if (currentUserId != null)
+            {
+                currentUser = db.AspNetUsers.Find(currentUserId);
+            }
+            ViewBag.CurrentUserRoleId = currentUser != null ? currentUser.role_id : 0;
+
             var aspNetUsers = db.AspNetUsers.Include(a => a.T_role);
             return View(aspNetUsers.ToList());
         }
