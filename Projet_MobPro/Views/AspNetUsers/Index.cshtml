@@ -36,13 +36,12 @@
             {
                 if (item.role_id != 1)
                 {
-                    @Html.ActionLink("Modifier", "Edit", new { id = item.Id })
-                    @: |
+                    @Html.ActionLink("Modifier", "Edit", new { id = item.Id }, new { @class = "btn-custom-edit" })
                 }
             }
 
-            @Html.ActionLink("Détails", "Details", new { id = item.Id }, new { @class = "btn-custom" }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
+            @Html.ActionLink("Détails", "Details", new { id = item.Id }, new { @class = "btn-custom-details" })
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.Id }, new { @class = "btn-custom-delete" })
         </td>
     </tr>
 }

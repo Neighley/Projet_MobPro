@@ -10875,12 +10875,12 @@ textarea.form-control-lg {
   }
 }
 
-.btn-custom {
+.btn-custom-edit {
     display: inline-block !important;
-    background-color: #007bff !important;
+    background-color: #38a3eb !important;
     color: white !important;
     text-align: center !important;
-    padding: 10px 20px !important;
+    padding: 6px 20px !important;
     font-size: 16px !important;
     border-radius: 5px !important;
     text-decoration: none !important;
@@ -10888,6 +10888,40 @@ textarea.form-control-lg {
     transition: background-color 0.3s ease !important;
 }
 
-.btn-custom:hover {
-    background-color: #0056b3 !important;
+.btn-custom-edit:hover {
+    background-color: #2c84bf !important;
+}
+
+.btn-custom-details {
+    display: inline-block !important;
+    background-color: #33de69 !important;
+    color: white !important;
+    text-align: center !important;
+    padding: 6px 20px !important;
+    font-size: 16px !important;
+    border-radius: 5px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.btn-custom-details:hover {
+    background-color: #26b553 !important;
+}
+
+.btn-custom-delete {
+    display: inline-block !important;
+    background-color: #f0303a !important;
+    color: white !important;
+    text-align: center !important;
+    padding: 6px 20px !important;
+    font-size: 16px !important;
+    border-radius: 5px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.btn-custom-delete:hover {
+    background-color: #bf222a !important;
 }
