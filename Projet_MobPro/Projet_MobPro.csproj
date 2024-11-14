@@ -270,7 +270,7 @@
     <Content Include="App_Data\Mobilite_Pro_BDD_log.ldf">
       <DependentUpon>Mobilite_Pro_BDD.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\ScriptBDD\Add_AutoIncrement_In_Tables.sql" />
+    <Content Include="App_Data\ScriptBDD\Add_Default_Value_role_id.sql" />
     <Content Include="App_Data\ScriptBDD\Add_Role_In_AspNetUser.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile1.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile2.SQL" />
