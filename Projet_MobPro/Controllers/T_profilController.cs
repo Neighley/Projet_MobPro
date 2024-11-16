@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,6 +18,20 @@ namespace Projet_MobPro.Controllers
         // GET: T_profil
         public ActionResult Index()
         {
+
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+            bool profilExistant = false;
+
+            if (currentUserId != null)
+            {
+                profilExistant = db.T_profil.Any(p => p.AspNetUsers.Id == currentUserId);
+            }
+
+            // Assurez-vous que ViewBag.ProfilExistant a une valeur par défaut
+            ViewBag.ProfilExistant = profilExistant;
+
+
             var t_profil = db.T_profil.Include(t => t.AspNetUsers).Include(t => t.T_niveau_experience).Include(t => t.T_role).Include(t => t.T_type_contrat);
             return View(t_profil.ToList());
         }
@@ -39,6 +54,16 @@ namespace Projet_MobPro.Controllers
         // GET: T_profil/Create
         public ActionResult Create()
         {
+            // Récupération du role_id de l'utilisateur ACTUEL pour gérer ses droits
+            var currentUserId = User.Identity.GetUserId();
+            AspNetUsers currentUser = null;
+
+            if (currentUserId != null)
+            {
+                currentUser = db.AspNetUsers.Find(currentUserId);
+            }
+            ViewBag.CurrentUserRoleId = currentUser != null ? currentUser.role_id : 0;
+
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience");
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");

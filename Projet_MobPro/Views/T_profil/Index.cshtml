@@ -4,10 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Mon profil</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (!(ViewBag.ProfilExistant is bool && (bool)ViewBag.ProfilExistant))
+    {
+        @Html.ActionLink("Créer un profil", "Create")
+    }
 </p>
 <table class="table">
     <tr>
