@@ -52,24 +52,30 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_profil/Create
-        public ActionResult Create()
+        public ActionResult Create(int? niveau_experience_id)
         {
-            // Récupération du role_id de l'utilisateur ACTUEL pour gérer ses droits
-            var currentUserId = User.Identity.GetUserId();
-            AspNetUsers currentUser = null;
-
-            if (currentUserId != null)
+            if (niveau_experience_id.HasValue)
             {
-                currentUser = db.AspNetUsers.Find(currentUserId);
+                ViewBag.NiveauExperienceId = niveau_experience_id.Value;
             }
-            ViewBag.CurrentUserRoleId = currentUser != null ? currentUser.role_id : 0;
+
+            var niveaux = db.T_niveau_experience.ToList();
+            ViewBag.NiveauxExperience = niveaux;
+
+            // Récupération de l'ID de l'utilisateur actuel pour gérer ses droits
+            var currentUserId = User.Identity.GetUserId();
+            var currentUser = db.AspNetUsers.Find(currentUserId);
+
+            ViewBag.CurrentUserRoleId = currentUser?.role_id ?? 0;
 
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience");
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat");
+
             return View();
         }
+
 
         // POST: T_profil/Create
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 

@@ -52,7 +52,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_niveau_experience.Add(t_niveau_experience);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "T_profil", new { niveau_experience_id = t_niveau_experience.id });
             }
 
             return View(t_niveau_experience);

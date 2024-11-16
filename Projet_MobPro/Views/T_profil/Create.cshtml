@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Créer votre profil</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>T_profil</h4>
+    <h5>Renseignez les champs ci-dessous :</h5>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <!--<div class="form-group">
@@ -79,13 +79,6 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.niveau_experience_id, "Niveau d'expérience", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("niveau_experience_id", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.niveau_experience_id, "", new { @class = "text-danger" })
-        </div>
-    </div>
     @if (ViewBag.CurrentUserRoleId == 1)
     {
         <div class="form-group">
@@ -101,16 +94,71 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AspNetUser_id, "Utilisateur actuel", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.AspNetUser_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("AspNetUser_id", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.AspNetUser_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    }
+
+    <br />
+    <h5>Gérer mon niveau d'expérience</h5>
+
+    @if (ViewBag.NiveauExperienceId != null)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                @{
+                    var niveauxExperience = ViewBag.NiveauxExperience as List<Projet_MobPro.Models.T_niveau_experience>;
+                    var niveau = niveauxExperience?.FirstOrDefault(n => n.id == ViewBag.NiveauExperienceId);
+                }
+                @if (niveau != null)
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nom du niveau d'expérience</th>
+                                <th>Domaine d'expertise</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@niveau.nom_niveau_experience</td>
+                                <td>@niveau.domaine</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="form-control-static">
+                        Niveau d'expérience non trouvé.
+                    </p>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>
+            @Html.ActionLink("Ajouter un domaine d'expertise", "Create", "T_niveau_experience")
+        </p>
+        <div class="form-group">
+            <div class="col-md-10">
+                <p class="form-control-static">
+                    Aucun niveau d'expérience trouvé pour cet utilisateur.
+                </p>
             </div>
         </div>
     }
 
+    <hr />
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Créer" class="btn btn-custom-edit" />
         </div>
+        <br />
     </div>
 </div>
 }
