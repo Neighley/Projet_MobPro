@@ -54,9 +54,66 @@ namespace Projet_MobPro.Controllers
         // GET: T_profil/Create
         public ActionResult Create(int? niveau_experience_id)
         {
+            var profil = new T_profil();
+
             if (niveau_experience_id.HasValue)
             {
                 ViewBag.NiveauExperienceId = niveau_experience_id.Value;
+            }
+
+            // Restaurer les données depuis TempData
+            if (TempData["Nom"] != null)
+            {
+                profil.nom = TempData["Nom"] as string;
+                TempData.Keep("Nom");
+            }
+
+            if (TempData["Prenom"] != null)
+            {
+                profil.prenom = TempData["Prenom"] as string;
+                TempData.Keep("Prenom");
+            }
+
+            if (TempData["Date_Naissance"] != null)
+            {
+                profil.date_naissance = (DateTime)TempData["Date_Naissance"];
+                TempData.Keep("Date_Naissance");
+            }
+
+            if (TempData["Code_Postal"] != null)
+            {
+                profil.code_postal = TempData["Code_Postal"] as string;
+                TempData.Keep("Code_Postal");
+            }
+
+            if (TempData["Ville"] != null)
+            {
+                profil.ville = TempData["Ville"] as string;
+                TempData.Keep("Ville");
+            }
+
+            if (TempData["Role_Id"] != null)
+            {
+                profil.role_id = (int)TempData["Role_Id"];
+                TempData.Keep("Role_Id");
+            }
+
+            if (TempData["Type_Contrat_Id"] != null)
+            {
+                profil.type_contrat_id = (int)TempData["Type_Contrat_Id"];
+                TempData.Keep("Type_Contrat_Id");
+            }
+
+            if (TempData["Niveau_Experience_Id"] != null)
+            {
+                profil.niveau_experience_id = (int)TempData["Niveau_Experience_Id"];
+                TempData.Keep("Niveau_Experience_Id");
+            }
+
+            if (TempData["AspNetUser_Id"] != null)
+            {
+                profil.AspNetUser_id = TempData["AspNetUser_Id"] as string;
+                TempData.Keep("AspNetUser_Id");
             }
 
             var niveaux = db.T_niveau_experience.ToList();
@@ -84,17 +141,32 @@ namespace Projet_MobPro.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,nom,prenom,date_naissance,adresse,code_postal,ville,ruelle_p,role_id,type_contrat_id,niveau_experience_id,AspNetUser_id")] T_profil t_profil)
         {
+
             if (ModelState.IsValid)
             {
+                // Ajouter le profil à la base et rediriger vers l'index
                 db.T_profil.Add(t_profil);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            /* Sauvegarde des données saisies dans TempData pour gérer la redirection sur T_niv_exp
+             Et ainsi garder en mémoire les champs précédemment entrés */
+            TempData["Nom"] = t_profil.nom;
+            TempData["Prenom"] = t_profil.prenom;
+            TempData["Date_Naissance"] = t_profil.date_naissance;
+            TempData["Code_Postal"] = t_profil.code_postal;
+            TempData["Ville"] = t_profil.ville;
+            TempData["Role_Id"] = t_profil.role_id;
+            TempData["Type_Contrat_Id"] = t_profil.type_contrat_id;
+            TempData["Niveau_Experience_Id"] = t_profil.niveau_experience_id;
+            TempData["AspNetUser_Id"] = t_profil.AspNetUser_id;
+
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
             ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
+
             return View(t_profil);
         }
 
