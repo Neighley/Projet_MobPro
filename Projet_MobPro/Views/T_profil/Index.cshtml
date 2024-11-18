@@ -85,9 +85,9 @@
             @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
         </td>
     </tr>
 }

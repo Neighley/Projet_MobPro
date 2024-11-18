@@ -24,10 +24,12 @@ namespace Projet_MobPro.Models
         public string nom { get; set; }
         public Nullable<int> num_tel_id { get; set; }
         public Nullable<int> site_id { get; set; }
+        public string AspNetUser_id { get; set; }
     
         public virtual T_num_tel T_num_tel { get; set; }
         public virtual T_site T_site { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_offre_emploi> T_offre_emploi { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

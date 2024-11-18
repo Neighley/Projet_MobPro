@@ -6,7 +6,6 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -22,13 +21,12 @@ namespace Projet_MobPro.Models
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
             this.T_profil = new HashSet<T_profil>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.T_entreprise = new HashSet<T_entreprise>();
         }
     
         public string Id { get; set; }
-        [Display(Name = "E-mail")]
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
-        [Display(Name = "Mot de passe hashé")]
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
         public string PhoneNumber { get; set; }
@@ -38,7 +36,6 @@ namespace Projet_MobPro.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
-        [Display(Name = "Rôle")]
         public Nullable<int> role_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -50,5 +47,7 @@ namespace Projet_MobPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
         public virtual T_role T_role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_entreprise> T_entreprise { get; set; }
     }
 }

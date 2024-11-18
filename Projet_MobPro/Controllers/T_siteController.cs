@@ -52,7 +52,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_site.Add(t_site);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "T_entreprise");
             }
 
             return View(t_site);

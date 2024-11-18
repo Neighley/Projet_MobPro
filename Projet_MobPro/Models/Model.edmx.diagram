@@ -42,6 +42,7 @@
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" Width="1.5" PointX="7.375" PointY="0.875" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_profil_T_niveau_experience" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role" />
+        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_entreprise_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

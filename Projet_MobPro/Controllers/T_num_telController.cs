@@ -52,7 +52,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_num_tel.Add(t_num_tel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "T_entreprise");
             }
 
             return View(t_num_tel);

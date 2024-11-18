@@ -72,6 +72,7 @@
           <Property Name="nom" Type="nvarchar" MaxLength="255" />
           <Property Name="num_tel_id" Type="int" />
           <Property Name="site_id" Type="int" />
+          <Property Name="AspNetUser_id" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="T_langues">
           <Key>
@@ -459,6 +460,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_T_entreprise_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="T_entreprise">
+              <PropertyRef Name="AspNetUser_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_T_profil_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="T_profil" Type="Self.T_profil" Multiplicity="*" />
@@ -588,6 +601,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_T_entreprise_AspNetUsers" Association="Self.FK_T_entreprise_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="T_entreprise" EntitySet="T_entreprise" />
+          </AssociationSet>
           <AssociationSet Name="FK_T_profil_AspNetUsers" Association="Self.FK_T_profil_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="T_profil" EntitySet="T_profil" />
@@ -652,6 +669,7 @@
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <Property Name="role_id" Type="Int32" />
           <NavigationProperty Name="T_role" Relationship="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role" FromRole="AspNetUsers" ToRole="T_role" />
+          <NavigationProperty Name="T_entreprise" Relationship="Mobilite_Pro_BDDModel.FK_T_entreprise_AspNetUsers" FromRole="AspNetUsers" ToRole="T_entreprise" />
         </EntityType>
         <EntityType Name="T_competences">
           <Key>
@@ -673,6 +691,8 @@
           <NavigationProperty Name="T_num_tel" Relationship="Self.FK__T_entrepr__num_t__5CD6CB2B" FromRole="T_entreprise" ToRole="T_num_tel" />
           <NavigationProperty Name="T_site" Relationship="Self.FK__T_entrepr__site___5DCAEF64" FromRole="T_entreprise" ToRole="T_site" />
           <NavigationProperty Name="T_offre_emploi" Relationship="Self.FK__T_offre_e__entre__5EBF139D" FromRole="T_entreprise" ToRole="T_offre_emploi" />
+          <Property Name="AspNetUser_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Mobilite_Pro_BDDModel.FK_T_entreprise_AspNetUsers" FromRole="T_entreprise" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="T_langues">
           <Key>
@@ -1096,6 +1116,10 @@
             <End Role="T_role" EntitySet="T_role" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_T_entreprise_AspNetUsers" Association="Mobilite_Pro_BDDModel.FK_T_entreprise_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="T_entreprise" EntitySet="T_entreprise" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="T_niveau_experience">
           <Key>
@@ -1127,6 +1151,18 @@
             </Principal>
             <Dependent Role="AspNetUsers">
               <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_entreprise_AspNetUsers">
+          <End Type="Mobilite_Pro_BDDModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="Mobilite_Pro_BDDModel.T_entreprise" Role="T_entreprise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="T_entreprise">
+              <PropertyRef Name="AspNetUser_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1193,6 +1229,7 @@
           <EntitySetMapping Name="T_entreprise">
             <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.T_entreprise">
               <MappingFragment StoreEntitySet="T_entreprise">
+                <ScalarProperty Name="AspNetUser_id" ColumnName="AspNetUser_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nom" ColumnName="nom" />
                 <ScalarProperty Name="num_tel_id" ColumnName="num_tel_id" />
