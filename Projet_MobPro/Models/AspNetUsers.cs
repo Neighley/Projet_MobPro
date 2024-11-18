@@ -6,6 +6,7 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -24,8 +25,10 @@ namespace Projet_MobPro.Models
         }
     
         public string Id { get; set; }
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
+        [Display(Name = "Mot de passe hashé")]
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
         public string PhoneNumber { get; set; }
@@ -35,6 +38,7 @@ namespace Projet_MobPro.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
+        [Display(Name = "Rôle")]
         public Nullable<int> role_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
