@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails</h2>
 
 <div>
-    <h4>T_profil</h4>
+    <h4>Profil existant</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -59,14 +59,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ruelle_p)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ruelle_p)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </dt>
 
@@ -81,17 +73,16 @@
         <dd>
             @Html.DisplayFor(model => model.T_niveau_experience.nom_niveau_experience)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.T_role.nom_role)
+            @Html.DisplayNameFor(model => model.T_niveau_experience.domaine)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.T_role.nom_role)
+            @Html.DisplayFor(model => model.T_niveau_experience.domaine)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
+            Type de contrat
         </dt>
 
         <dd>

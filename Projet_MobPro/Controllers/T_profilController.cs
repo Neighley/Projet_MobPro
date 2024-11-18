@@ -18,23 +18,48 @@ namespace Projet_MobPro.Controllers
         // GET: T_profil
         public ActionResult Index()
         {
-
             // Récupération de l'ID de l'utilisateur actuel
             var currentUserId = User.Identity.GetUserId();
-            bool profilExistant = false;
 
-            if (currentUserId != null)
+            // Récupération du nombre de profils créés
+            int profilCount = db.T_profil.Count();
+            ViewBag.ProfilCount = profilCount;
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+
+            IEnumerable<T_profil> t_profil;
+
+            /* Si role_id == 3, afficher le profil de l'utilisateur actuel
+             * Sinon (role_id == 1 ou 2 soit admin ou rh), afficher tous les profils) */
+            if (currentUserRole == 3)
             {
-                profilExistant = db.T_profil.Any(p => p.AspNetUsers.Id == currentUserId);
+                // Afficher uniquement le profil de l'utilisateur connecté
+                t_profil = db.T_profil
+                             .Include(t => t.AspNetUsers)
+                             .Include(t => t.T_niveau_experience)
+                             .Include(t => t.T_role)
+                             .Include(t => t.T_type_contrat)
+                             .Where(p => p.AspNetUser_id == currentUserId)
+                             .ToList();
+            }
+            else
+            {
+                // Afficher tous les profils pour les autres rôles
+                t_profil = db.T_profil
+                             .Include(t => t.AspNetUsers)
+                             .Include(t => t.T_niveau_experience)
+                             .Include(t => t.T_role)
+                             .Include(t => t.T_type_contrat)
+                             .ToList();
             }
 
-            // Assurez-vous que ViewBag.ProfilExistant a une valeur par défaut
-            ViewBag.ProfilExistant = profilExistant;
-
-
-            var t_profil = db.T_profil.Include(t => t.AspNetUsers).Include(t => t.T_niveau_experience).Include(t => t.T_role).Include(t => t.T_type_contrat);
-            return View(t_profil.ToList());
+            return View(t_profil);
         }
+
 
         // GET: T_profil/Details/5
         public ActionResult Details(int? id)
@@ -141,6 +166,15 @@ namespace Projet_MobPro.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,nom,prenom,date_naissance,adresse,code_postal,ville,ruelle_p,role_id,type_contrat_id,niveau_experience_id,AspNetUser_id")] T_profil t_profil)
         {
+
+            var currentUserId = User.Identity.GetUserId();
+            t_profil.AspNetUser_id = currentUserId;
+
+            if (db.T_profil.Any(p => p.AspNetUser_id == currentUserId))
+            {
+                ModelState.AddModelError("", "Un profil existe déjà pour cet utilisateur.");
+                return View(t_profil);
+            }
 
             if (ModelState.IsValid)
             {
