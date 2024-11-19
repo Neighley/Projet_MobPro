@@ -178,11 +178,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\T_competencesController.cs" />
+    <Compile Include="Controllers\T_domaine1Controller.cs" />
     <Compile Include="Controllers\T_entrepriseController.cs" />
     <Compile Include="Controllers\T_languesController.cs" />
     <Compile Include="Controllers\T_niveau_experienceController.cs" />
+    <Compile Include="Controllers\T_niveau_experienceOldController.cs" />
     <Compile Include="Controllers\T_num_telController.cs" />
     <Compile Include="Controllers\T_offre_emploiController.cs" />
+    <Compile Include="Controllers\T_profilController.cs" />
     <Compile Include="Controllers\T_profilOldController.cs" />
     <Compile Include="Controllers\T_profil_competencesController.cs" />
     <Compile Include="Controllers\T_profil_languesController.cs" />
@@ -395,11 +398,11 @@
     <Content Include="Views\T_langues\Details.cshtml" />
     <Content Include="Views\T_langues\Edit.cshtml" />
     <Content Include="Views\T_langues\Index.cshtml" />
-    <Content Include="Views\T_niveau_experience\Create.cshtml" />
-    <Content Include="Views\T_niveau_experience\Delete.cshtml" />
-    <Content Include="Views\T_niveau_experience\Details.cshtml" />
-    <Content Include="Views\T_niveau_experience\Edit.cshtml" />
-    <Content Include="Views\T_niveau_experience\Index.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Create.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Delete.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Details.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Edit.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Index.cshtml" />
     <Content Include="Views\T_num_tel\Create.cshtml" />
     <Content Include="Views\T_num_tel\Delete.cshtml" />
     <Content Include="Views\T_num_tel\Details.cshtml" />
@@ -450,6 +453,21 @@
     <Content Include="Views\AspNetUsers\Details.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\T_profil\Create.cshtml" />
+    <Content Include="Views\T_profil\Delete.cshtml" />
+    <Content Include="Views\T_profil\Details.cshtml" />
+    <Content Include="Views\T_profil\Edit.cshtml" />
+    <Content Include="Views\T_profil\Index.cshtml" />
+    <Content Include="Views\T_niveau_experience\Create.cshtml" />
+    <Content Include="Views\T_niveau_experience\Delete.cshtml" />
+    <Content Include="Views\T_niveau_experience\Details.cshtml" />
+    <Content Include="Views\T_niveau_experience\Edit.cshtml" />
+    <Content Include="Views\T_niveau_experience\Index.cshtml" />
+    <Content Include="Views\T_domaine1\Create.cshtml" />
+    <Content Include="Views\T_domaine1\Delete.cshtml" />
+    <Content Include="Views\T_domaine1\Details.cshtml" />
+    <Content Include="Views\T_domaine1\Edit.cshtml" />
+    <Content Include="Views\T_domaine1\Index.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

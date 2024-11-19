@@ -10,15 +10,14 @@ using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
 {
-    public class T_niveau_experienceController : Controller
+    public class T_niveau_experienceOldController : Controller
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
         // GET: T_niveau_experience
         public ActionResult Index()
         {
-            var t_niveau_experience = db.T_niveau_experience.Include(t => t.T_domaine).Include(t => t.T_profil);
-            return View(t_niveau_experience.ToList());
+            return View(db.T_niveau_experience.ToList());
         }
 
         // GET: T_niveau_experience/Details/5
@@ -39,8 +38,6 @@ namespace Projet_MobPro.Controllers
         // GET: T_niveau_experience/Create
         public ActionResult Create()
         {
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine");
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom");
             return View();
         }
 
@@ -49,17 +46,15 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id")] T_niveau_experience t_niveau_experience)
+        public ActionResult Create([Bind(Include = "id,nom_niveau_experience,domaine")] T_niveau_experience t_niveau_experience)
         {
             if (ModelState.IsValid)
             {
                 db.T_niveau_experience.Add(t_niveau_experience);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "T_profil", new { niveau_experience_id = t_niveau_experience.id });
             }
 
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
             return View(t_niveau_experience);
         }
 
@@ -75,8 +70,6 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
             return View(t_niveau_experience);
         }
 
@@ -85,7 +78,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id")] T_niveau_experience t_niveau_experience)
+        public ActionResult Edit([Bind(Include = "id,nom_niveau_experience,domaine")] T_niveau_experience t_niveau_experience)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +86,6 @@ namespace Projet_MobPro.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
             return View(t_niveau_experience);
         }
 

@@ -10,116 +10,107 @@ using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
 {
-    public class T_niveau_experienceController : Controller
+    public class T_domaine1Controller : Controller
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
-        // GET: T_niveau_experience
+        // GET: T_domaine1
         public ActionResult Index()
         {
-            var t_niveau_experience = db.T_niveau_experience.Include(t => t.T_domaine).Include(t => t.T_profil);
-            return View(t_niveau_experience.ToList());
+            return View(db.T_domaine.ToList());
         }
 
-        // GET: T_niveau_experience/Details/5
+        // GET: T_domaine1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
-            if (t_niveau_experience == null)
+            T_domaine t_domaine = db.T_domaine.Find(id);
+            if (t_domaine == null)
             {
                 return HttpNotFound();
             }
-            return View(t_niveau_experience);
+            return View(t_domaine);
         }
 
-        // GET: T_niveau_experience/Create
+        // GET: T_domaine1/Create
         public ActionResult Create()
         {
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine");
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom");
             return View();
         }
 
-        // POST: T_niveau_experience/Create
+        // POST: T_domaine1/Create
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id")] T_niveau_experience t_niveau_experience)
+        public ActionResult Create([Bind(Include = "id,domaine")] T_domaine t_domaine)
         {
             if (ModelState.IsValid)
             {
-                db.T_niveau_experience.Add(t_niveau_experience);
+                db.T_domaine.Add(t_domaine);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
-            return View(t_niveau_experience);
+            return View(t_domaine);
         }
 
-        // GET: T_niveau_experience/Edit/5
+        // GET: T_domaine1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
-            if (t_niveau_experience == null)
+            T_domaine t_domaine = db.T_domaine.Find(id);
+            if (t_domaine == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
-            return View(t_niveau_experience);
+            return View(t_domaine);
         }
 
-        // POST: T_niveau_experience/Edit/5
+        // POST: T_domaine1/Edit/5
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id")] T_niveau_experience t_niveau_experience)
+        public ActionResult Edit([Bind(Include = "id,domaine")] T_domaine t_domaine)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(t_niveau_experience).State = EntityState.Modified;
+                db.Entry(t_domaine).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
-            return View(t_niveau_experience);
+            return View(t_domaine);
         }
 
-        // GET: T_niveau_experience/Delete/5
+        // GET: T_domaine1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
-            if (t_niveau_experience == null)
+            T_domaine t_domaine = db.T_domaine.Find(id);
+            if (t_domaine == null)
             {
                 return HttpNotFound();
             }
-            return View(t_niveau_experience);
+            return View(t_domaine);
         }
 
-        // POST: T_niveau_experience/Delete/5
+        // POST: T_domaine1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
-            db.T_niveau_experience.Remove(t_niveau_experience);
+            T_domaine t_domaine = db.T_domaine.Find(id);
+            db.T_domaine.Remove(t_domaine);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -26,18 +26,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.domaine_id, "domaine_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.domaine, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("domaine_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.domaine_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.profil_id, "profil_id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("profil_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.profil_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.domaine, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.domaine, "", new { @class = "text-danger" })
             </div>
         </div>
 

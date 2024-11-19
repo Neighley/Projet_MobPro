@@ -15,10 +15,7 @@
             @Html.DisplayNameFor(model => model.nom_niveau_experience)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.T_domaine.domaine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_profil.nom)
+            @Html.DisplayNameFor(model => model.domaine)
         </th>
         <th></th>
     </tr>
@@ -29,10 +26,7 @@
             @Html.DisplayFor(modelItem => item.nom_niveau_experience)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.T_domaine.domaine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_profil.nom)
+            @Html.DisplayFor(modelItem => item.domaine)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
