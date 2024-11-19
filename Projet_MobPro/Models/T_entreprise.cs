@@ -6,6 +6,7 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -21,9 +22,13 @@ namespace Projet_MobPro.Models
         }
     
         public int id { get; set; }
+        [Display(Name = "Nom d'entreprise")]
         public string nom { get; set; }
+        [Display(Name = "Numéro de téléphone")]
         public Nullable<int> num_tel_id { get; set; }
+        [Display(Name = "Site principal")]
         public Nullable<int> site_id { get; set; }
+        [Display(Name = "Utilisateur actuel")]
         public string AspNetUser_id { get; set; }
     
         public virtual T_num_tel T_num_tel { get; set; }
