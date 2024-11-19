@@ -7,7 +7,11 @@
 <h2>Mon profil</h2>
 
 <p>
-    @if (!(ViewBag.ProfilExistant is bool && (bool)ViewBag.ProfilExistant) && ViewBag.ProfilCount < 2)
+    @if (ViewBag.ProfilCount < 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
+    {
+        @Html.ActionLink("Créer un profil", "Create")
+    }
+    else if(ViewBag.CurrentUserRoleId == 1)
     {
         @Html.ActionLink("Créer un profil", "Create")
     }

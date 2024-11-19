@@ -30,6 +30,7 @@ namespace Projet_MobPro.Controllers
                                     .Where(u => u.Id == currentUserId)
                                     .Select(u => u.role_id)
                                     .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
 
             IEnumerable<T_profil> t_profil;
 
@@ -86,6 +87,7 @@ namespace Projet_MobPro.Controllers
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat");
+
             return View();
         }
 
@@ -115,6 +117,7 @@ namespace Projet_MobPro.Controllers
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
+
             return View(t_profil);
         }
 
