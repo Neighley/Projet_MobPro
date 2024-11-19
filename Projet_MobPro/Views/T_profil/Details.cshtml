@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails du profil</h2>
 
 <div>
-    <h4>T_profil</h4>
+    <h5>Vos renseignements</h5>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -59,27 +59,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ruelle_p)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ruelle_p)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.AspNetUsers.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.T_role.nom_role)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.T_role.nom_role)
         </dd>
 
         <dt>
@@ -91,6 +75,16 @@
         </dd>
 
     </dl>
+
+    <h5>Gérer mon niveau d'expérience</h5>
+
+    <div class="form-group">
+        <p>Domaine</p>
+        <div class="col-md-10">
+            @Html.DropDownList("domaine", (SelectList)ViewBag.domaine_experience, new { @class = "form-control", @disabled = "disabled" })
+        </div>
+    </div>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |

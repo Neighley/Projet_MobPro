@@ -11,9 +11,14 @@
     {
         @Html.ActionLink("Créer un profil", "Create")
     }
-    else if(ViewBag.CurrentUserRoleId == 1)
+    else if (ViewBag.CurrentUserRoleId == 1)
     {
         @Html.ActionLink("Créer un profil", "Create")
+    }
+    else
+    {
+        @Html.ActionLink("Créer un profil", "Create")
+
     }
 </p>
 <table class="table">

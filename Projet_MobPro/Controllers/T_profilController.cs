@@ -71,6 +71,10 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.nom_niveau_experience = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience");
+            ViewBag.domaine_experience = new SelectList(db.T_niveau_experience, "id", "domaine_id");
+
             return View(t_profil);
         }
 
@@ -111,7 +115,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_profil.Add(t_profil);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = t_profil.id });
             }
 
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
