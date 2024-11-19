@@ -4,10 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Mon profil</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (!(ViewBag.ProfilExistant is bool && (bool)ViewBag.ProfilExistant) && ViewBag.ProfilCount < 2)
+    {
+        @Html.ActionLink("Créer un profil", "Create")
+    }
 </p>
 <table class="table">
     <tr>
@@ -30,16 +33,13 @@
             @Html.DisplayNameFor(model => model.ville)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ruelle_p)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.T_role.nom_role)
+            @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
+            Actions
         </th>
         <th></th>
     </tr>
@@ -65,21 +65,15 @@
             @Html.DisplayFor(modelItem => item.ville)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ruelle_p)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_role.nom_role)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
         </td>
     </tr>
 }

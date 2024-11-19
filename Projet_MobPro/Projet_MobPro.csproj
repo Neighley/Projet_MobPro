@@ -178,7 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\T_competencesController.cs" />
-    <Compile Include="Controllers\T_domaine1Controller.cs" />
+    <Compile Include="Controllers\T_domaineController.cs" />
     <Compile Include="Controllers\T_entrepriseController.cs" />
     <Compile Include="Controllers\T_languesController.cs" />
     <Compile Include="Controllers\T_niveau_experienceController.cs" />
@@ -463,11 +463,11 @@
     <Content Include="Views\T_niveau_experience\Details.cshtml" />
     <Content Include="Views\T_niveau_experience\Edit.cshtml" />
     <Content Include="Views\T_niveau_experience\Index.cshtml" />
-    <Content Include="Views\T_domaine1\Create.cshtml" />
-    <Content Include="Views\T_domaine1\Delete.cshtml" />
-    <Content Include="Views\T_domaine1\Details.cshtml" />
-    <Content Include="Views\T_domaine1\Edit.cshtml" />
-    <Content Include="Views\T_domaine1\Index.cshtml" />
+    <Content Include="Views\T_domaine\Create.cshtml" />
+    <Content Include="Views\T_domaine\Delete.cshtml" />
+    <Content Include="Views\T_domaine\Details.cshtml" />
+    <Content Include="Views\T_domaine\Edit.cshtml" />
+    <Content Include="Views\T_domaine\Index.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -6,6 +6,7 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -22,6 +23,7 @@ namespace Projet_MobPro.Models
         }
     
         public int id { get; set; }
+        [Display(Name = "Type de contrat")]
         public string nom_type_contrat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

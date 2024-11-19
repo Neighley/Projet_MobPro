@@ -6,6 +6,7 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -15,8 +16,11 @@ namespace Projet_MobPro.Models
     public partial class T_niveau_experience
     {
         public int id { get; set; }
+        [Display(Name = "Niveau d'expérience")]
         public string nom_niveau_experience { get; set; }
+        [Display(Name = "Domaine")]
         public int domaine_id { get; set; }
+        [Display(Name = "Utilisateur actuel")]
         public Nullable<int> profil_id { get; set; }
     
         public virtual T_domaine T_domaine { get; set; }

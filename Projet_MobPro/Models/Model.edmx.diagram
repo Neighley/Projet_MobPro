@@ -31,12 +31,10 @@
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_entreprise_AspNetUsers" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_profil_AspNetUsers" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_profil___compe__41EDCAC5" />
-        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Domaine" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_entrepr__num_t__3F115E1A" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_entrepr__site___3E1D39E1" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__entre__3D2915A8" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_profil___langu__395884C4" />
-        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Profil" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__site___2DE6D218" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__statu__2EDAF651" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__type___2FCF1A8A" />
