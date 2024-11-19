@@ -17,6 +17,7 @@ namespace Projet_MobPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_profil()
         {
+            this.T_niveau_experience = new HashSet<T_niveau_experience>();
             this.T_profil_competences = new HashSet<T_profil_competences>();
             this.T_profil_langues = new HashSet<T_profil_langues>();
         }
@@ -31,16 +32,16 @@ namespace Projet_MobPro.Models
         public string ruelle_p { get; set; }
         public Nullable<int> role_id { get; set; }
         public Nullable<int> type_contrat_id { get; set; }
-        public Nullable<int> niveau_experience_id { get; set; }
         public string AspNetUser_id { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_niveau_experience> T_niveau_experience { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil_competences> T_profil_competences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil_langues> T_profil_langues { get; set; }
         public virtual T_role T_role { get; set; }
         public virtual T_type_contrat T_type_contrat { get; set; }
-        public virtual T_niveau_experience T_niveau_experience { get; set; }
     }
 }

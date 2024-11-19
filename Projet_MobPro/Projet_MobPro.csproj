@@ -183,7 +183,7 @@
     <Compile Include="Controllers\T_niveau_experienceController.cs" />
     <Compile Include="Controllers\T_num_telController.cs" />
     <Compile Include="Controllers\T_offre_emploiController.cs" />
-    <Compile Include="Controllers\T_profilController.cs" />
+    <Compile Include="Controllers\T_profilOldController.cs" />
     <Compile Include="Controllers\T_profil_competencesController.cs" />
     <Compile Include="Controllers\T_profil_languesController.cs" />
     <Compile Include="Controllers\T_roleController.cs" />
@@ -224,6 +224,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\T_competences.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_domaine.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_entreprise.cs">
@@ -407,11 +410,11 @@
     <Content Include="Views\T_offre_emploi\Details.cshtml" />
     <Content Include="Views\T_offre_emploi\Edit.cshtml" />
     <Content Include="Views\T_offre_emploi\Index.cshtml" />
-    <Content Include="Views\T_profil\Create.cshtml" />
-    <Content Include="Views\T_profil\Delete.cshtml" />
-    <Content Include="Views\T_profil\Details.cshtml" />
-    <Content Include="Views\T_profil\Edit.cshtml" />
-    <Content Include="Views\T_profil\Index.cshtml" />
+    <Content Include="Views\T_profilOld\Create.cshtml" />
+    <Content Include="Views\T_profilOld\Delete.cshtml" />
+    <Content Include="Views\T_profilOld\Details.cshtml" />
+    <Content Include="Views\T_profilOld\Edit.cshtml" />
+    <Content Include="Views\T_profilOld\Index.cshtml" />
     <Content Include="Views\T_profil_competences\Create.cshtml" />
     <Content Include="Views\T_profil_competences\Delete.cshtml" />
     <Content Include="Views\T_profil_competences\Details.cshtml" />

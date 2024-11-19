@@ -14,17 +14,12 @@ namespace Projet_MobPro.Models
     
     public partial class T_niveau_experience
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_niveau_experience()
-        {
-            this.T_profil = new HashSet<T_profil>();
-        }
-    
         public int id { get; set; }
         public string nom_niveau_experience { get; set; }
-        public string domaine { get; set; }
+        public int domaine_id { get; set; }
+        public Nullable<int> profil_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_profil> T_profil { get; set; }
+        public virtual T_domaine T_domaine { get; set; }
+        public virtual T_profil T_profil { get; set; }
     }
 }

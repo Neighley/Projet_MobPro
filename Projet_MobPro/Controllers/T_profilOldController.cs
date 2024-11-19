@@ -11,7 +11,7 @@ using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
 {
-    public class T_profilController : Controller
+    public class T_profilOldController : Controller
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
@@ -129,11 +129,11 @@ namespace Projet_MobPro.Controllers
                 TempData.Keep("Type_Contrat_Id");
             }
 
-            if (TempData["Niveau_Experience_Id"] != null)
-            {
-                profil.niveau_experience_id = (int)TempData["Niveau_Experience_Id"];
-                TempData.Keep("Niveau_Experience_Id");
-            }
+            //if (TempData["Niveau_Experience_Id"] != null)
+            //{
+            //    profil.niveau_experience_id = (int)TempData["Niveau_Experience_Id"];
+            //    TempData.Keep("Niveau_Experience_Id");
+            //}
 
             if (TempData["AspNetUser_Id"] != null)
             {
@@ -193,11 +193,11 @@ namespace Projet_MobPro.Controllers
             TempData["Ville"] = t_profil.ville;
             TempData["Role_Id"] = t_profil.role_id;
             TempData["Type_Contrat_Id"] = t_profil.type_contrat_id;
-            TempData["Niveau_Experience_Id"] = t_profil.niveau_experience_id;
+            //TempData["Niveau_Experience_Id"] = t_profil.niveau_experience_id;
             TempData["AspNetUser_Id"] = t_profil.AspNetUser_id;
 
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
-            ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
+            //ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
 
@@ -217,7 +217,7 @@ namespace Projet_MobPro.Controllers
                 return HttpNotFound();
             }
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
-            ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
+            //ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
             return View(t_profil);
@@ -237,7 +237,7 @@ namespace Projet_MobPro.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
-            ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
+            //ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
             return View(t_profil);

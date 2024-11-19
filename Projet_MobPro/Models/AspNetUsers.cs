@@ -19,9 +19,9 @@ namespace Projet_MobPro.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.T_entreprise = new HashSet<T_entreprise>();
             this.T_profil = new HashSet<T_profil>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
-            this.T_entreprise = new HashSet<T_entreprise>();
         }
     
         public string Id { get; set; }
@@ -42,12 +42,12 @@ namespace Projet_MobPro.Models
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual T_role T_role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_entreprise> T_entreprise { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil> T_profil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
-        public virtual T_role T_role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_entreprise> T_entreprise { get; set; }
     }
 }

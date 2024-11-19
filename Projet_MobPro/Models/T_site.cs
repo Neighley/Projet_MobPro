@@ -6,7 +6,6 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -23,11 +22,8 @@ namespace Projet_MobPro.Models
         }
     
         public int id { get; set; }
-        [Display(Name = "Adresse postale")]
         public string adresse { get; set; }
-        [Display(Name = "Code postal")]
         public string code_postal { get; set; }
-        [Display(Name = "Ville")]
         public string ville { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
