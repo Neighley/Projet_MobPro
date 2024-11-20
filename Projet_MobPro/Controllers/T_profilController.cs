@@ -21,8 +21,8 @@ namespace Projet_MobPro.Controllers
             // Récupération de l'ID de l'utilisateur actuel
             var currentUserId = User.Identity.GetUserId();
 
-            // Récupération du nombre de profils créés
-            int profilCount = db.T_profil.Count();
+            // Récupération du nombre de profils créés pour l'utilisateur actuel
+            int profilCount = db.T_profil.Count(p => p.AspNetUser_id == currentUserId);
             ViewBag.ProfilCount = profilCount;
 
             // Récupération du rôle de l'utilisateur
