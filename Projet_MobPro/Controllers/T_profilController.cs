@@ -186,8 +186,12 @@ namespace Projet_MobPro.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             T_profil t_profil = db.T_profil.Find(id);
+
+            var niveauxExperience = db.T_niveau_experience.Where(ne => ne.profil_id == t_profil.id).ToList();
+            db.T_niveau_experience.RemoveRange(niveauxExperience);
             db.T_profil.Remove(t_profil);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

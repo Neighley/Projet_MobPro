@@ -6,7 +6,6 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -23,31 +22,18 @@ namespace Projet_MobPro.Models
         }
     
         public int id { get; set; }
-        [Display(Name = "Nom")]
         public string nom { get; set; }
-        [Display(Name = "Description")]
         public string description { get; set; }
-        [Display(Name = "Date de publication")]
         public Nullable<System.DateTime> date_publication { get; set; }
-        [Display(Name = "Date de suppression")]
         public Nullable<System.DateTime> date_suppression { get; set; }
-        [Display(Name = "Ouvert ou externe")]
         public Nullable<bool> ouvert_externe { get; set; }
-        [Display(Name = "Lien du site web")]
         public string url_site { get; set; }
-        [Display(Name = "Télétravail autorisé")]
         public Nullable<bool> teletravail_autorise { get; set; }
-        [Display(Name = "Télétravail partiel ou complet")]
         public Nullable<bool> full_teletravail { get; set; }
-        [Display(Name = "Site")]
         public Nullable<int> site_id { get; set; }
-        [Display(Name = "Statut")]
         public Nullable<int> statut_id { get; set; }
-        [Display(Name = "Entreprise")]
         public Nullable<int> entreprise_id { get; set; }
-        [Display(Name = "Type de contrat recherché")]
         public Nullable<int> type_contrat_id { get; set; }
-        [Display(Name = "Niveau d'expérience requis")]
         public Nullable<int> niveau_experience_id { get; set; }
     
         public virtual T_entreprise T_entreprise { get; set; }

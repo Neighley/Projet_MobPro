@@ -480,7 +480,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_NiveauExp_Profil">
-          <End Role="T_profil" Type="Self.T_profil" Multiplicity="0..1" />
+          <End Role="T_profil" Type="Self.T_profil" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="T_niveau_experience" Type="Self.T_niveau_experience" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_profil">
