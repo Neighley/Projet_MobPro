@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="77852488d8c843569fad28edcde93756" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_domaine" Width="1.5" PointX="7.375" PointY="4.875" />
+      <Diagram DiagramId="77852488d8c843569fad28edcde93756" Name="Diagram1" ZoomLevel="65">
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_domaine" Width="1.5" PointX="8.125" PointY="17.625" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Domaine" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Profil" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="7.625" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="20.25" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="9.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUsers" Width="1.5" PointX="3" PointY="9.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_competences" Width="1.5" PointX="8.25" PointY="6.875" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_entreprise" Width="1.5" PointX="8.25" PointY="10" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_langues" Width="1.5" PointX="8.25" PointY="22.875" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" Width="1.5" PointX="7.5" PointY="19.625" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_num_tel" Width="1.5" PointX="6" PointY="6.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_offre_emploi" Width="1.5" PointX="10.5" PointY="9" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil" Width="1.5" PointX="5.25" PointY="12.25" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_competences" Width="1.5" PointX="10.5" PointY="15.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_langues" Width="1.5" PointX="7.5" PointY="14.375" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_role" Width="1.5" PointX="0.75" PointY="10.5" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_site" Width="1.5" PointX="6" PointY="2.5" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_statut" Width="1.5" PointX="8.25" PointY="25.5" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_type_contrat" Width="1.5" PointX="8.25" PointY="3.375" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetRoles" Width="1.5" PointX="0.5" PointY="6.375" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserClaims" Width="1.5" PointX="0.5" PointY="11.625" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserLogins" Width="1.5" PointX="2.625" PointY="5" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUsers" Width="1.5" PointX="2.875" PointY="7.5" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_competences" Width="1.5" PointX="14.125" PointY="12" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_entreprise" Width="1.5" PointX="9.375" PointY="3.5" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_langues" Width="1.5" PointX="11.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" Width="1.5" PointX="4.625" PointY="15.625" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_num_tel" Width="1.5" PointX="11.875" PointY="3.125" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_offre_emploi" Width="1.5" PointX="11.375" PointY="7.5" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil" Width="1.5" PointX="6.875" PointY="7.75" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_competences" Width="1.5" PointX="11.625" PointY="16.375" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_langues" Width="1.5" PointX="9.125" PointY="13.75" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_role" Width="1.5" PointX="3.25" PointY="13.25" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_site" Width="1.5" PointX="13.875" PointY="4.75" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_statut" Width="1.5" PointX="15.125" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_type_contrat" Width="1.5" PointX="6.375" PointY="3.875" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role" />
