@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,6 +18,8 @@ namespace Projet_MobPro.Controllers
         // GET: T_niveau_experience
         public ActionResult Index()
         {
+            var currentUserId = User.Identity.GetUserId();
+
             var t_niveau_experience = db.T_niveau_experience.Include(t => t.T_domaine).Include(t => t.T_profil);
             return View(t_niveau_experience.ToList());
         }
@@ -37,11 +40,16 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_niveau_experience/Create
-        public ActionResult Create()
+        public ActionResult Create(int profilId)
         {
+            var niveauExperience = new T_niveau_experience
+            {
+                profil_id = profilId
+            };
+
             ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine");
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom");
-            return View();
+            return View(niveauExperience);
         }
 
         // POST: T_niveau_experience/Create
@@ -49,18 +57,18 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id")] T_niveau_experience t_niveau_experience)
+        public ActionResult Create([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id")] T_niveau_experience niveauExperience)
         {
             if (ModelState.IsValid)
             {
-                db.T_niveau_experience.Add(t_niveau_experience);
+                db.T_niveau_experience.Add(niveauExperience);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_Profil", new { id = niveauExperience.profil_id });
             }
 
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
-            return View(t_niveau_experience);
+            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", niveauExperience.domaine_id);
+            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", niveauExperience.profil_id);
+            return View(niveauExperience);
         }
 
         // GET: T_niveau_experience/Edit/5

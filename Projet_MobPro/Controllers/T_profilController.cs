@@ -66,14 +66,17 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_profil t_profil = db.T_profil.Find(id);
+
+            var t_profil = db.T_profil.Include(p => p.T_niveau_experience.Select(n => n.T_domaine)).FirstOrDefault(p => p.id == id);
+            
             if (t_profil == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.nom_niveau_experience = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience");
-            ViewBag.domaine_experience = new SelectList(db.T_niveau_experience, "id", "domaine_id");
+            ViewBag.NiveauxExperience = t_profil.T_niveau_experience.ToList();
+            ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
+            ViewBag.ProfilId = t_profil.id;
 
             return View(t_profil);
         }

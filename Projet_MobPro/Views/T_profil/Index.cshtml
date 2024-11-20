@@ -7,18 +7,14 @@
 <h2>Mon profil</h2>
 
 <p>
-    @if (ViewBag.ProfilCount < 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
+    <!-- A REVOIR CA NE FONCTIONNE PAS-->
+    @if (ViewBag.ProfilCount > 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
     {
         @Html.ActionLink("Créer un profil", "Create")
     }
     else if (ViewBag.CurrentUserRoleId == 1)
     {
         @Html.ActionLink("Créer un profil", "Create")
-    }
-    else
-    {
-        @Html.ActionLink("Créer un profil", "Create")
-
     }
 </p>
 <table class="table">
@@ -80,9 +76,9 @@
             @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Delete", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
+            @Html.ActionLink("Modifier", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Détails", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
         </td>
     </tr>
 }
