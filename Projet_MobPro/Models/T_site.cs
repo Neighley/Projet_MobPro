@@ -17,7 +17,6 @@ namespace Projet_MobPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_site()
         {
-            this.T_entreprise = new HashSet<T_entreprise>();
             this.T_offre_emploi = new HashSet<T_offre_emploi>();
         }
     
@@ -25,9 +24,9 @@ namespace Projet_MobPro.Models
         public string adresse { get; set; }
         public string code_postal { get; set; }
         public string ville { get; set; }
+        public Nullable<int> entreprise_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_entreprise> T_entreprise { get; set; }
+        public virtual T_entreprise T_entreprise { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_offre_emploi> T_offre_emploi { get; set; }
     }

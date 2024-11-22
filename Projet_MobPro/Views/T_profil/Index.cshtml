@@ -17,6 +17,7 @@
         @Html.ActionLink("Créer un profil", "Create")
     }
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -42,9 +43,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
-        </th>
-        <th>
-            Actions
         </th>
         <th></th>
     </tr>
@@ -76,9 +74,9 @@
             @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
         </td>
         <td>
-            @Html.ActionLink("Modifier", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Détails", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
         </td>
     </tr>
 }

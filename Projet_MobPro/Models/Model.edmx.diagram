@@ -5,36 +5,36 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="77852488d8c843569fad28edcde93756" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_domaine" Width="1.5" PointX="7.375" PointY="4.875" />
-        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Domaine" />
-        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Profil" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="7.625" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="20.25" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="9.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUsers" Width="1.5" PointX="3" PointY="9.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_competences" Width="1.5" PointX="8.25" PointY="6.875" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_entreprise" Width="1.5" PointX="8.25" PointY="10" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_langues" Width="1.5" PointX="8.25" PointY="22.875" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" Width="1.5" PointX="7.5" PointY="19.625" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_num_tel" Width="1.5" PointX="6" PointY="6.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_offre_emploi" Width="1.5" PointX="10.5" PointY="9" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil" Width="1.5" PointX="5.25" PointY="12.25" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_competences" Width="1.5" PointX="10.5" PointY="15.125" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_langues" Width="1.5" PointX="7.5" PointY="14.375" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_role" Width="1.5" PointX="0.75" PointY="10.5" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_site" Width="1.5" PointX="6" PointY="2.5" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_statut" Width="1.5" PointX="8.25" PointY="25.5" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_type_contrat" Width="1.5" PointX="8.25" PointY="3.375" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="22.625" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="20.125" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.AspNetUsers" Width="1.5" PointX="3" PointY="12.25" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_competences" Width="1.5" PointX="7.5" PointY="26.125" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_domaine" Width="1.5" PointX="10.25" PointY="9.75" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_entreprise" Width="1.5" PointX="5.25" PointY="10.75" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_langues" Width="1.5" PointX="7.5" PointY="23.625" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" Width="1.5" PointX="12.5" PointY="15.5" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_num_tel" Width="1.5" PointX="7.5" PointY="9.5" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_offre_emploi" Width="1.5" PointX="9.75" PointY="12.875" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil" Width="1.5" PointX="5.25" PointY="14.375" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_competences" Width="1.5" PointX="10.5" PointY="19.25" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_langues" Width="1.5" PointX="7.5" PointY="14.5" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_role" Width="1.5" PointX="0.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_site" Width="1.5" PointX="7.5" PointY="17.625" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_statut" Width="1.5" PointX="7.5" PointY="6.75" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_type_contrat" Width="1.5" PointX="7.5" PointY="21.125" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_AspNetUsers_T_role" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_entreprise_AspNetUsers" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_profil_AspNetUsers" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_profil___compe__41EDCAC5" />
-        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_entrepr__num_t__3F115E1A" />
-        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_entrepr__site___3E1D39E1" />
+        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Domaine" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__entre__3D2915A8" />
+        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NumTel_Entreprise" />
+        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_Site_Entreprise" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_profil___langu__395884C4" />
+        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Profil" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__site___2DE6D218" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__statu__2EDAF651" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.FK__T_offre_e__type___2FCF1A8A" />

@@ -66,9 +66,9 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             var t_profil = db.T_profil.Include(p => p.T_niveau_experience.Select(n => n.T_domaine)).FirstOrDefault(p => p.id == id);
-            
+
+            //T_profil t_profil = db.T_profil.Find(id);
             if (t_profil == null)
             {
                 return HttpNotFound();
@@ -94,7 +94,6 @@ namespace Projet_MobPro.Controllers
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat");
-
             return View();
         }
 
@@ -124,7 +123,6 @@ namespace Projet_MobPro.Controllers
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
-
             return View(t_profil);
         }
 
@@ -187,11 +185,11 @@ namespace Projet_MobPro.Controllers
         {
             T_profil t_profil = db.T_profil.Find(id);
 
+            // Si un profil est supprimé, on supprime aussi les niveaux d'expérience
             var niveauxExperience = db.T_niveau_experience.Where(ne => ne.profil_id == t_profil.id).ToList();
             db.T_niveau_experience.RemoveRange(niveauxExperience);
             db.T_profil.Remove(t_profil);
             db.SaveChanges();
-
             return RedirectToAction("Index");
         }
 

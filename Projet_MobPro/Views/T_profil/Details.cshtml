@@ -76,18 +76,15 @@
 
     </dl>
 
-    <br />
     <h5>Gérer mon niveau d'expérience</h5>
-    <br />
     <a href="@Url.Action("Create", "T_niveau_experience", new { profilId = Model.id })" class="btn btn-primary">
         Ajouter un Niveau d'Expérience
     </a>
-    <br />
+
     @if (ViewBag.NiveauxExperience != null && ViewBag.NiveauxExperience.Count > 0)
     {
         <div class="form-group">
             <div class="col-md-10">
-                <br />
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -115,6 +112,6 @@
 
 </div>
 <p>
-    @Html.ActionLink("Modifier le profil", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Retour", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

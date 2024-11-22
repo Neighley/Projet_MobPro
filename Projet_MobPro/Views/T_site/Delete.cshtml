@@ -35,6 +35,14 @@
             @Html.DisplayFor(model => model.ville)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.T_entreprise.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_entreprise.nom)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {

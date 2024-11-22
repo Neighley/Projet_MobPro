@@ -10,112 +10,107 @@ using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
 {
-    public class T_num_telController : Controller
+    public class T_siteOldController : Controller
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
-        // GET: T_num_tel
+        // GET: T_site
         public ActionResult Index()
         {
-            var t_num_tel = db.T_num_tel.Include(t => t.T_entreprise);
-            return View(t_num_tel.ToList());
+            return View(db.T_site.ToList());
         }
 
-        // GET: T_num_tel/Details/5
+        // GET: T_site/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_num_tel t_num_tel = db.T_num_tel.Find(id);
-            if (t_num_tel == null)
+            T_site t_site = db.T_site.Find(id);
+            if (t_site == null)
             {
                 return HttpNotFound();
             }
-            return View(t_num_tel);
+            return View(t_site);
         }
 
-        // GET: T_num_tel/Create
+        // GET: T_site/Create
         public ActionResult Create()
         {
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
             return View();
         }
 
-        // POST: T_num_tel/Create
+        // POST: T_site/Create
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,telephone,entreprise_id")] T_num_tel t_num_tel)
+        public ActionResult Create([Bind(Include = "id,adresse,code_postal,ville")] T_site t_site)
         {
             if (ModelState.IsValid)
             {
-                db.T_num_tel.Add(t_num_tel);
+                db.T_site.Add(t_site);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "T_entreprise");
             }
 
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);
-            return View(t_num_tel);
+            return View(t_site);
         }
 
-        // GET: T_num_tel/Edit/5
+        // GET: T_site/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_num_tel t_num_tel = db.T_num_tel.Find(id);
-            if (t_num_tel == null)
+            T_site t_site = db.T_site.Find(id);
+            if (t_site == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);
-            return View(t_num_tel);
+            return View(t_site);
         }
 
-        // POST: T_num_tel/Edit/5
+        // POST: T_site/Edit/5
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,telephone,entreprise_id")] T_num_tel t_num_tel)
+        public ActionResult Edit([Bind(Include = "id,adresse,code_postal,ville")] T_site t_site)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(t_num_tel).State = EntityState.Modified;
+                db.Entry(t_site).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);
-            return View(t_num_tel);
+            return View(t_site);
         }
 
-        // GET: T_num_tel/Delete/5
+        // GET: T_site/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_num_tel t_num_tel = db.T_num_tel.Find(id);
-            if (t_num_tel == null)
+            T_site t_site = db.T_site.Find(id);
+            if (t_site == null)
             {
                 return HttpNotFound();
             }
-            return View(t_num_tel);
+            return View(t_site);
         }
 
-        // POST: T_num_tel/Delete/5
+        // POST: T_site/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            T_num_tel t_num_tel = db.T_num_tel.Find(id);
-            db.T_num_tel.Remove(t_num_tel);
+            T_site t_site = db.T_site.Find(id);
+            db.T_site.Remove(t_site);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

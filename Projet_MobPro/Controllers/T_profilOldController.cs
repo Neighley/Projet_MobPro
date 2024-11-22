@@ -21,8 +21,8 @@ namespace Projet_MobPro.Controllers
             // Récupération de l'ID de l'utilisateur actuel
             var currentUserId = User.Identity.GetUserId();
 
-            // Récupération du nombre de profils créés
-            int profilCount = db.T_profil.Count();
+            // Récupération du nombre de profils créés pour l'utilisateur actuel
+            int profilCount = db.T_profil.Count(p => p.AspNetUser_id == currentUserId);
             ViewBag.ProfilCount = profilCount;
 
             // Récupération du rôle de l'utilisateur
@@ -30,6 +30,7 @@ namespace Projet_MobPro.Controllers
                                     .Where(u => u.Id == currentUserId)
                                     .Select(u => u.role_id)
                                     .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
 
             IEnumerable<T_profil> t_profil;
 
@@ -40,7 +41,6 @@ namespace Projet_MobPro.Controllers
                 // Afficher uniquement le profil de l'utilisateur connecté
                 t_profil = db.T_profil
                              .Include(t => t.AspNetUsers)
-                             .Include(t => t.T_niveau_experience)
                              .Include(t => t.T_role)
                              .Include(t => t.T_type_contrat)
                              .Where(p => p.AspNetUser_id == currentUserId)
@@ -51,7 +51,6 @@ namespace Projet_MobPro.Controllers
                 // Afficher tous les profils pour les autres rôles
                 t_profil = db.T_profil
                              .Include(t => t.AspNetUsers)
-                             .Include(t => t.T_niveau_experience)
                              .Include(t => t.T_role)
                              .Include(t => t.T_type_contrat)
                              .ToList();
@@ -60,7 +59,6 @@ namespace Projet_MobPro.Controllers
             return View(t_profil);
         }
 
-
         // GET: T_profil/Details/5
         public ActionResult Details(int? id)
         {
@@ -68,105 +66,45 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_profil t_profil = db.T_profil.Find(id);
+
+            var t_profil = db.T_profil.Include(p => p.T_niveau_experience.Select(n => n.T_domaine)).FirstOrDefault(p => p.id == id);
+            
             if (t_profil == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.NiveauxExperience = t_profil.T_niveau_experience.ToList();
+            ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
+            ViewBag.ProfilId = t_profil.id;
+
             return View(t_profil);
         }
 
         // GET: T_profil/Create
-        public ActionResult Create(int? niveau_experience_id)
+        public ActionResult Create()
         {
             var profil = new T_profil();
-
-            if (niveau_experience_id.HasValue)
-            {
-                ViewBag.NiveauExperienceId = niveau_experience_id.Value;
-            }
-
-            // Restaurer les données depuis TempData
-            if (TempData["Nom"] != null)
-            {
-                profil.nom = TempData["Nom"] as string;
-                TempData.Keep("Nom");
-            }
-
-            if (TempData["Prenom"] != null)
-            {
-                profil.prenom = TempData["Prenom"] as string;
-                TempData.Keep("Prenom");
-            }
-
-            if (TempData["Date_Naissance"] != null)
-            {
-                profil.date_naissance = (DateTime)TempData["Date_Naissance"];
-                TempData.Keep("Date_Naissance");
-            }
-
-            if (TempData["Code_Postal"] != null)
-            {
-                profil.code_postal = TempData["Code_Postal"] as string;
-                TempData.Keep("Code_Postal");
-            }
-
-            if (TempData["Ville"] != null)
-            {
-                profil.ville = TempData["Ville"] as string;
-                TempData.Keep("Ville");
-            }
-
-            if (TempData["Role_Id"] != null)
-            {
-                profil.role_id = (int)TempData["Role_Id"];
-                TempData.Keep("Role_Id");
-            }
-
-            if (TempData["Type_Contrat_Id"] != null)
-            {
-                profil.type_contrat_id = (int)TempData["Type_Contrat_Id"];
-                TempData.Keep("Type_Contrat_Id");
-            }
-
-            //if (TempData["Niveau_Experience_Id"] != null)
-            //{
-            //    profil.niveau_experience_id = (int)TempData["Niveau_Experience_Id"];
-            //    TempData.Keep("Niveau_Experience_Id");
-            //}
-
-            if (TempData["AspNetUser_Id"] != null)
-            {
-                profil.AspNetUser_id = TempData["AspNetUser_Id"] as string;
-                TempData.Keep("AspNetUser_Id");
-            }
-
-            var niveaux = db.T_niveau_experience.ToList();
-            ViewBag.NiveauxExperience = niveaux;
 
             // Récupération de l'ID de l'utilisateur actuel pour gérer ses droits
             var currentUserId = User.Identity.GetUserId();
             var currentUser = db.AspNetUsers.Find(currentUserId);
-
             ViewBag.CurrentUserRoleId = currentUser?.role_id ?? 0;
 
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience");
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat");
 
             return View();
         }
 
-
         // POST: T_profil/Create
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom,prenom,date_naissance,adresse,code_postal,ville,ruelle_p,role_id,type_contrat_id,niveau_experience_id,AspNetUser_id")] T_profil t_profil)
+        public ActionResult Create([Bind(Include = "id,nom,prenom,date_naissance,adresse,code_postal,ville,ruelle_p,role_id,type_contrat_id,AspNetUser_id")] T_profil t_profil)
         {
-
             var currentUserId = User.Identity.GetUserId();
             t_profil.AspNetUser_id = currentUserId;
 
@@ -178,26 +116,12 @@ namespace Projet_MobPro.Controllers
 
             if (ModelState.IsValid)
             {
-                // Ajouter le profil à la base et rediriger vers l'index
                 db.T_profil.Add(t_profil);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = t_profil.id });
             }
 
-            /* Sauvegarde des données saisies dans TempData pour gérer la redirection sur T_niv_exp
-             Et ainsi garder en mémoire les champs précédemment entrés */
-            TempData["Nom"] = t_profil.nom;
-            TempData["Prenom"] = t_profil.prenom;
-            TempData["Date_Naissance"] = t_profil.date_naissance;
-            TempData["Code_Postal"] = t_profil.code_postal;
-            TempData["Ville"] = t_profil.ville;
-            TempData["Role_Id"] = t_profil.role_id;
-            TempData["Type_Contrat_Id"] = t_profil.type_contrat_id;
-            //TempData["Niveau_Experience_Id"] = t_profil.niveau_experience_id;
-            TempData["AspNetUser_Id"] = t_profil.AspNetUser_id;
-
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
-            //ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
 
@@ -217,7 +141,6 @@ namespace Projet_MobPro.Controllers
                 return HttpNotFound();
             }
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
-            //ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
             return View(t_profil);
@@ -228,7 +151,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom,prenom,date_naissance,adresse,code_postal,ville,ruelle_p,role_id,type_contrat_id,niveau_experience_id,AspNetUser_id")] T_profil t_profil)
+        public ActionResult Edit([Bind(Include = "id,nom,prenom,date_naissance,adresse,code_postal,ville,ruelle_p,role_id,type_contrat_id,AspNetUser_id")] T_profil t_profil)
         {
             if (ModelState.IsValid)
             {
@@ -237,7 +160,6 @@ namespace Projet_MobPro.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
-            //ViewBag.niveau_experience_id = new SelectList(db.T_niveau_experience, "id", "nom_niveau_experience", t_profil.niveau_experience_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
             return View(t_profil);
@@ -264,8 +186,12 @@ namespace Projet_MobPro.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             T_profil t_profil = db.T_profil.Find(id);
+
+            var niveauxExperience = db.T_niveau_experience.Where(ne => ne.profil_id == t_profil.id).ToList();
+            db.T_niveau_experience.RemoveRange(niveauxExperience);
             db.T_profil.Remove(t_profil);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

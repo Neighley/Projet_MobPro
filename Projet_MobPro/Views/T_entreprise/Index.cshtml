@@ -4,14 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Entreprises</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Créer une entreprise", "Create")
-    <br />
-    @Html.ActionLink("Voir mes sites", "Index", "T_site")
-    <br />
-    @Html.ActionLink("Voir mes n° Téléphone", "Index", "T_num_tel")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -19,10 +15,7 @@
             @Html.DisplayNameFor(model => model.nom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.T_num_tel.telephone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_site.adresse)
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </th>
         <th></th>
     </tr>
@@ -33,15 +26,12 @@
             @Html.DisplayFor(modelItem => item.nom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.T_num_tel.telephone)
+            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.T_site.adresse)
-        </td>
-        <td>
-            @Html.ActionLink("Modifier", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Delete", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

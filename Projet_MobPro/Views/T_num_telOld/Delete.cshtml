@@ -1,4 +1,4 @@
-﻿@model Projet_MobPro.Models.T_entreprise
+﻿@model Projet_MobPro.Models.T_num_tel
 
 @{
     ViewBag.Title = "Delete";
@@ -8,23 +8,15 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>T_entreprise</h4>
+    <h4>T_num_tel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nom)
+            @Html.DisplayNameFor(model => model.telephone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.nom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsers.Email)
+            @Html.DisplayFor(model => model.telephone)
         </dd>
 
     </dl>

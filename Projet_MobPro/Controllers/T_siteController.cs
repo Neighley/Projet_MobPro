@@ -17,7 +17,8 @@ namespace Projet_MobPro.Controllers
         // GET: T_site
         public ActionResult Index()
         {
-            return View(db.T_site.ToList());
+            var t_site = db.T_site.Include(t => t.T_entreprise);
+            return View(t_site.ToList());
         }
 
         // GET: T_site/Details/5
@@ -38,6 +39,7 @@ namespace Projet_MobPro.Controllers
         // GET: T_site/Create
         public ActionResult Create()
         {
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
             return View();
         }
 
@@ -46,15 +48,16 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,adresse,code_postal,ville")] T_site t_site)
+        public ActionResult Create([Bind(Include = "id,adresse,code_postal,ville,entreprise_id")] T_site t_site)
         {
             if (ModelState.IsValid)
             {
                 db.T_site.Add(t_site);
                 db.SaveChanges();
-                return RedirectToAction("Create", "T_entreprise");
+                return RedirectToAction("Index");
             }
 
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);
             return View(t_site);
         }
 
@@ -70,6 +73,7 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);
             return View(t_site);
         }
 
@@ -78,7 +82,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,adresse,code_postal,ville")] T_site t_site)
+        public ActionResult Edit([Bind(Include = "id,adresse,code_postal,ville,entreprise_id")] T_site t_site)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace Projet_MobPro.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);
             return View(t_site);
         }
 

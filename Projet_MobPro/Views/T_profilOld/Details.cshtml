@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Détails</h2>
+<h2>Détails du profil</h2>
 
 <div>
-    <h4>Profil existant</h4>
+    <h5>Vos renseignements</h5>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -67,22 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.T_niveau_experience.nom_niveau_experience)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.T_niveau_experience.nom_niveau_experience)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.T_niveau_experience.domaine)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.T_niveau_experience.domaine)
-        </dd>
-
-        <dt>
-            Type de contrat
+            @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
         </dt>
 
         <dd>
@@ -90,8 +75,46 @@
         </dd>
 
     </dl>
+
+    <br />
+    <h5>Gérer mon niveau d'expérience</h5>
+    <br />
+    <a href="@Url.Action("Create", "T_niveau_experience", new { profilId = Model.id })" class="btn btn-primary">
+        Ajouter un Niveau d'Expérience
+    </a>
+    <br />
+    @if (ViewBag.NiveauxExperience != null && ViewBag.NiveauxExperience.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Niveau d'expérience</th>
+                            <th>Domaine d'expertise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var niveau in ViewBag.NiveauxExperience as List<Projet_MobPro.Models.T_niveau_experience>)
+                        {
+                            <tr>
+                                <td>@niveau.nom_niveau_experience</td>
+                                <td>@niveau.T_domaine.domaine</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Aucun niveau d'expérience trouvé pour ce profil.</p>
+    }
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier le profil", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Retour", "Index")
 </p>

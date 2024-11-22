@@ -14,16 +14,10 @@ namespace Projet_MobPro.Models
     
     public partial class T_num_tel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_num_tel()
-        {
-            this.T_entreprise = new HashSet<T_entreprise>();
-        }
-    
         public int id { get; set; }
         public string telephone { get; set; }
+        public Nullable<int> entreprise_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_entreprise> T_entreprise { get; set; }
+        public virtual T_entreprise T_entreprise { get; set; }
     }
 }

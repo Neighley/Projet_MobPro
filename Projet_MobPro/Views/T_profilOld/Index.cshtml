@@ -7,7 +7,12 @@
 <h2>Mon profil</h2>
 
 <p>
-    @if (!(ViewBag.ProfilExistant is bool && (bool)ViewBag.ProfilExistant) && ViewBag.ProfilCount < 2)
+    <!-- A REVOIR CA NE FONCTIONNE PAS-->
+    @if (ViewBag.ProfilCount < 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
+    {
+        @Html.ActionLink("Créer un profil", "Create")
+    }
+    else if (ViewBag.CurrentUserRoleId == 1)
     {
         @Html.ActionLink("Créer un profil", "Create")
     }
@@ -36,17 +41,12 @@
             @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.T_niveau_experience.nom_niveau_experience)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_niveau_experience.domaine)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
         </th>
         <th>
             Actions
         </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -72,19 +72,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
-        <!--<td>
-            @Html.DisplayFor(modelItem => item.T_niveau_experience.nom_niveau_experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_niveau_experience.domaine)
-        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
+            @Html.ActionLink("Modifier", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Détails", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
         </td>
     </tr>
 }

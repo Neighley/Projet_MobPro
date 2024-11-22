@@ -10,15 +10,14 @@ using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
 {
-    public class T_num_telController : Controller
+    public class T_num_telOldController : Controller
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
         // GET: T_num_tel
         public ActionResult Index()
         {
-            var t_num_tel = db.T_num_tel.Include(t => t.T_entreprise);
-            return View(t_num_tel.ToList());
+            return View(db.T_num_tel.ToList());
         }
 
         // GET: T_num_tel/Details/5
@@ -39,7 +38,6 @@ namespace Projet_MobPro.Controllers
         // GET: T_num_tel/Create
         public ActionResult Create()
         {
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
             return View();
         }
 
@@ -48,16 +46,15 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,telephone,entreprise_id")] T_num_tel t_num_tel)
+        public ActionResult Create([Bind(Include = "id,telephone")] T_num_tel t_num_tel)
         {
             if (ModelState.IsValid)
             {
                 db.T_num_tel.Add(t_num_tel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "T_entreprise");
             }
 
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);
             return View(t_num_tel);
         }
 
@@ -73,7 +70,6 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);
             return View(t_num_tel);
         }
 
@@ -82,7 +78,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,telephone,entreprise_id")] T_num_tel t_num_tel)
+        public ActionResult Edit([Bind(Include = "id,telephone")] T_num_tel t_num_tel)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace Projet_MobPro.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);
             return View(t_num_tel);
         }
 

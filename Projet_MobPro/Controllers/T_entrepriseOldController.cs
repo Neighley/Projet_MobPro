@@ -6,19 +6,46 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
 {
-    public class T_entrepriseController : Controller
+    public class T_entrepriseOldController : Controller
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
         // GET: T_entreprise
         public ActionResult Index()
         {
-            var t_entreprise = db.T_entreprise.Include(t => t.AspNetUsers);
-            return View(t_entreprise.ToList());
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+
+            IEnumerable<T_entreprise> t_entreprise;
+
+            if (currentUserRole == 1)
+            {
+                t_entreprise = db.T_entreprise
+                                 .Include(t => t.T_num_tel)
+                                 .Include(t => t.T_site)
+                                 .ToList();
+            }
+            else
+            {
+                t_entreprise = db.T_entreprise
+                                 .Include(t => t.T_num_tel)
+                                 .Include(t => t.T_site)
+                                 .Where(e => e.AspNetUser_id == currentUserId)
+                                 .ToList();
+            }
+
+            return View(t_entreprise);
         }
 
         // GET: T_entreprise/Details/5
@@ -39,7 +66,8 @@ namespace Projet_MobPro.Controllers
         // GET: T_entreprise/Create
         public ActionResult Create()
         {
-            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone");
+            ViewBag.site_id = new SelectList(db.T_site, "id", "adresse");
             return View();
         }
 
@@ -48,7 +76,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom,AspNetUser_id")] T_entreprise t_entreprise)
+        public ActionResult Create([Bind(Include = "id,nom,num_tel_id,site_id")] T_entreprise t_entreprise)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +85,8 @@ namespace Projet_MobPro.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_entreprise.AspNetUser_id);
+            //ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone", t_entreprise.num_tel_id);
+            //ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_entreprise.site_id);
             return View(t_entreprise);
         }
 
@@ -73,7 +102,8 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_entreprise.AspNetUser_id);
+            //ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone", t_entreprise.num_tel_id);
+            //ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_entreprise.site_id);
             return View(t_entreprise);
         }
 
@@ -82,7 +112,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom,AspNetUser_id")] T_entreprise t_entreprise)
+        public ActionResult Edit([Bind(Include = "id,nom,num_tel_id,site_id")] T_entreprise t_entreprise)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +120,8 @@ namespace Projet_MobPro.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_entreprise.AspNetUser_id);
+            //ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone", t_entreprise.num_tel_id);
+            //ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_entreprise.site_id);
             return View(t_entreprise);
         }
 

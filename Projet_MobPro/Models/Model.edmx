@@ -77,8 +77,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom" Type="nvarchar" MaxLength="255" />
-          <Property Name="num_tel_id" Type="int" />
-          <Property Name="site_id" Type="int" />
           <Property Name="AspNetUser_id" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="T_langues">
@@ -103,6 +101,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="telephone" Type="nvarchar" MaxLength="20" />
+          <Property Name="entreprise_id" Type="int" />
         </EntityType>
         <EntityType Name="T_offre_emploi">
           <Key>
@@ -192,6 +191,7 @@
           <Property Name="adresse" Type="nvarchar" MaxLength="255" />
           <Property Name="code_postal" Type="nvarchar" MaxLength="10" />
           <Property Name="ville" Type="nvarchar" MaxLength="100" />
+          <Property Name="entreprise_id" Type="int" />
         </EntityType>
         <EntityType Name="T_statut">
           <Key>
@@ -207,30 +207,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_type_contrat" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__T_entrepr__num_t__3F115E1A">
-          <End Role="T_num_tel" Type="Self.T_num_tel" Multiplicity="0..1" />
-          <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_num_tel">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_entreprise">
-              <PropertyRef Name="num_tel_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__T_entrepr__site___3E1D39E1">
-          <End Role="T_site" Type="Self.T_site" Multiplicity="0..1" />
-          <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_site">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_entreprise">
-              <PropertyRef Name="site_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__T_offre_e__compe__42E1EEFE">
           <End Role="T_competences" Type="Self.T_competences" Multiplicity="1" />
           <End Role="T_offre_emploi_competences" Type="Self.T_offre_emploi_competences" Multiplicity="*" />
@@ -480,9 +456,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_NiveauExp_Profil">
-          <End Role="T_profil" Type="Self.T_profil" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="T_profil" Type="Self.T_profil" Multiplicity="0..1" />
           <End Role="T_niveau_experience" Type="Self.T_niveau_experience" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_profil">
@@ -490,6 +464,30 @@
             </Principal>
             <Dependent Role="T_niveau_experience">
               <PropertyRef Name="profil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NumTel_Entreprise">
+          <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="0..1" />
+          <End Role="T_num_tel" Type="Self.T_num_tel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_entreprise">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_num_tel">
+              <PropertyRef Name="entreprise_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Site_Entreprise">
+          <End Role="T_entreprise" Type="Self.T_entreprise" Multiplicity="0..1" />
+          <End Role="T_site" Type="Self.T_site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_entreprise">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_site">
+              <PropertyRef Name="entreprise_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -539,14 +537,6 @@
           <EntitySet Name="T_site" EntityType="Self.T_site" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_statut" EntityType="Self.T_statut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_type_contrat" EntityType="Self.T_type_contrat" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__T_entrepr__num_t__3F115E1A" Association="Self.FK__T_entrepr__num_t__3F115E1A">
-            <End Role="T_num_tel" EntitySet="T_num_tel" />
-            <End Role="T_entreprise" EntitySet="T_entreprise" />
-          </AssociationSet>
-          <AssociationSet Name="FK__T_entrepr__site___3E1D39E1" Association="Self.FK__T_entrepr__site___3E1D39E1">
-            <End Role="T_site" EntitySet="T_site" />
-            <End Role="T_entreprise" EntitySet="T_entreprise" />
-          </AssociationSet>
           <AssociationSet Name="FK__T_offre_e__compe__42E1EEFE" Association="Self.FK__T_offre_e__compe__42E1EEFE">
             <End Role="T_competences" EntitySet="T_competences" />
             <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
@@ -631,6 +621,14 @@
             <End Role="T_profil" EntitySet="T_profil" />
             <End Role="T_niveau_experience" EntitySet="T_niveau_experience" />
           </AssociationSet>
+          <AssociationSet Name="FK_NumTel_Entreprise" Association="Self.FK_NumTel_Entreprise">
+            <End Role="T_entreprise" EntitySet="T_entreprise" />
+            <End Role="T_num_tel" EntitySet="T_num_tel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Site_Entreprise" Association="Self.FK_Site_Entreprise">
+            <End Role="T_entreprise" EntitySet="T_entreprise" />
+            <End Role="T_site" EntitySet="T_site" />
+          </AssociationSet>
           <AssociationSet Name="FK_T_entreprise_AspNetUsers" Association="Self.FK_T_entreprise_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="T_entreprise" EntitySet="T_entreprise" />
@@ -691,17 +689,17 @@
             <End Role="T_domaine" EntitySet="T_domaine" />
             <End Role="T_niveau_experience" EntitySet="T_niveau_experience" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_entrepr__num_t__3F115E1A" Association="Mobilite_Pro_BDDModel.FK__T_entrepr__num_t__3F115E1A">
-            <End Role="T_num_tel" EntitySet="T_num_tel" />
-            <End Role="T_entreprise" EntitySet="T_entreprise" />
-          </AssociationSet>
-          <AssociationSet Name="FK__T_entrepr__site___3E1D39E1" Association="Mobilite_Pro_BDDModel.FK__T_entrepr__site___3E1D39E1">
-            <End Role="T_site" EntitySet="T_site" />
-            <End Role="T_entreprise" EntitySet="T_entreprise" />
-          </AssociationSet>
           <AssociationSet Name="FK__T_offre_e__entre__3D2915A8" Association="Mobilite_Pro_BDDModel.FK__T_offre_e__entre__3D2915A8">
             <End Role="T_entreprise" EntitySet="T_entreprise" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NumTel_Entreprise" Association="Mobilite_Pro_BDDModel.FK_NumTel_Entreprise">
+            <End Role="T_entreprise" EntitySet="T_entreprise" />
+            <End Role="T_num_tel" EntitySet="T_num_tel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Site_Entreprise" Association="Mobilite_Pro_BDDModel.FK_Site_Entreprise">
+            <End Role="T_entreprise" EntitySet="T_entreprise" />
+            <End Role="T_site" EntitySet="T_site" />
           </AssociationSet>
           <AssociationSet Name="FK__T_profil___langu__395884C4" Association="Mobilite_Pro_BDDModel.FK__T_profil___langu__395884C4">
             <End Role="T_langues" EntitySet="T_langues" />
@@ -828,13 +826,11 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="num_tel_id" Type="Int32" />
-          <Property Name="site_id" Type="Int32" />
           <Property Name="AspNetUser_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="Mobilite_Pro_BDDModel.FK_T_entreprise_AspNetUsers" FromRole="T_entreprise" ToRole="AspNetUsers" />
-          <NavigationProperty Name="T_num_tel" Relationship="Mobilite_Pro_BDDModel.FK__T_entrepr__num_t__3F115E1A" FromRole="T_entreprise" ToRole="T_num_tel" />
-          <NavigationProperty Name="T_site" Relationship="Mobilite_Pro_BDDModel.FK__T_entrepr__site___3E1D39E1" FromRole="T_entreprise" ToRole="T_site" />
           <NavigationProperty Name="T_offre_emploi" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__entre__3D2915A8" FromRole="T_entreprise" ToRole="T_offre_emploi" />
+          <NavigationProperty Name="T_num_tel" Relationship="Mobilite_Pro_BDDModel.FK_NumTel_Entreprise" FromRole="T_entreprise" ToRole="T_num_tel" />
+          <NavigationProperty Name="T_site" Relationship="Mobilite_Pro_BDDModel.FK_Site_Entreprise" FromRole="T_entreprise" ToRole="T_site" />
         </EntityType>
         <EntityType Name="T_langues">
           <Key>
@@ -862,7 +858,8 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="T_entreprise" Relationship="Mobilite_Pro_BDDModel.FK__T_entrepr__num_t__3F115E1A" FromRole="T_num_tel" ToRole="T_entreprise" />
+          <Property Name="entreprise_id" Type="Int32" />
+          <NavigationProperty Name="T_entreprise" Relationship="Mobilite_Pro_BDDModel.FK_NumTel_Entreprise" FromRole="T_num_tel" ToRole="T_entreprise" />
         </EntityType>
         <EntityType Name="T_offre_emploi">
           <Key>
@@ -954,7 +951,8 @@
           <Property Name="adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="code_postal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ville" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="T_entreprise" Relationship="Mobilite_Pro_BDDModel.FK__T_entrepr__site___3E1D39E1" FromRole="T_site" ToRole="T_entreprise" />
+          <Property Name="entreprise_id" Type="Int32" />
+          <NavigationProperty Name="T_entreprise" Relationship="Mobilite_Pro_BDDModel.FK_Site_Entreprise" FromRole="T_site" ToRole="T_entreprise" />
           <NavigationProperty Name="T_offre_emploi" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__site___2DE6D218" FromRole="T_site" ToRole="T_offre_emploi" />
         </EntityType>
         <EntityType Name="T_statut">
@@ -1062,30 +1060,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_entrepr__num_t__3F115E1A">
-          <End Type="Mobilite_Pro_BDDModel.T_num_tel" Role="T_num_tel" Multiplicity="0..1" />
-          <End Type="Mobilite_Pro_BDDModel.T_entreprise" Role="T_entreprise" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_num_tel">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_entreprise">
-              <PropertyRef Name="num_tel_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__T_entrepr__site___3E1D39E1">
-          <End Type="Mobilite_Pro_BDDModel.T_site" Role="T_site" Multiplicity="0..1" />
-          <End Type="Mobilite_Pro_BDDModel.T_entreprise" Role="T_entreprise" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_site">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_entreprise">
-              <PropertyRef Name="site_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__T_offre_e__entre__3D2915A8">
           <End Type="Mobilite_Pro_BDDModel.T_entreprise" Role="T_entreprise" Multiplicity="0..1" />
           <End Type="Mobilite_Pro_BDDModel.T_offre_emploi" Role="T_offre_emploi" Multiplicity="*" />
@@ -1094,6 +1068,30 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="T_offre_emploi">
+              <PropertyRef Name="entreprise_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NumTel_Entreprise">
+          <End Type="Mobilite_Pro_BDDModel.T_entreprise" Role="T_entreprise" Multiplicity="0..1" />
+          <End Type="Mobilite_Pro_BDDModel.T_num_tel" Role="T_num_tel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_entreprise">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_num_tel">
+              <PropertyRef Name="entreprise_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Site_Entreprise">
+          <End Type="Mobilite_Pro_BDDModel.T_entreprise" Role="T_entreprise" Multiplicity="0..1" />
+          <End Type="Mobilite_Pro_BDDModel.T_site" Role="T_site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_entreprise">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_site">
               <PropertyRef Name="entreprise_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1290,8 +1288,6 @@
             <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.T_entreprise">
               <MappingFragment StoreEntitySet="T_entreprise">
                 <ScalarProperty Name="AspNetUser_id" ColumnName="AspNetUser_id" />
-                <ScalarProperty Name="site_id" ColumnName="site_id" />
-                <ScalarProperty Name="num_tel_id" ColumnName="num_tel_id" />
                 <ScalarProperty Name="nom" ColumnName="nom" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -1318,6 +1314,7 @@
           <EntitySetMapping Name="T_num_tel">
             <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.T_num_tel">
               <MappingFragment StoreEntitySet="T_num_tel">
+                <ScalarProperty Name="entreprise_id" ColumnName="entreprise_id" />
                 <ScalarProperty Name="telephone" ColumnName="telephone" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -1393,6 +1390,7 @@
           <EntitySetMapping Name="T_site">
             <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.T_site">
               <MappingFragment StoreEntitySet="T_site">
+                <ScalarProperty Name="entreprise_id" ColumnName="entreprise_id" />
                 <ScalarProperty Name="ville" ColumnName="ville" />
                 <ScalarProperty Name="code_postal" ColumnName="code_postal" />
                 <ScalarProperty Name="adresse" ColumnName="adresse" />
