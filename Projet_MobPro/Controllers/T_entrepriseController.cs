@@ -164,9 +164,11 @@ namespace Projet_MobPro.Controllers
         {
             T_entreprise t_entreprise = db.T_entreprise.Find(id);
 
-            // Si un profil est supprimé, on supprime aussi les sites
+            // Si un profil est supprimé, on supprime aussi les sites ET les num_tel
             var sites = db.T_site.Where(ne => ne.entreprise_id == t_entreprise.id).ToList();
             db.T_site.RemoveRange(sites);
+            var numtel = db.T_num_tel.Where(ne => ne.entreprise_id == t_entreprise.id).ToList();
+            db.T_num_tel.RemoveRange(numtel);
             db.T_entreprise.Remove(t_entreprise);
             db.SaveChanges();
             return RedirectToAction("Index");

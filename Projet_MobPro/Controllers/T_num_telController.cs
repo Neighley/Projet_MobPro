@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,8 +18,16 @@ namespace Projet_MobPro.Controllers
         // GET: T_num_tel
         public ActionResult Index()
         {
-            var t_num_tel = db.T_num_tel.Include(t => t.T_entreprise);
-            return View(t_num_tel.ToList());
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+
+            var entreprise = db.T_entreprise.FirstOrDefault(e => e.AspNetUser_id == currentUserId);
+
+            var t_num_tel = db.T_num_tel
+                            .Include(t => t.T_entreprise)
+                            .Where(t => t.entreprise_id == entreprise.id)
+                            .ToList();
+            return View(t_num_tel);
         }
 
         // GET: T_num_tel/Details/5
@@ -37,8 +46,11 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_num_tel/Create
-        public ActionResult Create()
+        public ActionResult Create(int? entrepriseId)
         {
+            var entreprise = db.T_entreprise.Find(entrepriseId);
+
+            ViewBag.EntrepriseId = entrepriseId;
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
             return View();
         }
@@ -54,7 +66,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_num_tel.Add(t_num_tel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_entreprise", new { id = t_num_tel.entreprise_id });
             }
 
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);

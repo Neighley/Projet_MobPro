@@ -26,7 +26,7 @@ namespace Projet_MobPro.Controllers
             var t_site = db.T_site
                             .Include(t => t.T_entreprise)
                             .Where(t => t.entreprise_id == entreprise.id)
-                            .ToList(); ;
+                            .ToList();
             return View(t_site);
         }
 

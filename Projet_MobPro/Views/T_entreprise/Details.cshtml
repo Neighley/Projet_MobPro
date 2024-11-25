@@ -65,6 +65,38 @@
     {
         <p>Aucun site trouvé pour ce profil.</p>
     }
+
+    <h5>Gérer mes numéros de téléphone</h5>
+    <a href="@Url.Action("Create", "T_num_tel", new { entrepriseId = Model.id })" class="btn btn-primary">
+        Ajouter un téléphone
+    </a>
+
+    @if (ViewBag.NumTel != null && ViewBag.Sites.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Téléphone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var niveau in ViewBag.NumTel as List<Projet_MobPro.Models.T_num_tel>)
+                        {
+                            <tr>
+                                <td>@niveau.telephone</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Aucun téléphone trouvé pour ce profil.</p>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
