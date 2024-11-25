@@ -60,13 +60,14 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,adresse,code_postal,ville,entreprise_id")] T_site t_site)
+        public ActionResult Create(int entrepriseId, [Bind(Include = "id,adresse,code_postal,ville,entreprise_id")] T_site t_site)
         {
             if (ModelState.IsValid)
             {
+                t_site.entreprise_id = entrepriseId;
                 db.T_site.Add(t_site);
                 db.SaveChanges();
-                return RedirectToAction("Details", "T_entreprise", new { id = t_site.entreprise_id});
+                return RedirectToAction("Details", "T_entreprise", new { id = entrepriseId});
             }
 
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);
@@ -113,11 +114,15 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_site t_site = db.T_site.Find(id);
+
+            T_site t_site = db.T_site.Include(t => t.T_entreprise).FirstOrDefault(t => t.id == id);
+
             if (t_site == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.EntrepriseId = t_site.entreprise_id;
             return View(t_site);
         }
 

@@ -32,6 +32,9 @@
     <a href="@Url.Action("Create", "T_site", new { entrepriseId = Model.id })" class="btn btn-primary">
         Ajouter un site
     </a>
+    <a href="@Url.Action("Index", "T_site")" class="btn btn-primary">
+        Gérer mes sites
+    </a>
 
     @if (ViewBag.Sites != null && ViewBag.Sites.Count > 0)
     {
@@ -69,6 +72,10 @@
     <h5>Gérer mes numéros de téléphone</h5>
     <a href="@Url.Action("Create", "T_num_tel", new { entrepriseId = Model.id })" class="btn btn-primary">
         Ajouter un téléphone
+    </a>
+    </a>
+    <a href="@Url.Action("Index", "T_num_tel")" class="btn btn-primary">
+        Gérer mes téléphones
     </a>
 
     @if (ViewBag.NumTel != null && ViewBag.Sites.Count > 0)

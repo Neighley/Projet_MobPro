@@ -60,13 +60,14 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,telephone,entreprise_id")] T_num_tel t_num_tel)
+        public ActionResult Create(int entrepriseId, [Bind(Include = "id,telephone,entreprise_id")] T_num_tel t_num_tel)
         {
             if (ModelState.IsValid)
             {
+                t_num_tel.entreprise_id = entrepriseId;
                 db.T_num_tel.Add(t_num_tel);
                 db.SaveChanges();
-                return RedirectToAction("Details", "T_entreprise", new { id = t_num_tel.entreprise_id });
+                return RedirectToAction("Details", "T_entreprise", new { id = entrepriseId });
             }
 
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_num_tel.entreprise_id);
