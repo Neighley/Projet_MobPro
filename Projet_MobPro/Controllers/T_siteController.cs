@@ -46,8 +46,11 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_site/Create
-        public ActionResult Create()
+        public ActionResult Create(int? entrepriseId)
         {
+            var entreprise = db.T_entreprise.Find(entrepriseId);
+
+            ViewBag.EntrepriseId = entrepriseId;
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
             return View();
         }
