@@ -32,9 +32,6 @@
     <a href="@Url.Action("Create", "T_site", new { entrepriseId = Model.id })" class="btn btn-primary">
         Ajouter un site
     </a>
-    <a href="@Url.Action("Index", "T_site")" class="btn btn-primary">
-        Gérer mes sites
-    </a>
 
     @if (ViewBag.Sites != null && ViewBag.Sites.Count > 0)
     {
@@ -47,6 +44,7 @@
                             <th>Code postal</th>
                             <th>Ville</th>
                             <th>Entreprise</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +55,10 @@
                                 <td>@niveau.code_postal</td>
                                 <td>@niveau.ville</td>
                                 <td>@niveau.entreprise_id</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_site", new { id = niveau.id, entrepriseId = Model.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_site", new { id = niveau.id }, new { @class = "btn-custom-delete" })
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -73,10 +75,6 @@
     <a href="@Url.Action("Create", "T_num_tel", new { entrepriseId = Model.id })" class="btn btn-primary">
         Ajouter un téléphone
     </a>
-    </a>
-    <a href="@Url.Action("Index", "T_num_tel")" class="btn btn-primary">
-        Gérer mes téléphones
-    </a>
 
     @if (ViewBag.NumTel != null && ViewBag.Sites.Count > 0)
     {
@@ -86,6 +84,7 @@
                     <thead>
                         <tr>
                             <th>Téléphone</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,6 +92,10 @@
                         {
                             <tr>
                                 <td>@niveau.telephone</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_num_tel", new { id = niveau.id, entrepriseId = Model.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_num_tel", new { id = niveau.id }, new { @class = "btn-custom-delete" })
+                                </td>
                             </tr>
                         }
                     </tbody>

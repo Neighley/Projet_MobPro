@@ -48,6 +48,8 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
+        <input type="hidden" name="entrepriseId" value="@ViewBag.EntrepriseId" />
+
 <div class="form-actions no-color">
     <input type="submit" value="Delete" class="btn btn-default" />
     @Html.ActionLink("Retour", "Details", "T_entreprise", new { id = ViewBag.EntrepriseId ?? Model.entreprise_id }, new { @class = "btn btn-secondary" })
