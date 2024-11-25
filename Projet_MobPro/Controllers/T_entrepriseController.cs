@@ -21,11 +21,16 @@ namespace Projet_MobPro.Controllers
             // Récupération de l'ID de l'utilisateur actuel
             var currentUserId = User.Identity.GetUserId();
 
+            // Récupération du nombre d'entreprises créés pour l'utilisateur actuel
+            int entrepriseCount = db.T_entreprise.Count(p => p.AspNetUser_id == currentUserId);
+            ViewBag.EntrepriseCount = entrepriseCount;
+
             // Récupération du rôle de l'utilisateur
             var currentUserRole = db.AspNetUsers
                                     .Where(u => u.Id == currentUserId)
                                     .Select(u => u.role_id)
                                     .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
 
             IEnumerable<T_entreprise> t_entreprise;
 
@@ -158,6 +163,10 @@ namespace Projet_MobPro.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             T_entreprise t_entreprise = db.T_entreprise.Find(id);
+
+            // Si un profil est supprimé, on supprime aussi les sites
+            var sites = db.T_site.Where(ne => ne.entreprise_id == t_entreprise.id).ToList();
+            db.T_site.RemoveRange(sites);
             db.T_entreprise.Remove(t_entreprise);
             db.SaveChanges();
             return RedirectToAction("Index");

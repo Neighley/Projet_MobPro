@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,8 +18,16 @@ namespace Projet_MobPro.Controllers
         // GET: T_site
         public ActionResult Index()
         {
-            var t_site = db.T_site.Include(t => t.T_entreprise);
-            return View(t_site.ToList());
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+            
+            var entreprise = db.T_entreprise.FirstOrDefault(e => e.AspNetUser_id == currentUserId);
+
+            var t_site = db.T_site
+                            .Include(t => t.T_entreprise)
+                            .Where(t => t.entreprise_id == entreprise.id)
+                            .ToList(); ;
+            return View(t_site);
         }
 
         // GET: T_site/Details/5

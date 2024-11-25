@@ -7,7 +7,14 @@
 <h2>Entreprises</h2>
 
 <p>
-    @Html.ActionLink("Créer une entreprise", "Create")
+    @if (ViewBag.EntrepriseCount < 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
+    {
+        @Html.ActionLink("Créer une entreprise", "Create")
+    }
+    else if (ViewBag.CurrentUserRoleId == 1)
+    {
+        @Html.ActionLink("Créer une entreprise", "Create")
+    }
     <br />
     @Html.ActionLink("Voir mes sites", "Index", "T_site")
     <br />
