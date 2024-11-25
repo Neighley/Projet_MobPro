@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Modifier</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>T_site</h4>
+        <h5>Vérifiez les champs ci-dessous :</h5>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
@@ -24,7 +24,7 @@
                 @Html.ValidationMessageFor(model => model.adresse, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <br />
         <div class="form-group">
             @Html.LabelFor(model => model.code_postal, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -32,7 +32,7 @@
                 @Html.ValidationMessageFor(model => model.code_postal, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <br />
         <div class="form-group">
             @Html.LabelFor(model => model.ville, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -50,17 +50,17 @@
         </div>-->
 
         <input type="hidden" name="entrepriseId" value="@ViewBag.EntrepriseId" />
-
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Sauvegarder" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour", "Details", "T_entreprise", new { id = ViewBag.EntrepriseId }, null)
 </div>
 
 @section Scripts {

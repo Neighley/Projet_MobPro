@@ -2881,8 +2881,8 @@ textarea.form-control-lg {
 
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #c642ff;
-    --bs-btn-border-color: #c642ff;
+    --bs-btn-bg: #97bfc7;
+    --bs-btn-border-color: #97bfc7;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #912bbd;
     --bs-btn-hover-border-color: #912bbd;
@@ -10877,7 +10877,7 @@ textarea.form-control-lg {
 
 .btn-custom-edit {
     display: inline-block !important;
-    background-color: #38a3eb !important;
+    background-color: #3A7E8D !important;
     color: white !important;
     text-align: center !important;
     padding: 6px 20px !important;
@@ -10894,7 +10894,7 @@ textarea.form-control-lg {
 
 .btn-custom-details {
     display: inline-block !important;
-    background-color: #33de69 !important;
+    background-color: #3A7E8D !important;
     color: white !important;
     text-align: center !important;
     padding: 6px 20px !important;
@@ -10911,7 +10911,7 @@ textarea.form-control-lg {
 
 .btn-custom-delete {
     display: inline-block !important;
-    background-color: #f0303a !important;
+    background-color: #42494E !important;
     color: white !important;
     text-align: center !important;
     padding: 6px 20px !important;
