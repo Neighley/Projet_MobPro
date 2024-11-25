@@ -54,7 +54,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_site.Add(t_site);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_entreprise", new { id = t_site.entreprise_id});
             }
 
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);

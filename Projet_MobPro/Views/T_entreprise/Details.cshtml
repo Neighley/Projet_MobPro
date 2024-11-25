@@ -27,6 +27,44 @@
         </dd>
 
     </dl>
+
+    <h5>Gérer mes sites</h5>
+    <a href="@Url.Action("Create", "T_site", new { entrepriseId = Model.id })" class="btn btn-primary">
+        Ajouter un site
+    </a>
+
+    @if (ViewBag.Sites != null && ViewBag.Sites.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Adresse</th>
+                            <th>Code postal</th>
+                            <th>Ville</th>
+                            <th>Entreprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var niveau in ViewBag.Sites as List<Projet_MobPro.Models.T_site>)
+                        {
+                            <tr>
+                                <td>@niveau.adresse</td>
+                                <td>@niveau.code_postal</td>
+                                <td>@niveau.ville</td>
+                                <td>@niveau.entreprise_id</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Aucun site trouvé pour ce profil.</p>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |

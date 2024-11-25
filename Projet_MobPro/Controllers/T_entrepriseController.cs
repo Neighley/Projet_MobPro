@@ -55,18 +55,31 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_entreprise t_entreprise = db.T_entreprise.Find(id);
+            var t_entreprise = db.T_entreprise.Include(p => p.T_site).Include(p => p.T_num_tel).FirstOrDefault(p => p.id == id);
+
+            //T_entreprise t_entreprise = db.T_entreprise.Find(id);
             if (t_entreprise == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Sites = t_entreprise.T_site.ToList();
+            ViewBag.NumTel = t_entreprise.T_num_tel.ToList();
+            ViewBag.EntrepriseId = t_entreprise.id;
             return View(t_entreprise);
         }
 
         // GET: T_entreprise/Create
         public ActionResult Create()
         {
+            var entreprise = new T_entreprise();
+
+            // Récupération de l'ID de l'utilisateur actuel pour gérer ses droits
+            var currentUserId = User.Identity.GetUserId();
+            var currentUser = db.AspNetUsers.Find(currentUserId);
+            ViewBag.CurrentUserRoleId = currentUser?.role_id ?? 0;
+
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");
             return View();
         }
 
@@ -77,11 +90,14 @@ namespace Projet_MobPro.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,nom,AspNetUser_id")] T_entreprise t_entreprise)
         {
+            var currentUserId = User.Identity.GetUserId();
+            t_entreprise.AspNetUser_id = currentUserId;
+
             if (ModelState.IsValid)
             {
                 db.T_entreprise.Add(t_entreprise);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = t_entreprise.id });
             }
 
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_entreprise.AspNetUser_id);
