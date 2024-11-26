@@ -2884,8 +2884,8 @@ textarea.form-control-lg {
     --bs-btn-bg: #97bfc7;
     --bs-btn-border-color: #97bfc7;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #912bbd;
-    --bs-btn-hover-border-color: #912bbd;
+    --bs-btn-hover-bg: #749ba3;
+    --bs-btn-hover-border-color: #749ba3;
     --bs-btn-focus-shadow-rgb: 49, 132, 253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #912bbd;
@@ -10889,7 +10889,7 @@ textarea.form-control-lg {
 }
 
 .btn-custom-edit:hover {
-    background-color: #2c84bf !important;
+    background-color: #2d6673 !important;
 }
 
 .btn-custom-details {

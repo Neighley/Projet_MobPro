@@ -90,6 +90,7 @@
                         <tr>
                             <th>Niveau d'expérience</th>
                             <th>Domaine d'expertise</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,6 +99,10 @@
                             <tr>
                                 <td>@niveau.nom_niveau_experience</td>
                                 <td>@niveau.T_domaine.domaine</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_niveau_experience", new { id = niveau.id, profilId = Model.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_niveau_experience", new { id = niveau.id, profilId = Model.id }, new { @class = "btn-custom-delete" })
+                                </td>
                             </tr>
                         }
                     </tbody>

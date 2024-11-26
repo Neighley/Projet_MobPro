@@ -49,8 +49,9 @@
         <input type="hidden" name="entrepriseId" value="@ViewBag.EntrepriseId" />
 
 <div class="form-actions no-color">
-    <input type="submit" value="Supprimer" class="btn btn-default" />
-    @Html.ActionLink("Retour", "Details", "T_entreprise", new { id = ViewBag.EntrepriseId ?? Model.entreprise_id }, new { @class = "btn btn-secondary" })
+    <input type="submit" value="Supprimer" class="btn btn-primary" />
+    <br /><br />
+    @Html.ActionLink("Retour", "Details", "T_entreprise", new { id = ViewBag.EntrepriseId }, null)
 
 </div>
     }
