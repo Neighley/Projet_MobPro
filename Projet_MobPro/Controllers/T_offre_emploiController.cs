@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -39,6 +40,10 @@ namespace Projet_MobPro.Controllers
         // GET: T_offre_emploi/Create
         public ActionResult Create()
         {
+            var userId = User.Identity.GetUserId();
+            var userEntreprise = db.T_entreprise.Where(e => e.AspNetUser_id == userId).ToList();
+
+            ViewBag.EntrepriseId = new SelectList(userEntreprise, "id", "nom");
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
             ViewBag.site_id = new SelectList(db.T_site, "id", "adresse");
             ViewBag.statut_id = new SelectList(db.T_statut, "id", "statut");
