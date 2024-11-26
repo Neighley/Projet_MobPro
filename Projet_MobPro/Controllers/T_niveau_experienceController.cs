@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,6 +18,8 @@ namespace Projet_MobPro.Controllers
         // GET: T_niveau_experience
         public ActionResult Index()
         {
+            var currentUserId = User.Identity.GetUserId();
+
             var t_niveau_experience = db.T_niveau_experience.Include(t => t.T_domaine).Include(t => t.T_profil).Include(t => t.T_offre_emploi);
             return View(t_niveau_experience.ToList());
         }
@@ -37,8 +40,11 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_niveau_experience/Create
-        public ActionResult Create()
+        public ActionResult Create(int? profilId)
         {
+            var profil = db.T_profil.Find(profilId);
+
+            ViewBag.ProfilId = profilId;
             ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine");
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom");
             ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom");
@@ -50,24 +56,27 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id,offre_emploi_id")] T_niveau_experience t_niveau_experience)
+        public ActionResult Create(int profilId, [Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id,offre_emploi_id")] T_niveau_experience niveauExperience)
         {
             if (ModelState.IsValid)
             {
-                db.T_niveau_experience.Add(t_niveau_experience);
+                niveauExperience.profil_id = profilId;
+                db.T_niveau_experience.Add(niveauExperience);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_Profil", new { id = profilId });
             }
 
-            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
-            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
-            ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom", t_niveau_experience.offre_emploi_id);
-            return View(t_niveau_experience);
+            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", niveauExperience.domaine_id);
+            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", niveauExperience.profil_id);
+            ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom", niveauExperience.offre_emploi_id);
+            return View(niveauExperience);
         }
 
         // GET: T_niveau_experience/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? profilId, int? id)
         {
+            var profil = db.T_entreprise.Find(profilId);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -77,6 +86,8 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ProfilId = profilId;
             ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
             ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom", t_niveau_experience.offre_emploi_id);
@@ -88,13 +99,14 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id,offre_emploi_id")] T_niveau_experience t_niveau_experience)
+        public ActionResult Edit(int profilId, [Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id,offre_emploi_id")] T_niveau_experience t_niveau_experience)
         {
             if (ModelState.IsValid)
             {
+                t_niveau_experience.profil_id = profilId;
                 db.Entry(t_niveau_experience).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_profil", new { id = profilId });
             }
             ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
@@ -109,23 +121,25 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
+            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Include(t => t.T_profil).FirstOrDefault(t => t.id == id);
             if (t_niveau_experience == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ProfilId = t_niveau_experience.profil_id;
             return View(t_niveau_experience);
         }
 
         // POST: T_niveau_experience/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int profilId)
         {
             T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
             db.T_niveau_experience.Remove(t_niveau_experience);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "T_profil", new { id = profilId });
         }
 
         protected override void Dispose(bool disposing)

@@ -1,14 +1,11 @@
-﻿@model IEnumerable<Projet_MobPro.Models.T_niveau_experience>
+﻿﻿@model IEnumerable<Projet_MobPro.Models.T_niveau_experience>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Niveaux d'expérience</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -26,26 +23,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom_niveau_experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_domaine.domaine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_profil.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_offre_emploi.nom)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_niveau_experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_domaine.domaine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_profil.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_offre_emploi.nom)
+            </td>
+            <td>
+                @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Détails", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
+            </td>
+        </tr>
+    }
 
 </table>
