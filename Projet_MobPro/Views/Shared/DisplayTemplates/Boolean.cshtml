@@ -1,0 +1,7 @@
+﻿@model bool?
+
+@{
+    string displayValue = Model.HasValue ? (Model.Value ? "Oui" : "Non") : "Indéfini";
+}
+
+@displayValue

@@ -4,10 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Profils</h2>
+<h2>Mon profil</h2>
 
 <p>
-    @if (ViewBag.CurrentUserRoleId == 1)
+    @if (ViewBag.ProfilCount < 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
+    {
+        @Html.ActionLink("Créer un profil", "Create")
+    }
+    else if (ViewBag.CurrentUserRoleId == 1)
     {
         @Html.ActionLink("Créer un profil", "Create")
     }
@@ -39,10 +43,6 @@
         <th>
             @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
         </th>
-        @if (ViewBag.CurrentUserRoleId == 1)
-        {
-            <th>Actions</th>
-        }
         <th></th>
     </tr>
 
@@ -73,15 +73,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
             </td>
-            @if (ViewBag.CurrentUserRoleId == 1)
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
-                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
-                </td>
-            }
-
+            <td>
+                @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Détails", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
+            </td>
         </tr>
     }
 

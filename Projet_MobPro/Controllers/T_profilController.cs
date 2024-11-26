@@ -16,7 +16,7 @@ namespace Projet_MobPro.Controllers
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
         // GET: T_profil
-        public ActionResult Index()
+        public ActionResult Affichage()
         {
             // Récupération de l'ID de l'utilisateur actuel
             var currentUserId = User.Identity.GetUserId();
@@ -55,6 +55,29 @@ namespace Projet_MobPro.Controllers
                              .Include(t => t.T_type_contrat)
                              .ToList();
             }
+
+            return View(t_profil);
+        }
+
+        public ActionResult Index()
+        {
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
+            IEnumerable<T_profil> t_profil;
+
+            t_profil = db.T_profil
+                         .Include(t => t.AspNetUsers)
+                         .Include(t => t.T_role)
+                         .Include(t => t.T_type_contrat)
+                         .ToList();
 
             return View(t_profil);
         }
