@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails de l'offre</h2>
 
 <div>
-    <h4>T_offre_emploi</h4>
+    <h5>Vos renseignements :</h5>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -115,6 +115,12 @@
         </dd>
 
     </dl>
+
+    <h5>Gérer les niveaux d'expérience requis</h5>
+    <a href="@Url.Action("Create", "T_niveau_experience", new { offreEmploiId = Model.id })" class="btn btn-primary">
+        Ajouter un Niveau d'Expérience
+    </a>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |

@@ -18,8 +18,10 @@ namespace Projet_MobPro.Models
         public string nom_niveau_experience { get; set; }
         public int domaine_id { get; set; }
         public Nullable<int> profil_id { get; set; }
+        public Nullable<int> offre_emploi_id { get; set; }
     
         public virtual T_domaine T_domaine { get; set; }
         public virtual T_profil T_profil { get; set; }
+        public virtual T_offre_emploi T_offre_emploi { get; set; }
     }
 }

@@ -90,7 +90,8 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_offre_emploi t_offre_emploi = db.T_offre_emploi.Find(id);
+            var t_offre_emploi = db.T_offre_emploi.Include(p => p.T_niveau_experience.Select(n => n.T_domaine)).FirstOrDefault(p => p.id == id);
+            
             if (t_offre_emploi == null)
             {
                 return HttpNotFound();

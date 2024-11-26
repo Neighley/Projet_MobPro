@@ -11,8 +11,7 @@ namespace Projet_MobPro.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class T_offre_emploi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,14 +19,13 @@ namespace Projet_MobPro.Models
         {
             this.T_competences = new HashSet<T_competences>();
             this.T_langues = new HashSet<T_langues>();
+            this.T_niveau_experience = new HashSet<T_niveau_experience>();
         }
     
         public int id { get; set; }
         public string nom { get; set; }
         public string description { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> date_publication { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> date_suppression { get; set; }
         public Nullable<bool> ouvert_externe { get; set; }
         public string url_site { get; set; }
@@ -47,5 +45,7 @@ namespace Projet_MobPro.Models
         public virtual ICollection<T_competences> T_competences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_langues> T_langues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_niveau_experience> T_niveau_experience { get; set; }
     }
 }

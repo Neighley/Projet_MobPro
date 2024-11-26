@@ -180,20 +180,16 @@
     <Compile Include="Controllers\T_competencesController.cs" />
     <Compile Include="Controllers\T_domaineController.cs" />
     <Compile Include="Controllers\T_entrepriseController.cs" />
-    <Compile Include="Controllers\T_entrepriseOldController.cs" />
     <Compile Include="Controllers\T_languesController.cs" />
     <Compile Include="Controllers\T_niveau_experienceController.cs" />
     <Compile Include="Controllers\T_niveau_experienceOldController.cs" />
     <Compile Include="Controllers\T_num_telController.cs" />
-    <Compile Include="Controllers\T_num_telOldController.cs" />
     <Compile Include="Controllers\T_offre_emploiController.cs" />
     <Compile Include="Controllers\T_profilController.cs" />
-    <Compile Include="Controllers\T_profilOldController.cs" />
     <Compile Include="Controllers\T_profil_competencesController.cs" />
     <Compile Include="Controllers\T_profil_languesController.cs" />
     <Compile Include="Controllers\T_roleController.cs" />
     <Compile Include="Controllers\T_siteController.cs" />
-    <Compile Include="Controllers\T_siteOldController.cs" />
     <Compile Include="Controllers\T_statutController.cs" />
     <Compile Include="Controllers\T_type_contratController.cs" />
     <Compile Include="Global.asax.cs">
@@ -280,6 +276,7 @@
     <Content Include="App_Data\Mobilite_Pro_BDD_log.ldf">
       <DependentUpon>Mobilite_Pro_BDD.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\ScriptBDD\Add_Constraint_NivExp_in_Toffreemploi.sql" />
     <Content Include="App_Data\ScriptBDD\Add_Default_Value_role_id.sql" />
     <Content Include="App_Data\ScriptBDD\Add_Role_In_AspNetUser.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile1.sql" />

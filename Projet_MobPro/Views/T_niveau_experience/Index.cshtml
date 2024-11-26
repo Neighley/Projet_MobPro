@@ -4,8 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Niveaux d'expérience</h2>
+<h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -16,6 +19,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.T_profil.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_offre_emploi.nom)
         </th>
         <th></th>
     </tr>
@@ -32,9 +38,12 @@
             @Html.DisplayFor(modelItem => item.T_profil.nom)
         </td>
         <td>
-            @Html.ActionLink("Modifier", "Edit", new { id=item.id }, new {@class = "btn-custom-edit"})
-            @Html.ActionLink("Détails", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
+            @Html.DisplayFor(modelItem => item.T_offre_emploi.nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

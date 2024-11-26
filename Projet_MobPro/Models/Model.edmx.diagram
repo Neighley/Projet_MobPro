@@ -45,6 +45,7 @@
         <AssociationConnector Association="Mobilite_Pro_BDDModel.AspNetUserRoles" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.T_offre_emploi_competences" />
         <AssociationConnector Association="Mobilite_Pro_BDDModel.T_offre_emploi_langues" />
+        <AssociationConnector Association="Mobilite_Pro_BDDModel.FK_T_niveau_exp_T_offre_emploi" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
