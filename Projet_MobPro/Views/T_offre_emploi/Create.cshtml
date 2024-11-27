@@ -93,13 +93,26 @@
         </div>
     </div>
     <br />
-    <div class="form-group">
-        @Html.LabelFor(model => model.site_id, "site_id", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("site_id", (SelectList)ViewBag.site_id, null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.site_id, "", new { @class = "text-danger" })
+    @if (ViewBag.CurrentUserRoleId == 1)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.site_id, "site_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("site_id", (SelectList)ViewBag.site_idAdmin, null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.site_id, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.site_id, "site_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("site_id", (SelectList)ViewBag.site_id, null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.site_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
     <br />
     <div class="form-group">
         @Html.LabelFor(model => model.statut_id, "statut_id", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -109,13 +122,26 @@
         </div>
     </div>
     <br />
-    <div class="form-group">
-        @Html.LabelFor(model => model.entreprise_id, "Entreprise", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("entreprise_id", (SelectList)ViewBag.EntrepriseId, null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.entreprise_id, "", new { @class = "text-danger" })
+    @if (ViewBag.CurrentUserRoleId == 1)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.entreprise_id, "Entreprise", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("entreprise_id", (SelectList)ViewBag.entreprise_idAdmin, null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.entreprise_id, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.entreprise_id, "Entreprise", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("entreprise_id", (SelectList)ViewBag.EntrepriseId, null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.entreprise_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
     <br />
     <div class="form-group">
         @Html.LabelFor(model => model.type_contrat_id, "type_contrat_id", htmlAttributes: new { @class = "control-label col-md-2" })

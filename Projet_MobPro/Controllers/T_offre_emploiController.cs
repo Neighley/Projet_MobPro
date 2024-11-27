@@ -28,7 +28,7 @@ namespace Projet_MobPro.Controllers
                                     .FirstOrDefault();
             ViewBag.CurrentUserRoleId = currentUserRole;
 
-            var t_offre_emploi = db.T_offre_emploi.Include(t => t.T_entreprise).Include(t => t.T_site).Include(t => t.T_statut).Include(t => t.T_type_contrat);
+            var t_offre_emploi = db.T_offre_emploi.Include(t => t.T_entreprise).Include(t => t.T_site).Include(t => t.T_statut).Include(t => t.T_type_contrat).Include(o => o.T_entreprise.T_num_tel);
             return View(t_offre_emploi.ToList());
         }
 
@@ -103,11 +103,37 @@ namespace Projet_MobPro.Controllers
             return View(t_offre_emploi);
         }
 
+        public ActionResult Details_Requis(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var t_offre_emploi = db.T_offre_emploi.Include(p => p.T_niveau_experience.Select(n => n.T_domaine)).FirstOrDefault(p => p.id == id);
+
+            if (t_offre_emploi == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.NiveauxExperience = t_offre_emploi.T_niveau_experience.ToList();
+            ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
+            ViewBag.OffreId = t_offre_emploi.id;
+            return View(t_offre_emploi);
+        }
+
         // GET: T_offre_emploi/Create
         public ActionResult Create()
         {
             var userId = User.Identity.GetUserId();
             var userEntreprises = db.T_entreprise.Where(e => e.AspNetUser_id == userId).ToList();
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == userId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
 
             // Récupération des IDs des entreprises
             var entrepriseIds = userEntreprises.Select(e => e.id).ToList();
@@ -116,8 +142,9 @@ namespace Projet_MobPro.Controllers
             var userSites = db.T_site.Where(s => entrepriseIds.Contains(s.entreprise_id ?? 0)).ToList();
 
             ViewBag.EntrepriseId = new SelectList(userEntreprises, "id", "nom");
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
+            ViewBag.entreprise_idAdmin = new SelectList(db.T_entreprise, "id", "nom");
             ViewBag.site_id = new SelectList(userSites, "id", "adresse");
+            ViewBag.site_idAdmin = new SelectList(db.T_site, "id", "adresse");
             ViewBag.statut_id = new SelectList(db.T_statut, "id", "statut");
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat");
             return View();
@@ -150,6 +177,8 @@ namespace Projet_MobPro.Controllers
             var currentUserId = User.Identity.GetUserId();
 
             var currentUser = db.T_entreprise.Where(e => e.AspNetUser_id == currentUserId).ToList();
+            var entrepriseIds = currentUser.Select(e => e.id).ToList();
+            var userSites = db.T_site.Where(s => entrepriseIds.Contains(s.entreprise_id ?? 0)).ToList();
 
             var currentUserRole = db.AspNetUsers
                                     .Where(u => u.Id == currentUserId)
@@ -169,6 +198,7 @@ namespace Projet_MobPro.Controllers
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_offre_emploi.entreprise_id);
             ViewBag.entreprise_id2 = new SelectList(currentUser, "id", "nom", t_offre_emploi.entreprise_id);
             ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_offre_emploi.site_id);
+            ViewBag.site_id2 = new SelectList(userSites, "id", "adresse", t_offre_emploi.site_id);
             ViewBag.statut_id = new SelectList(db.T_statut, "id", "statut", t_offre_emploi.statut_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_offre_emploi.type_contrat_id);
             return View(t_offre_emploi);

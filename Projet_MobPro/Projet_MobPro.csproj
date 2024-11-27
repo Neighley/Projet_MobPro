@@ -278,6 +278,7 @@
     </Content>
     <Content Include="App_Data\ScriptBDD\Add_Constraint_NivExp_in_Toffreemploi.sql" />
     <Content Include="App_Data\ScriptBDD\Add_Default_Value_role_id.sql" />
+    <Content Include="App_Data\ScriptBDD\Add_donnees_langues.sql" />
     <Content Include="App_Data\ScriptBDD\Add_Role_In_AspNetUser.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile1.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile2.SQL" />
@@ -490,6 +491,7 @@
     <Content Include="Views\T_niveau_experience\Create_Offre.cshtml" />
     <Content Include="Views\T_niveau_experience\Edit_Offre.cshtml" />
     <Content Include="Views\T_niveau_experience\Delete_Offre.cshtml" />
+    <Content Include="Views\T_offre_emploi\Details_Requis.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

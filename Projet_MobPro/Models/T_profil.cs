@@ -6,7 +6,6 @@
 //     Les modifications manuelles apportées à ce fichier sont remplacées si le code est régénéré.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace Projet_MobPro.Models
 {
@@ -26,7 +25,6 @@ namespace Projet_MobPro.Models
         public int id { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> date_naissance { get; set; }
         public string adresse { get; set; }
         public string code_postal { get; set; }

@@ -15,9 +15,9 @@
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_langues" Width="1.5" PointX="7.5" PointY="23.625" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" Width="1.5" PointX="12.5" PointY="15.5" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_num_tel" Width="1.5" PointX="7.5" PointY="9.5" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_offre_emploi" Width="1.5" PointX="9.75" PointY="12.875" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_offre_emploi" Width="1.5" PointX="10.75" PointY="12.875" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil" Width="1.5" PointX="5.25" PointY="14.375" />
-        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_competences" Width="1.5" PointX="10.5" PointY="19.25" />
+        <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_competences" Width="1.5" PointX="13" PointY="19.375" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_profil_langues" Width="1.5" PointX="7.5" PointY="14.5" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_role" Width="1.5" PointX="0.75" PointY="13.625" />
         <EntityTypeShape EntityType="Mobilite_Pro_BDDModel.T_site" Width="1.5" PointX="7.875" PointY="18.375" />
