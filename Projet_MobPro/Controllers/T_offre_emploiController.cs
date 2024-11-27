@@ -122,6 +122,29 @@ namespace Projet_MobPro.Controllers
             return View(t_offre_emploi);
         }
 
+        public ActionResult Contact(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            T_offre_emploi offre = db.T_offre_emploi.Find(id);
+            if (offre == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Récupérer les numéros de téléphone de l'entreprise liée à l'offre d'emploi
+            var numTels = db.T_num_tel
+                        .Where(n => n.entreprise_id == offre.entreprise_id)
+                        .ToList();
+
+            ViewBag.NumTel = numTels;
+
+            return View(offre);
+        }
+
         // GET: T_offre_emploi/Create
         public ActionResult Create()
         {

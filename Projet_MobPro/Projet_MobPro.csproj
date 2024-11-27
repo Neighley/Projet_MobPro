@@ -492,6 +492,7 @@
     <Content Include="Views\T_niveau_experience\Edit_Offre.cshtml" />
     <Content Include="Views\T_niveau_experience\Delete_Offre.cshtml" />
     <Content Include="Views\T_offre_emploi\Details_Requis.cshtml" />
+    <Content Include="Views\T_offre_emploi\Contact.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
