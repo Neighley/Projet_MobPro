@@ -152,6 +152,16 @@ namespace Projet_MobPro.Controllers
         // GET: T_profil/Edit/5
         public ActionResult Edit(int? id)
         {
+            var currentUserId = User.Identity.GetUserId();
+
+            var currentUser = db.AspNetUsers.Where(u => u.Id == currentUserId).ToList();
+
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -162,6 +172,7 @@ namespace Projet_MobPro.Controllers
                 return HttpNotFound();
             }
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
+            ViewBag.AspNetUser_id2 = new SelectList(currentUser, "Id", "Email", t_profil.AspNetUser_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_profil.type_contrat_id);
             return View(t_profil);
@@ -178,7 +189,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.Entry(t_profil).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Affichage");
             }
             ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_profil.AspNetUser_id);
             ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role", t_profil.role_id);
@@ -213,7 +224,7 @@ namespace Projet_MobPro.Controllers
             db.T_niveau_experience.RemoveRange(niveauxExperience);
             db.T_profil.Remove(t_profil);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Affichage");
         }
 
         protected override void Dispose(bool disposing)

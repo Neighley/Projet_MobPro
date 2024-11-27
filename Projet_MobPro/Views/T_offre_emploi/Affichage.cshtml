@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Voir mon offre d'emploi</h2>
 
 <p>
     @if (ViewBag.OffresCount < 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
@@ -100,7 +100,7 @@
             <td>
                 @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
                 @Html.ActionLink("Détails", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
-                @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
             </td>
         </tr>
     }

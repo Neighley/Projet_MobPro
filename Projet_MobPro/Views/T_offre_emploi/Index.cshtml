@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Voir les offres d'emploi</h2>
 
 <p>
     @if (ViewBag.CurrentUserRoleId == 1)
@@ -20,19 +20,19 @@
         </th>
         <!--<th>
         @Html.DisplayNameFor(model => model.description)
-    </th>-->
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.date_publication)
         </th>
         <!--<th>
         @Html.DisplayNameFor(model => model.date_suppression)
-    </th>-->
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.ouvert_externe)
         </th>
         <!--<th>
         @Html.DisplayNameFor(model => model.url_site)
-    </th>-->
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.teletravail_autorise)
         </th>
@@ -65,19 +65,19 @@
         </td>
         <!--<td>
         @Html.DisplayFor(modelItem => item.description)
-    </td>-->
+        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.date_publication)
         </td>
         <!--<td>
         @Html.DisplayFor(modelItem => item.date_suppression)
-    </td>-->
+        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.ouvert_externe)
         </td>
         <!--<td>
         @Html.DisplayFor(modelItem => item.url_site)
-    </td>-->
+        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.teletravail_autorise)
         </td>
@@ -101,7 +101,7 @@
             <td>
                 @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
                 @Html.ActionLink("Détails", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
-                @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
             </td>
         }
 
