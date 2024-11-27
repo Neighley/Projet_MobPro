@@ -147,6 +147,16 @@ namespace Projet_MobPro.Controllers
         // GET: T_offre_emploi/Edit/5
         public ActionResult Edit(int? id)
         {
+            var currentUserId = User.Identity.GetUserId();
+
+            var currentUser = db.T_entreprise.Where(e => e.AspNetUser_id == currentUserId).ToList();
+
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,6 +167,7 @@ namespace Projet_MobPro.Controllers
                 return HttpNotFound();
             }
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_offre_emploi.entreprise_id);
+            ViewBag.entreprise_id2 = new SelectList(currentUser, "id", "nom", t_offre_emploi.entreprise_id);
             ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_offre_emploi.site_id);
             ViewBag.statut_id = new SelectList(db.T_statut, "id", "statut", t_offre_emploi.statut_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_offre_emploi.type_contrat_id);
@@ -172,9 +183,27 @@ namespace Projet_MobPro.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUserId = User.Identity.GetUserId();
+                var currentUserRole = db.AspNetUsers
+                                        .Where(u => u.Id == currentUserId)
+                                        .Select(u => u.role_id)
+                                        .FirstOrDefault();
+
+                if (currentUserRole != 1)
+                {
+                    var userEntreprise = db.T_entreprise
+                                           .Where(e => e.AspNetUser_id == currentUserId)
+                                           .Select(e => e.id)
+                                           .FirstOrDefault();
+                    if (userEntreprise != 0)
+                    {
+                        t_offre_emploi.entreprise_id = userEntreprise;
+                    }
+                }
+
                 db.Entry(t_offre_emploi).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Affichage");
             }
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_offre_emploi.entreprise_id);
             ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_offre_emploi.site_id);

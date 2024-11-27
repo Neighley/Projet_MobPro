@@ -109,3 +109,49 @@
 }
 
 </table>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@item.nom</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Entreprise : @item.T_entreprise.nom</h6>
+                    <p class="card-text">
+                        <small>
+                            <i class="fas fa-map-marker-alt"></i> @item.T_site.adresse, @item.T_site.code_postal @item.T_site.ville<br>
+                            <i class="fas fa-calendar-alt"></i> Publié le @item.date_publication.Value.ToString("dd/MM/yyyy")
+                        </small>
+                    </p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="fas fa-globe"></i> Recherche : @item.T_type_contrat.nom_type_contrat
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-globe"></i> Ouvert à l'externe : @(item.ouvert_externe.GetValueOrDefault() ? "Oui" : "Non")
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-home"></i> Télétravail : @(item.teletravail_autorise.GetValueOrDefault() ? "Autorisé" : "Non autorisé")
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-laptop-house"></i> Télétravail temps plein : @(item.full_teletravail.GetValueOrDefault() ? "Oui" : "Non")
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <small class="text-muted" style="color: #6c757d;">Statut : @item.T_statut.statut</small>
+                    @if (ViewBag.CurrentUserRoleId == 1)
+                    {
+                        <div class="mt-2">
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-outline-primary mr-2" })
+                            @Html.ActionLink("Détails", "Details", new { id = item.id }, new { @class = "btn btn-sm btn-outline-info mr-2" })
+                            @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-outline-danger" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

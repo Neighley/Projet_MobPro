@@ -187,6 +187,17 @@ namespace Projet_MobPro.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUserId = User.Identity.GetUserId();
+                var currentUserRole = db.AspNetUsers
+                                        .Where(u => u.Id == currentUserId)
+                                        .Select(u => u.role_id)
+                                        .FirstOrDefault();
+
+                if (currentUserRole != 1)
+                {
+                    t_profil.AspNetUser_id = currentUserId;
+                }
+
                 db.Entry(t_profil).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Affichage");
