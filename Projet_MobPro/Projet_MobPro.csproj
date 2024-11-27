@@ -270,6 +270,7 @@
     <Content Include="App_Data\Mobilite_Pro_BDD_log.ldf">
       <DependentUpon>Mobilite_Pro_BDD.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\ScriptBDD\AjoutT_Langues.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile1.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile2.SQL" />
     <Content Include="App_Data\ScriptBDD\TextFile3.sql" />
