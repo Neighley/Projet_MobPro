@@ -85,6 +85,7 @@
     {
         <div class="form-group">
             <div class="col-md-10">
+                <br />
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -112,11 +113,14 @@
     }
     else
     {
+        <br />
         <p>Aucun niveau d'expérience trouvé pour ce profil.</p>
     }
 
 </div>
+<br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.id }, new { @class = "btn-custom-edit" })
+    <br /><br />
+    @Html.ActionLink("Retour", "Affichage")
 </p>

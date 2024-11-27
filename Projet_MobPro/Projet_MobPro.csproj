@@ -487,6 +487,9 @@
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\T_profil\Affichage.cshtml" />
     <Content Include="Views\T_offre_emploi\Affichage.cshtml" />
+    <Content Include="Views\T_niveau_experience\Create_Offre.cshtml" />
+    <Content Include="Views\T_niveau_experience\Edit_Offre.cshtml" />
+    <Content Include="Views\T_niveau_experience\Delete_Offre.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

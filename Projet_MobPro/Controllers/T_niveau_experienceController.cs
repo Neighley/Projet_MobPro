@@ -72,6 +72,37 @@ namespace Projet_MobPro.Controllers
             return View(niveauExperience);
         }
 
+        // GET: T_niveau_experience/Create_Offre pour offres d'emploi
+        public ActionResult Create_Offre(int? offreEmploiId)
+        {
+            var offre = db.T_offre_emploi.Find(offreEmploiId);
+
+            ViewBag.OffreId = offreEmploiId;
+            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine");
+            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom");
+            ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom");
+            return View();
+        }
+
+        // POST: T_niveau_experience/Create_Offre pour offres d'emploi
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create_Offre(int offreEmploiId, [Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id,offre_emploi_id")] T_niveau_experience niveauExperience)
+        {
+            if (ModelState.IsValid)
+            {
+                niveauExperience.offre_emploi_id = offreEmploiId;
+                db.T_niveau_experience.Add(niveauExperience);
+                db.SaveChanges();
+                return RedirectToAction("Details", "T_offre_emploi", new { id = offreEmploiId });
+            }
+
+            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", niveauExperience.domaine_id);
+            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", niveauExperience.profil_id);
+            ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom", niveauExperience.offre_emploi_id);
+            return View(niveauExperience);
+        }
+
         // GET: T_niveau_experience/Edit/5
         public ActionResult Edit(int? profilId, int? id)
         {
@@ -114,6 +145,46 @@ namespace Projet_MobPro.Controllers
             return View(t_niveau_experience);
         }
 
+        // GET: T_niveau_experience/Edit_Offre/5 pour offres d'emploi
+        public ActionResult Edit_Offre(int? offreEmploiId, int? id)
+        {
+            var offre = db.T_entreprise.Find(offreEmploiId);
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
+            if (t_niveau_experience == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.OffreId = offreEmploiId;
+            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
+            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
+            ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom", t_niveau_experience.offre_emploi_id);
+            return View(t_niveau_experience);
+        }
+
+        // POST: T_niveau_experience/Edit_Offre/5 pour offres d'emploi
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit_Offre(int offreEmploiId, [Bind(Include = "id,nom_niveau_experience,domaine_id,profil_id,offre_emploi_id")] T_niveau_experience t_niveau_experience)
+        {
+            if (ModelState.IsValid)
+            {
+                t_niveau_experience.offre_emploi_id = offreEmploiId;
+                db.Entry(t_niveau_experience).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", "T_offre_emploi", new { id = offreEmploiId });
+            }
+            ViewBag.domaine_id = new SelectList(db.T_domaine, "id", "domaine", t_niveau_experience.domaine_id);
+            ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_niveau_experience.profil_id);
+            ViewBag.offre_emploi_id = new SelectList(db.T_offre_emploi, "id", "nom", t_niveau_experience.offre_emploi_id);
+            return View(t_niveau_experience);
+        }
+
         // GET: T_niveau_experience/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -140,6 +211,34 @@ namespace Projet_MobPro.Controllers
             db.T_niveau_experience.Remove(t_niveau_experience);
             db.SaveChanges();
             return RedirectToAction("Details", "T_profil", new { id = profilId });
+        }
+
+        // GET: T_niveau_experience/Delete_Offre/5 pour offres d'emploi
+        public ActionResult Delete_Offre(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Include(t => t.T_offre_emploi).FirstOrDefault(t => t.id == id);
+            if (t_niveau_experience == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.OffreId = t_niveau_experience.offre_emploi_id;
+            return View(t_niveau_experience);
+        }
+
+        // POST: T_niveau_experience/Delete/5
+        [HttpPost, ActionName("Delete_Offre")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed_Offre(int id, int offreEmploiId)
+        {
+            T_niveau_experience t_niveau_experience = db.T_niveau_experience.Find(id);
+            db.T_niveau_experience.Remove(t_niveau_experience);
+            db.SaveChanges();
+            return RedirectToAction("Details", "T_offre_emploi", new { id = offreEmploiId });
         }
 
         protected override void Dispose(bool disposing)

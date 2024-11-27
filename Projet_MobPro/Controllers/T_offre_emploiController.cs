@@ -96,6 +96,10 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.NiveauxExperience = t_offre_emploi.T_niveau_experience.ToList();
+            ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
+            ViewBag.OffreId = t_offre_emploi.id;
             return View(t_offre_emploi);
         }
 
@@ -130,7 +134,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_offre_emploi.Add(t_offre_emploi);
                 db.SaveChanges();
-                return RedirectToAction("Affichage");
+                return RedirectToAction("Details", new { id = t_offre_emploi.id });
             }
 
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_offre_emploi.entreprise_id);
