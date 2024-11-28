@@ -16,7 +16,6 @@
 {
     <div class="form-group">
         <div class="col-md-10">
-            <br />
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -38,15 +37,15 @@
 else
 {
     <br />
-    <p>Aucun numéro de téléphone.</p>
+    <p>Aucun numéro de téléphone n'a été renseigné.</p>
 }
-
+<br />
 <h5>Site Internet :</h5>
 <dd>
     @Html.DisplayFor(model => model.url_site)
     <!-- mettre un lien :) -->
 </dd>
-
+<br />
 <h5>Location :</h5>
 <dd>
     @Html.DisplayFor(model => model.T_site.adresse),

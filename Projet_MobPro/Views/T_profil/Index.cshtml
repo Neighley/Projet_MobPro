@@ -13,7 +13,7 @@
     }
 </p>
 
-<table class="table">
+<!--<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.nom)
@@ -85,4 +85,50 @@
         </tr>
     }
 
-</table>
+</table>-->
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@item.prenom @item.nom</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Recherche : @item.T_type_contrat.nom_type_contrat</h6>
+                    <p class="card-text">
+                        <small>
+                            <i class="fas fa-birthday-cake"></i> @(item.date_naissance.HasValue ? item.date_naissance.Value.ToString("dd/MM/yyyy") : "Non renseigné")<br>
+                            <i class="fas fa-map-marker-alt"></i> @item.adresse, @item.code_postal @item.ville<br>
+                            <i class="fas fa-envelope"></i> @(item.AspNetUsers?.Email ?? "Aucun email")
+                        </small>
+                    </p>
+                    <h6 class="mt-3">Niveaux d'expérience :</h6>
+                    @if (item.T_niveau_experience != null && item.T_niveau_experience.Any())
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var niveau in item.T_niveau_experience)
+                            {
+                                <li class="list-group-item">
+                                    <strong>@niveau.nom_niveau_experience</strong> en @niveau.T_domaine.domaine
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>Aucun niveau d'expérience trouvé pour ce profil.</p>
+                    }
+                </div>
+                <div class="card-footer bg-transparent">
+                    @if (ViewBag.CurrentUserRoleId == 1)
+                    {
+                        <div class="btn-group mt-2" role="group">
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn btn-custom-edit" }) ....
+                            @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn btn-custom-delete btn-spacing2" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
