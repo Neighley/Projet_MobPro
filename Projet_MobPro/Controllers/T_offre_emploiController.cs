@@ -4,16 +4,19 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
+using Projet_MobPro.Services;
 
 namespace Projet_MobPro.Controllers
 {
     public class T_offre_emploiController : Controller
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
+        private SimpleGeocodingService _geocodingService = new SimpleGeocodingService();
 
         // GET: T_offre_emploi
         public ActionResult Index()
@@ -289,6 +292,31 @@ namespace Projet_MobPro.Controllers
             db.T_offre_emploi.Remove(t_offre_emploi);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> CalculateDistance(int offreId)
+        {
+            var userId = User.Identity.GetUserId();
+            var profil = await db.T_profil.FirstOrDefaultAsync(p => p.AspNetUsers.Id == userId);
+            var offre = await db.T_offre_emploi.Include(j => j.T_site).FirstOrDefaultAsync(j => j.id == offreId);
+
+            if (offre == null || profil == null)
+            {
+                return Json(new { success = false, message = "Offre ou profil non trouvé." }, JsonRequestBehavior.AllowGet);
+            }
+
+            string offreAddress = $"{offre.T_site.adresse}, {offre.T_site.code_postal} {offre.T_site.ville}";
+            string profilAddress = $"{profil.adresse}, {profil.code_postal} {profil.ville}";
+
+            var geocodingService = new SimpleGeocodingService();
+            var distance = await geocodingService.GetDistanceBetweenJobAndProfile(offreAddress, profilAddress);
+
+            if (distance < 0)
+            {
+                return Json(new { success = false, message = "Impossible de calculer la distance." }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { success = true, distance = distance }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

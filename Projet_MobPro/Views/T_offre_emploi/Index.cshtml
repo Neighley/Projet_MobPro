@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Projet_MobPro.Models.T_offre_emploi>
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +13,6 @@
         @Html.ActionLink("Créer une offre", "Create")
     }
 </p>
-
 
 <div class="row">
     @foreach (var item in Model)
@@ -43,23 +43,54 @@
                             <i class="fas fa-laptop-house"></i> Télétravail à temps plein : @(item.full_teletravail.GetValueOrDefault() ? "Oui" : "Non")
                         </li>
                     </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="mt-2">
+                            <button onclick="calculateDistance(@item.id)" class="btn btn-info btn-sm">Calculer la distance</button>
+                            <div id="distanceResult-@item.id" style="display:none;">
+                                Distance : <span id="distance-@item.id"></span> km
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div class="card-footer bg-transparent">
                     <small class="text-muted" style="color: #6c757d;">Statut : @item.T_statut.statut</small>
-                        <div class="mt-2">
-                            @Html.ActionLink("Contact", "Contact", new { id = item.id }, new { @class = "btn btn-primary btn-spacing" })
-                            @Html.ActionLink("Détails", "Details_Requis", new { id = item.id }, new { @class = "btn btn-custom-edit btn-spacing" })
+                    <div class="mt-2">
+                        @Html.ActionLink("Contact", "Contact", new { id = item.id }, new { @class = "btn btn-primary btn-spacing" })
+                        @Html.ActionLink("Détails", "Details_Requis", new { id = item.id }, new { @class = "btn btn-custom-edit btn-spacing" })
 
-                            @if (ViewBag.CurrentUserRoleId == 1)
-                            { 
+                        @if (ViewBag.CurrentUserRoleId == 1)
+                        {
                             <br />
                             @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn btn-custom-edit btn-spacing" })
                             @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn btn-custom-delete btn-spacing" })
-                            }
-                        </div>
-
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
+
+@section Scripts {
+    <script>
+        function calculateDistance(offreId) {
+            $.ajax({
+                url: '@Url.Action("CalculateDistance", "VotreController")',
+                type: 'GET',
+                data: { offreId: offreId },
+                success: function (result) {
+                    if (result.success) {
+                        $('#distance-' + offreId).text((result.distance / 1000).toFixed(2));
+                        $('#distanceResult-' + offreId).show();
+                    } else {
+                        alert(result.message);
+                    }
+                },
+                error: function () {
+                    alert('Une erreur est survenue lors du calcul de la distance.');
+                }
+            });
+        }
+    </script>
+}
