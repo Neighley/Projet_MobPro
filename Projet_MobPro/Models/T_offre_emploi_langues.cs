@@ -12,18 +12,14 @@ namespace Projet_MobPro.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class T_domaine
+    public partial class T_offre_emploi_langues
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_domaine()
-        {
-            this.T_niveau_experience = new HashSet<T_niveau_experience>();
-        }
-    
         public int id { get; set; }
-        public string domaine { get; set; }
+        public int offre_emploi_id { get; set; }
+        public int langues_id { get; set; }
+        public string commentaire { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_niveau_experience> T_niveau_experience { get; set; }
+        public virtual T_langues T_langues { get; set; }
+        public virtual T_offre_emploi T_offre_emploi { get; set; }
     }
 }
