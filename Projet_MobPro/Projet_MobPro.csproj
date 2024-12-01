@@ -247,6 +247,12 @@
     <Compile Include="Models\T_offre_emploi.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\T_offre_emploi_competences.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_offre_emploi_langues.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\T_profil.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
