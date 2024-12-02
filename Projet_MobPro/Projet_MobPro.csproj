@@ -185,6 +185,8 @@
     <Compile Include="Controllers\T_niveau_experienceOldController.cs" />
     <Compile Include="Controllers\T_num_telController.cs" />
     <Compile Include="Controllers\T_offre_emploiController.cs" />
+    <Compile Include="Controllers\T_offre_emploi_competencesController.cs" />
+    <Compile Include="Controllers\T_offre_emploi_languesController.cs" />
     <Compile Include="Controllers\T_profilController.cs" />
     <Compile Include="Controllers\T_profil_competencesController.cs" />
     <Compile Include="Controllers\T_profil_languesController.cs" />
@@ -245,6 +247,12 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_offre_emploi.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_offre_emploi_competences.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_offre_emploi_langues.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_profil.cs">
@@ -493,6 +501,16 @@
     <Content Include="Views\T_niveau_experience\Delete_Offre.cshtml" />
     <Content Include="Views\T_offre_emploi\Details_Requis.cshtml" />
     <Content Include="Views\T_offre_emploi\Contact.cshtml" />
+    <Content Include="Views\T_offre_emploi_langues\Create.cshtml" />
+    <Content Include="Views\T_offre_emploi_langues\Delete.cshtml" />
+    <Content Include="Views\T_offre_emploi_langues\Details.cshtml" />
+    <Content Include="Views\T_offre_emploi_langues\Edit.cshtml" />
+    <Content Include="Views\T_offre_emploi_langues\Index.cshtml" />
+    <Content Include="Views\T_offre_emploi_competences\Create.cshtml" />
+    <Content Include="Views\T_offre_emploi_competences\Delete.cshtml" />
+    <Content Include="Views\T_offre_emploi_competences\Details.cshtml" />
+    <Content Include="Views\T_offre_emploi_competences\Edit.cshtml" />
+    <Content Include="Views\T_offre_emploi_competences\Index.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
