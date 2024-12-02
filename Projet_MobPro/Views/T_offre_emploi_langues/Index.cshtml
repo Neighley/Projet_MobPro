@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Projet_MobPro.Models.T_profil_langues>
+﻿@model IEnumerable<Projet_MobPro.Models.T_offre_emploi_langues>
 
 @{
     ViewBag.Title = "Index";
@@ -12,16 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.level_langues)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.commentaire)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.T_langues.nom_langue)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.T_profil.nom)
+            @Html.DisplayNameFor(model => model.T_offre_emploi.nom)
         </th>
         <th></th>
     </tr>
@@ -29,16 +26,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.level_langues)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.commentaire)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.T_langues.nom_langue)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.T_profil.nom)
+            @Html.DisplayFor(modelItem => item.T_offre_emploi.nom)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

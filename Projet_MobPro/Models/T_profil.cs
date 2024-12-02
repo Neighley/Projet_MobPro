@@ -18,8 +18,8 @@ namespace Projet_MobPro.Models
         public T_profil()
         {
             this.T_niveau_experience = new HashSet<T_niveau_experience>();
-            this.T_profil_competences = new HashSet<T_profil_competences>();
             this.T_profil_langues = new HashSet<T_profil_langues>();
+            this.T_profil_competences = new HashSet<T_profil_competences>();
         }
     
         public int id { get; set; }
@@ -38,9 +38,9 @@ namespace Projet_MobPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_niveau_experience> T_niveau_experience { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_profil_competences> T_profil_competences { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil_langues> T_profil_langues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_profil_competences> T_profil_competences { get; set; }
         public virtual T_role T_role { get; set; }
         public virtual T_type_contrat T_type_contrat { get; set; }
     }

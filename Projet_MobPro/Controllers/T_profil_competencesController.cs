@@ -49,7 +49,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "profil_id,competences_id,level_competences,commentaire,marge_erreur,restriction_level_competences")] T_profil_competences t_profil_competences)
+        public ActionResult Create([Bind(Include = "id,profil_id,competences_id,level_competences,commentaire,marge_erreur,restriction_level_competences")] T_profil_competences t_profil_competences)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "profil_id,competences_id,level_competences,commentaire,marge_erreur,restriction_level_competences")] T_profil_competences t_profil_competences)
+        public ActionResult Edit([Bind(Include = "id,profil_id,competences_id,level_competences,commentaire,marge_erreur,restriction_level_competences")] T_profil_competences t_profil_competences)
         {
             if (ModelState.IsValid)
             {

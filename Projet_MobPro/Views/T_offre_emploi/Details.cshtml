@@ -19,12 +19,12 @@
         </dd>
 
         <!--<dt>
-        @Html.DisplayNameFor(model => model.description)
-    </dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.description)
-    </dd>-->
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.date_publication)
@@ -35,12 +35,12 @@
         </dd>
 
         <!--<dt>
-        @Html.DisplayNameFor(model => model.date_suppression)
-    </dt>
+            @Html.DisplayNameFor(model => model.date_suppression)
+        </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.date_suppression)
-    </dd>-->
+        <dd>
+            @Html.DisplayFor(model => model.date_suppression)
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.ouvert_externe)
@@ -75,12 +75,12 @@
         </dd>
 
         <!--<dt>
-        @Html.DisplayNameFor(model => model.niveau_experience_id)
-    </dt>
+            @Html.DisplayNameFor(model => model.niveau_experience_id)
+        </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.niveau_experience_id)
-    </dd>-->
+        <dd>
+            @Html.DisplayFor(model => model.niveau_experience_id)
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.T_entreprise.nom)
@@ -155,6 +155,88 @@
     {
         <br />
         <p>Aucun niveau d'expérience trouvé pour ce profil.</p>
+    }
+
+    <h5>Gérer les langues requises</h5>
+    <a href="@Url.Action("Create", "T_offre_emploi_langues", new { offreEmploiId = Model.id })" class="btn btn-primary">
+        Ajouter une langue
+    </a>
+
+    @if (ViewBag.Langues != null && ViewBag.Langues.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Langue</th>
+                            <th>Niveau requis</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var lang in ViewBag.Langues as List<Projet_MobPro.Models.T_offre_emploi_langues>)
+                        {
+                            <tr>
+                                <td>@lang.T_langues.nom_langue</td>
+                                <td>@lang.commentaire</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_offre_emploi_langues", new { id = lang.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_offre_emploi_langues", new { id = lang.id }, new { @class = "btn-custom-delete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <br />
+        <p>Aucune langue trouvée pour cette offre.</p>
+    }
+
+    <h5>Gérer les compétences requises</h5>
+    <a href="@Url.Action("Create", "T_offre_emploi_competences", new { offreEmploiId = Model.id })" class="btn btn-primary">
+        Ajouter une compétence
+    </a>
+
+    @if (ViewBag.Competences != null && ViewBag.Competences.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Compétence</th>
+                            <th>Niveau requis</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var comp in ViewBag.Competences as List<Projet_MobPro.Models.T_offre_emploi_competences>)
+                        {
+                            <tr>
+                                <td>@comp.T_competences.nom_competence</td>
+                                <td>@comp.commentaire</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_offre_emploi_competences", new { id = comp.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_offre_emploi_competences", new { id = comp.id }, new { @class = "btn-custom-delete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <br />
+        <p>Aucune compétence trouvée pour cette offre.</p>
     }
 
 </div>

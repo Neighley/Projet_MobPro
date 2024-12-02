@@ -17,16 +17,16 @@ namespace Projet_MobPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_competences()
         {
+            this.T_offre_emploi_competences = new HashSet<T_offre_emploi_competences>();
             this.T_profil_competences = new HashSet<T_profil_competences>();
-            this.T_offre_emploi = new HashSet<T_offre_emploi>();
         }
     
         public int id { get; set; }
         public string nom_competence { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_profil_competences> T_profil_competences { get; set; }
+        public virtual ICollection<T_offre_emploi_competences> T_offre_emploi_competences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_offre_emploi> T_offre_emploi { get; set; }
+        public virtual ICollection<T_profil_competences> T_profil_competences { get; set; }
     }
 }

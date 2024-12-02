@@ -117,6 +117,85 @@
         <p>Aucun niveau d'expérience trouvé pour ce profil.</p>
     }
 
+    <h5>Gérer mes langues</h5>
+    <a href="@Url.Action("Create", "T_profil_langues", new { profilId = Model.id })" class="btn btn-primary">
+        Ajouter une langue
+    </a>
+    @if (ViewBag.Langues != null && ViewBag.Langues.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Langue</th>
+                            <th>Niveau</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var langues in ViewBag.Langues as List<Projet_MobPro.Models.T_profil_langues>)
+                        {
+                            <tr>
+                                <td>@langues.T_langues.nom_langue</td>
+                                <td>@langues.level_langues</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_niveau_experience", new { id = langues.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_niveau_experience", new { id = langues.id }, new { @class = "btn-custom-delete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <br />
+        <p>Aucune langue trouvée pour ce profil.</p>
+    }
+    <h5>Gérer mes compétences</h5>
+    <a href="@Url.Action("Create", "T_profil_competences", new { profilId = Model.id })" class="btn btn-primary">
+        Ajouter une compétence
+    </a>
+    @if (ViewBag.Competences != null && ViewBag.Competences.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Competence</th>
+                            <th>Commentaire</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var comp in ViewBag.Competences as List<Projet_MobPro.Models.T_profil_competences>)
+                        {
+                            <tr>
+                                <td>@comp.T_competences.nom_competence</td>
+                                <td>@comp.commentaire</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_niveau_experience", new { id = comp.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_niveau_experience", new { id = comp.id }, new { @class = "btn-custom-delete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <br />
+        <p>Aucune compétence trouvée pour ce profil.</p>
+    }
+
 </div>
 <br />
 <p>

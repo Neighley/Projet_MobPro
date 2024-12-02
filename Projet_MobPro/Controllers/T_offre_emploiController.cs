@@ -18,6 +18,7 @@ namespace Projet_MobPro.Controllers
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
         private SimpleGeocodingService _geocodingService = new SimpleGeocodingService();
 
+        [Authorize]
         // GET: T_offre_emploi
         public ActionResult Index()
         {
@@ -101,6 +102,8 @@ namespace Projet_MobPro.Controllers
             }
 
             ViewBag.NiveauxExperience = t_offre_emploi.T_niveau_experience.ToList();
+            ViewBag.Langues = t_offre_emploi.T_offre_emploi_langues.ToList();
+            ViewBag.Competences = t_offre_emploi.T_offre_emploi_competences.ToList();
             ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
             ViewBag.OffreId = t_offre_emploi.id;
             return View(t_offre_emploi);

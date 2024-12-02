@@ -49,7 +49,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
+        public ActionResult Create([Bind(Include = "id,profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
+        public ActionResult Edit([Bind(Include = "id,profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
         {
             if (ModelState.IsValid)
             {

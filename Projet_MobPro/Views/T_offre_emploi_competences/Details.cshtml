@@ -1,4 +1,4 @@
-﻿@model Projet_MobPro.Models.T_profil_langues
+﻿@model Projet_MobPro.Models.T_offre_emploi_competences
 
 @{
     ViewBag.Title = "Details";
@@ -7,17 +7,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>T_profil_langues</h4>
+    <h4>T_offre_emploi_competences</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.level_langues)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.level_langues)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.commentaire)
         </dt>
@@ -27,19 +19,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.T_langues.nom_langue)
+            @Html.DisplayNameFor(model => model.T_competences.nom_competence)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.T_langues.nom_langue)
+            @Html.DisplayFor(model => model.T_competences.nom_competence)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.T_profil.nom)
+            @Html.DisplayNameFor(model => model.T_offre_emploi.nom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.T_profil.nom)
+            @Html.DisplayFor(model => model.T_offre_emploi.nom)
         </dd>
 
     </dl>

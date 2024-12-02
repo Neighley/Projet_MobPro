@@ -125,19 +125,21 @@
         </EntityType>
         <EntityType Name="T_offre_emploi_competences">
           <Key>
-            <PropertyRef Name="offre_emploi_id" />
-            <PropertyRef Name="competences_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="offre_emploi_id" Type="int" Nullable="false" />
           <Property Name="competences_id" Type="int" Nullable="false" />
+          <Property Name="commentaire" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="T_offre_emploi_langues">
           <Key>
-            <PropertyRef Name="offre_emploi_id" />
-            <PropertyRef Name="langues_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="offre_emploi_id" Type="int" Nullable="false" />
           <Property Name="langues_id" Type="int" Nullable="false" />
+          <Property Name="commentaire" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="T_profil">
           <Key>
@@ -157,9 +159,9 @@
         </EntityType>
         <EntityType Name="T_profil_competences">
           <Key>
-            <PropertyRef Name="profil_id" />
-            <PropertyRef Name="competences_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="profil_id" Type="int" Nullable="false" />
           <Property Name="competences_id" Type="int" Nullable="false" />
           <Property Name="level_competences" Type="int" />
@@ -169,9 +171,9 @@
         </EntityType>
         <EntityType Name="T_profil_langues">
           <Key>
-            <PropertyRef Name="profil_id" />
-            <PropertyRef Name="langues_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="profil_id" Type="int" Nullable="false" />
           <Property Name="langues_id" Type="int" Nullable="false" />
           <Property Name="level_langues" Type="int" />
@@ -208,7 +210,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_type_contrat" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__T_offre_e__compe__42E1EEFE">
+        <Association Name="FK__T_offre_e__compe__74444068">
           <End Role="T_competences" Type="Self.T_competences" Multiplicity="1" />
           <End Role="T_offre_emploi_competences" Type="Self.T_offre_emploi_competences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -232,7 +234,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__langu__3A4CA8FD">
+        <Association Name="FK__T_offre_e__langu__7073AF84">
           <End Role="T_langues" Type="Self.T_langues" Multiplicity="1" />
           <End Role="T_offre_emploi_langues" Type="Self.T_offre_emploi_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -244,19 +246,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_offre_e__offre__2BFE89A6">
-          <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="1" />
-          <End Role="T_offre_emploi_competences" Type="Self.T_offre_emploi_competences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_offre_emploi">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_offre_emploi_competences">
-              <PropertyRef Name="offre_emploi_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__T_offre_e__offre__2CF2ADDF">
+        <Association Name="FK__T_offre_e__offre__6F7F8B4B">
           <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="1" />
           <End Role="T_offre_emploi_langues" Type="Self.T_offre_emploi_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -264,6 +254,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="T_offre_emploi_langues">
+              <PropertyRef Name="offre_emploi_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_offre_e__offre__73501C2F">
+          <End Role="T_offre_emploi" Type="Self.T_offre_emploi" Multiplicity="1" />
+          <End Role="T_offre_emploi_competences" Type="Self.T_offre_emploi_competences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_offre_emploi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_offre_emploi_competences">
               <PropertyRef Name="offre_emploi_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -304,7 +306,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___compe__41EDCAC5">
+        <Association Name="FK__T_profil___compe__6CA31EA0">
           <End Role="T_competences" Type="Self.T_competences" Multiplicity="1" />
           <End Role="T_profil_competences" Type="Self.T_profil_competences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +318,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___langu__395884C4">
+        <Association Name="FK__T_profil___langu__68D28DBC">
           <End Role="T_langues" Type="Self.T_langues" Multiplicity="1" />
           <End Role="T_profil_langues" Type="Self.T_profil_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -328,19 +330,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___profi__1F63A897">
-          <End Role="T_profil" Type="Self.T_profil" Multiplicity="1" />
-          <End Role="T_profil_competences" Type="Self.T_profil_competences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_profil">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_profil_competences">
-              <PropertyRef Name="profil_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__T_profil___profi__2057CCD0">
+        <Association Name="FK__T_profil___profi__67DE6983">
           <End Role="T_profil" Type="Self.T_profil" Multiplicity="1" />
           <End Role="T_profil_langues" Type="Self.T_profil_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -348,6 +338,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="T_profil_langues">
+              <PropertyRef Name="profil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_profil___profi__6BAEFA67">
+          <End Role="T_profil" Type="Self.T_profil" Multiplicity="1" />
+          <End Role="T_profil_competences" Type="Self.T_profil_competences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_profil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_profil_competences">
               <PropertyRef Name="profil_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -550,7 +552,7 @@
           <EntitySet Name="T_site" EntityType="Self.T_site" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_statut" EntityType="Self.T_statut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_type_contrat" EntityType="Self.T_type_contrat" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__T_offre_e__compe__42E1EEFE" Association="Self.FK__T_offre_e__compe__42E1EEFE">
+          <AssociationSet Name="FK__T_offre_e__compe__74444068" Association="Self.FK__T_offre_e__compe__74444068">
             <End Role="T_competences" EntitySet="T_competences" />
             <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
           </AssociationSet>
@@ -558,17 +560,17 @@
             <End Role="T_entreprise" EntitySet="T_entreprise" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__langu__3A4CA8FD" Association="Self.FK__T_offre_e__langu__3A4CA8FD">
+          <AssociationSet Name="FK__T_offre_e__langu__7073AF84" Association="Self.FK__T_offre_e__langu__7073AF84">
             <End Role="T_langues" EntitySet="T_langues" />
             <End Role="T_offre_emploi_langues" EntitySet="T_offre_emploi_langues" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__offre__2BFE89A6" Association="Self.FK__T_offre_e__offre__2BFE89A6">
-            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
-            <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
-          </AssociationSet>
-          <AssociationSet Name="FK__T_offre_e__offre__2CF2ADDF" Association="Self.FK__T_offre_e__offre__2CF2ADDF">
+          <AssociationSet Name="FK__T_offre_e__offre__6F7F8B4B" Association="Self.FK__T_offre_e__offre__6F7F8B4B">
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
             <End Role="T_offre_emploi_langues" EntitySet="T_offre_emploi_langues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_offre_e__offre__73501C2F" Association="Self.FK__T_offre_e__offre__73501C2F">
+            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
+            <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
           </AssociationSet>
           <AssociationSet Name="FK__T_offre_e__site___2DE6D218" Association="Self.FK__T_offre_e__site___2DE6D218">
             <End Role="T_site" EntitySet="T_site" />
@@ -582,21 +584,21 @@
             <End Role="T_type_contrat" EntitySet="T_type_contrat" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___compe__41EDCAC5" Association="Self.FK__T_profil___compe__41EDCAC5">
+          <AssociationSet Name="FK__T_profil___compe__6CA31EA0" Association="Self.FK__T_profil___compe__6CA31EA0">
             <End Role="T_competences" EntitySet="T_competences" />
             <End Role="T_profil_competences" EntitySet="T_profil_competences" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___langu__395884C4" Association="Self.FK__T_profil___langu__395884C4">
+          <AssociationSet Name="FK__T_profil___langu__68D28DBC" Association="Self.FK__T_profil___langu__68D28DBC">
             <End Role="T_langues" EntitySet="T_langues" />
             <End Role="T_profil_langues" EntitySet="T_profil_langues" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___profi__1F63A897" Association="Self.FK__T_profil___profi__1F63A897">
-            <End Role="T_profil" EntitySet="T_profil" />
-            <End Role="T_profil_competences" EntitySet="T_profil_competences" />
-          </AssociationSet>
-          <AssociationSet Name="FK__T_profil___profi__2057CCD0" Association="Self.FK__T_profil___profi__2057CCD0">
+          <AssociationSet Name="FK__T_profil___profi__67DE6983" Association="Self.FK__T_profil___profi__67DE6983">
             <End Role="T_profil" EntitySet="T_profil" />
             <End Role="T_profil_langues" EntitySet="T_profil_langues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_profil___profi__6BAEFA67" Association="Self.FK__T_profil___profi__6BAEFA67">
+            <End Role="T_profil" EntitySet="T_profil" />
+            <End Role="T_profil_competences" EntitySet="T_profil_competences" />
           </AssociationSet>
           <AssociationSet Name="FK__T_profil__role_i__1C873BEC" Association="Self.FK__T_profil__role_i__1C873BEC">
             <End Role="T_role" EntitySet="T_role" />
@@ -671,6 +673,8 @@
           <EntitySet Name="T_niveau_experience" EntityType="Mobilite_Pro_BDDModel.T_niveau_experience" />
           <EntitySet Name="T_num_tel" EntityType="Mobilite_Pro_BDDModel.T_num_tel" />
           <EntitySet Name="T_offre_emploi" EntityType="Mobilite_Pro_BDDModel.T_offre_emploi" />
+          <EntitySet Name="T_offre_emploi_competences" EntityType="Mobilite_Pro_BDDModel.T_offre_emploi_competences" />
+          <EntitySet Name="T_offre_emploi_langues" EntityType="Mobilite_Pro_BDDModel.T_offre_emploi_langues" />
           <EntitySet Name="T_profil" EntityType="Mobilite_Pro_BDDModel.T_profil" />
           <EntitySet Name="T_profil_competences" EntityType="Mobilite_Pro_BDDModel.T_profil_competences" />
           <EntitySet Name="T_profil_langues" EntityType="Mobilite_Pro_BDDModel.T_profil_langues" />
@@ -698,7 +702,11 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="T_profil" EntitySet="T_profil" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___compe__41EDCAC5" Association="Mobilite_Pro_BDDModel.FK__T_profil___compe__41EDCAC5">
+          <AssociationSet Name="FK__T_offre_e__compe__74444068" Association="Mobilite_Pro_BDDModel.FK__T_offre_e__compe__74444068">
+            <End Role="T_competences" EntitySet="T_competences" />
+            <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_profil___compe__6CA31EA0" Association="Mobilite_Pro_BDDModel.FK__T_profil___compe__6CA31EA0">
             <End Role="T_competences" EntitySet="T_competences" />
             <End Role="T_profil_competences" EntitySet="T_profil_competences" />
           </AssociationSet>
@@ -718,13 +726,29 @@
             <End Role="T_entreprise" EntitySet="T_entreprise" />
             <End Role="T_site" EntitySet="T_site" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___langu__395884C4" Association="Mobilite_Pro_BDDModel.FK__T_profil___langu__395884C4">
+          <AssociationSet Name="FK__T_offre_e__langu__7073AF84" Association="Mobilite_Pro_BDDModel.FK__T_offre_e__langu__7073AF84">
+            <End Role="T_langues" EntitySet="T_langues" />
+            <End Role="T_offre_emploi_langues" EntitySet="T_offre_emploi_langues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_profil___langu__68D28DBC" Association="Mobilite_Pro_BDDModel.FK__T_profil___langu__68D28DBC">
             <End Role="T_langues" EntitySet="T_langues" />
             <End Role="T_profil_langues" EntitySet="T_profil_langues" />
           </AssociationSet>
           <AssociationSet Name="FK_NiveauExp_Profil" Association="Mobilite_Pro_BDDModel.FK_NiveauExp_Profil">
             <End Role="T_profil" EntitySet="T_profil" />
             <End Role="T_niveau_experience" EntitySet="T_niveau_experience" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_niveau_exp_T_offre_emploi" Association="Mobilite_Pro_BDDModel.FK_T_niveau_exp_T_offre_emploi">
+            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
+            <End Role="T_niveau_experience" EntitySet="T_niveau_experience" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_offre_e__offre__6F7F8B4B" Association="Mobilite_Pro_BDDModel.FK__T_offre_e__offre__6F7F8B4B">
+            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
+            <End Role="T_offre_emploi_langues" EntitySet="T_offre_emploi_langues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_offre_e__offre__73501C2F" Association="Mobilite_Pro_BDDModel.FK__T_offre_e__offre__73501C2F">
+            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
+            <End Role="T_offre_emploi_competences" EntitySet="T_offre_emploi_competences" />
           </AssociationSet>
           <AssociationSet Name="FK__T_offre_e__site___2DE6D218" Association="Mobilite_Pro_BDDModel.FK__T_offre_e__site___2DE6D218">
             <End Role="T_site" EntitySet="T_site" />
@@ -738,13 +762,13 @@
             <End Role="T_type_contrat" EntitySet="T_type_contrat" />
             <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_profil___profi__1F63A897" Association="Mobilite_Pro_BDDModel.FK__T_profil___profi__1F63A897">
-            <End Role="T_profil" EntitySet="T_profil" />
-            <End Role="T_profil_competences" EntitySet="T_profil_competences" />
-          </AssociationSet>
-          <AssociationSet Name="FK__T_profil___profi__2057CCD0" Association="Mobilite_Pro_BDDModel.FK__T_profil___profi__2057CCD0">
+          <AssociationSet Name="FK__T_profil___profi__67DE6983" Association="Mobilite_Pro_BDDModel.FK__T_profil___profi__67DE6983">
             <End Role="T_profil" EntitySet="T_profil" />
             <End Role="T_profil_langues" EntitySet="T_profil_langues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_profil___profi__6BAEFA67" Association="Mobilite_Pro_BDDModel.FK__T_profil___profi__6BAEFA67">
+            <End Role="T_profil" EntitySet="T_profil" />
+            <End Role="T_profil_competences" EntitySet="T_profil_competences" />
           </AssociationSet>
           <AssociationSet Name="FK__T_profil__role_i__1C873BEC" Association="Mobilite_Pro_BDDModel.FK__T_profil__role_i__1C873BEC">
             <End Role="T_role" EntitySet="T_role" />
@@ -757,18 +781,6 @@
           <AssociationSet Name="AspNetUserRoles" Association="Mobilite_Pro_BDDModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="T_offre_emploi_competences" Association="Mobilite_Pro_BDDModel.T_offre_emploi_competences">
-            <End Role="T_competences" EntitySet="T_competences" />
-            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
-          </AssociationSet>
-          <AssociationSet Name="T_offre_emploi_langues" Association="Mobilite_Pro_BDDModel.T_offre_emploi_langues">
-            <End Role="T_langues" EntitySet="T_langues" />
-            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_niveau_exp_T_offre_emploi" Association="Mobilite_Pro_BDDModel.FK_T_niveau_exp_T_offre_emploi">
-            <End Role="T_offre_emploi" EntitySet="T_offre_emploi" />
-            <End Role="T_niveau_experience" EntitySet="T_niveau_experience" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRoles">
@@ -830,8 +842,8 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nom_competence" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="T_profil_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___compe__41EDCAC5" FromRole="T_competences" ToRole="T_profil_competences" />
-          <NavigationProperty Name="T_offre_emploi" Relationship="Mobilite_Pro_BDDModel.T_offre_emploi_competences" FromRole="T_competences" ToRole="T_offre_emploi" />
+          <NavigationProperty Name="T_offre_emploi_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__compe__74444068" FromRole="T_competences" ToRole="T_offre_emploi_competences" />
+          <NavigationProperty Name="T_profil_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___compe__6CA31EA0" FromRole="T_competences" ToRole="T_profil_competences" />
         </EntityType>
         <EntityType Name="T_domaine">
           <Key>
@@ -859,8 +871,8 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nom_langue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="T_profil_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___langu__395884C4" FromRole="T_langues" ToRole="T_profil_langues" />
-          <NavigationProperty Name="T_offre_emploi" Relationship="Mobilite_Pro_BDDModel.T_offre_emploi_langues" FromRole="T_langues" ToRole="T_offre_emploi" />
+          <NavigationProperty Name="T_offre_emploi_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__langu__7073AF84" FromRole="T_langues" ToRole="T_offre_emploi_langues" />
+          <NavigationProperty Name="T_profil_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___langu__68D28DBC" FromRole="T_langues" ToRole="T_profil_langues" />
         </EntityType>
         <EntityType Name="T_niveau_experience">
           <Key>
@@ -870,9 +882,9 @@
           <Property Name="nom_niveau_experience" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="domaine_id" Type="Int32" Nullable="false" />
           <Property Name="profil_id" Type="Int32" />
+          <Property Name="offre_emploi_id" Type="Int32" />
           <NavigationProperty Name="T_domaine" Relationship="Mobilite_Pro_BDDModel.FK_NiveauExp_Domaine" FromRole="T_niveau_experience" ToRole="T_domaine" />
           <NavigationProperty Name="T_profil" Relationship="Mobilite_Pro_BDDModel.FK_NiveauExp_Profil" FromRole="T_niveau_experience" ToRole="T_profil" />
-          <Property Name="offre_emploi_id" Type="Int32" />
           <NavigationProperty Name="T_offre_emploi" Relationship="Mobilite_Pro_BDDModel.FK_T_niveau_exp_T_offre_emploi" FromRole="T_niveau_experience" ToRole="T_offre_emploi" />
         </EntityType>
         <EntityType Name="T_num_tel">
@@ -903,12 +915,34 @@
           <Property Name="type_contrat_id" Type="Int32" />
           <Property Name="niveau_experience_id" Type="Int32" />
           <NavigationProperty Name="T_entreprise" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__entre__3D2915A8" FromRole="T_offre_emploi" ToRole="T_entreprise" />
+          <NavigationProperty Name="T_niveau_experience" Relationship="Mobilite_Pro_BDDModel.FK_T_niveau_exp_T_offre_emploi" FromRole="T_offre_emploi" ToRole="T_niveau_experience" />
+          <NavigationProperty Name="T_offre_emploi_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__offre__6F7F8B4B" FromRole="T_offre_emploi" ToRole="T_offre_emploi_langues" />
+          <NavigationProperty Name="T_offre_emploi_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__offre__73501C2F" FromRole="T_offre_emploi" ToRole="T_offre_emploi_competences" />
           <NavigationProperty Name="T_site" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__site___2DE6D218" FromRole="T_offre_emploi" ToRole="T_site" />
           <NavigationProperty Name="T_statut" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__statu__2EDAF651" FromRole="T_offre_emploi" ToRole="T_statut" />
           <NavigationProperty Name="T_type_contrat" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__type___2FCF1A8A" FromRole="T_offre_emploi" ToRole="T_type_contrat" />
-          <NavigationProperty Name="T_competences" Relationship="Mobilite_Pro_BDDModel.T_offre_emploi_competences" FromRole="T_offre_emploi" ToRole="T_competences" />
-          <NavigationProperty Name="T_langues" Relationship="Mobilite_Pro_BDDModel.T_offre_emploi_langues" FromRole="T_offre_emploi" ToRole="T_langues" />
-          <NavigationProperty Name="T_niveau_experience" Relationship="Mobilite_Pro_BDDModel.FK_T_niveau_exp_T_offre_emploi" FromRole="T_offre_emploi" ToRole="T_niveau_experience" />
+        </EntityType>
+        <EntityType Name="T_offre_emploi_competences">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="offre_emploi_id" Type="Int32" Nullable="false" />
+          <Property Name="competences_id" Type="Int32" Nullable="false" />
+          <Property Name="commentaire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="T_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__compe__74444068" FromRole="T_offre_emploi_competences" ToRole="T_competences" />
+          <NavigationProperty Name="T_offre_emploi" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__offre__73501C2F" FromRole="T_offre_emploi_competences" ToRole="T_offre_emploi" />
+        </EntityType>
+        <EntityType Name="T_offre_emploi_langues">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="offre_emploi_id" Type="Int32" Nullable="false" />
+          <Property Name="langues_id" Type="Int32" Nullable="false" />
+          <Property Name="commentaire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="T_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__langu__7073AF84" FromRole="T_offre_emploi_langues" ToRole="T_langues" />
+          <NavigationProperty Name="T_offre_emploi" Relationship="Mobilite_Pro_BDDModel.FK__T_offre_e__offre__6F7F8B4B" FromRole="T_offre_emploi_langues" ToRole="T_offre_emploi" />
         </EntityType>
         <EntityType Name="T_profil">
           <Key>
@@ -927,36 +961,36 @@
           <Property Name="AspNetUser_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="Mobilite_Pro_BDDModel.FK_T_profil_AspNetUsers" FromRole="T_profil" ToRole="AspNetUsers" />
           <NavigationProperty Name="T_niveau_experience" Relationship="Mobilite_Pro_BDDModel.FK_NiveauExp_Profil" FromRole="T_profil" ToRole="T_niveau_experience" />
-          <NavigationProperty Name="T_profil_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__1F63A897" FromRole="T_profil" ToRole="T_profil_competences" />
-          <NavigationProperty Name="T_profil_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__2057CCD0" FromRole="T_profil" ToRole="T_profil_langues" />
+          <NavigationProperty Name="T_profil_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__67DE6983" FromRole="T_profil" ToRole="T_profil_langues" />
+          <NavigationProperty Name="T_profil_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__6BAEFA67" FromRole="T_profil" ToRole="T_profil_competences" />
           <NavigationProperty Name="T_role" Relationship="Mobilite_Pro_BDDModel.FK__T_profil__role_i__1C873BEC" FromRole="T_profil" ToRole="T_role" />
           <NavigationProperty Name="T_type_contrat" Relationship="Mobilite_Pro_BDDModel.FK__T_profil__type_c__1D7B6025" FromRole="T_profil" ToRole="T_type_contrat" />
         </EntityType>
         <EntityType Name="T_profil_competences">
           <Key>
-            <PropertyRef Name="profil_id" />
-            <PropertyRef Name="competences_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="profil_id" Type="Int32" Nullable="false" />
           <Property Name="competences_id" Type="Int32" Nullable="false" />
           <Property Name="level_competences" Type="Int32" />
           <Property Name="commentaire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="marge_erreur" Type="Boolean" />
           <Property Name="restriction_level_competences" Type="Boolean" />
-          <NavigationProperty Name="T_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___compe__41EDCAC5" FromRole="T_profil_competences" ToRole="T_competences" />
-          <NavigationProperty Name="T_profil" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__1F63A897" FromRole="T_profil_competences" ToRole="T_profil" />
+          <NavigationProperty Name="T_competences" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___compe__6CA31EA0" FromRole="T_profil_competences" ToRole="T_competences" />
+          <NavigationProperty Name="T_profil" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__6BAEFA67" FromRole="T_profil_competences" ToRole="T_profil" />
         </EntityType>
         <EntityType Name="T_profil_langues">
           <Key>
-            <PropertyRef Name="profil_id" />
-            <PropertyRef Name="langues_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="profil_id" Type="Int32" Nullable="false" />
           <Property Name="langues_id" Type="Int32" Nullable="false" />
           <Property Name="level_langues" Type="Int32" />
           <Property Name="commentaire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="T_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___langu__395884C4" FromRole="T_profil_langues" ToRole="T_langues" />
-          <NavigationProperty Name="T_profil" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__2057CCD0" FromRole="T_profil_langues" ToRole="T_profil" />
+          <NavigationProperty Name="T_langues" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___langu__68D28DBC" FromRole="T_profil_langues" ToRole="T_langues" />
+          <NavigationProperty Name="T_profil" Relationship="Mobilite_Pro_BDDModel.FK__T_profil___profi__67DE6983" FromRole="T_profil_langues" ToRole="T_profil" />
         </EntityType>
         <EntityType Name="T_role">
           <Key>
@@ -1060,7 +1094,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___compe__41EDCAC5">
+        <Association Name="FK__T_offre_e__compe__74444068">
+          <End Type="Mobilite_Pro_BDDModel.T_competences" Role="T_competences" Multiplicity="1" />
+          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi_competences" Role="T_offre_emploi_competences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_competences">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_offre_emploi_competences">
+              <PropertyRef Name="competences_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_profil___compe__6CA31EA0">
           <End Type="Mobilite_Pro_BDDModel.T_competences" Role="T_competences" Multiplicity="1" />
           <End Type="Mobilite_Pro_BDDModel.T_profil_competences" Role="T_profil_competences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1120,7 +1166,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___langu__395884C4">
+        <Association Name="FK__T_offre_e__langu__7073AF84">
+          <End Type="Mobilite_Pro_BDDModel.T_langues" Role="T_langues" Multiplicity="1" />
+          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi_langues" Role="T_offre_emploi_langues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_langues">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_offre_emploi_langues">
+              <PropertyRef Name="langues_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_profil___langu__68D28DBC">
           <End Type="Mobilite_Pro_BDDModel.T_langues" Role="T_langues" Multiplicity="1" />
           <End Type="Mobilite_Pro_BDDModel.T_profil_langues" Role="T_profil_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1141,6 +1199,42 @@
             </Principal>
             <Dependent Role="T_niveau_experience">
               <PropertyRef Name="profil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_niveau_exp_T_offre_emploi">
+          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi" Role="T_offre_emploi" Multiplicity="0..1" />
+          <End Type="Mobilite_Pro_BDDModel.T_niveau_experience" Role="T_niveau_experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_offre_emploi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_niveau_experience">
+              <PropertyRef Name="offre_emploi_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_offre_e__offre__6F7F8B4B">
+          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi" Role="T_offre_emploi" Multiplicity="1" />
+          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi_langues" Role="T_offre_emploi_langues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_offre_emploi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_offre_emploi_langues">
+              <PropertyRef Name="offre_emploi_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_offre_e__offre__73501C2F">
+          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi" Role="T_offre_emploi" Multiplicity="1" />
+          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi_competences" Role="T_offre_emploi_competences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_offre_emploi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_offre_emploi_competences">
+              <PropertyRef Name="offre_emploi_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1180,19 +1274,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_profil___profi__1F63A897">
-          <End Type="Mobilite_Pro_BDDModel.T_profil" Role="T_profil" Multiplicity="1" />
-          <End Type="Mobilite_Pro_BDDModel.T_profil_competences" Role="T_profil_competences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_profil">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_profil_competences">
-              <PropertyRef Name="profil_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__T_profil___profi__2057CCD0">
+        <Association Name="FK__T_profil___profi__67DE6983">
           <End Type="Mobilite_Pro_BDDModel.T_profil" Role="T_profil" Multiplicity="1" />
           <End Type="Mobilite_Pro_BDDModel.T_profil_langues" Role="T_profil_langues" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1200,6 +1282,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="T_profil_langues">
+              <PropertyRef Name="profil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_profil___profi__6BAEFA67">
+          <End Type="Mobilite_Pro_BDDModel.T_profil" Role="T_profil" Multiplicity="1" />
+          <End Type="Mobilite_Pro_BDDModel.T_profil_competences" Role="T_profil_competences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_profil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_profil_competences">
               <PropertyRef Name="profil_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1231,26 +1325,6 @@
         <Association Name="AspNetUserRoles">
           <End Type="Mobilite_Pro_BDDModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="Mobilite_Pro_BDDModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <Association Name="T_offre_emploi_competences">
-          <End Type="Mobilite_Pro_BDDModel.T_competences" Role="T_competences" Multiplicity="*" />
-          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi" Role="T_offre_emploi" Multiplicity="*" />
-        </Association>
-        <Association Name="T_offre_emploi_langues">
-          <End Type="Mobilite_Pro_BDDModel.T_langues" Role="T_langues" Multiplicity="*" />
-          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi" Role="T_offre_emploi" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_T_niveau_exp_T_offre_emploi">
-          <End Type="Mobilite_Pro_BDDModel.T_offre_emploi" Role="T_offre_emploi" Multiplicity="0..1" />
-          <End Type="Mobilite_Pro_BDDModel.T_niveau_experience" Role="T_niveau_experience" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_offre_emploi">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="T_niveau_experience">
-              <PropertyRef Name="offre_emploi_id" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1377,6 +1451,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="T_offre_emploi_competences">
+            <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.T_offre_emploi_competences">
+              <MappingFragment StoreEntitySet="T_offre_emploi_competences">
+                <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+                <ScalarProperty Name="competences_id" ColumnName="competences_id" />
+                <ScalarProperty Name="offre_emploi_id" ColumnName="offre_emploi_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_offre_emploi_langues">
+            <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.T_offre_emploi_langues">
+              <MappingFragment StoreEntitySet="T_offre_emploi_langues">
+                <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+                <ScalarProperty Name="langues_id" ColumnName="langues_id" />
+                <ScalarProperty Name="offre_emploi_id" ColumnName="offre_emploi_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="T_profil">
             <EntityTypeMapping TypeName="Mobilite_Pro_BDDModel.T_profil">
               <MappingFragment StoreEntitySet="T_profil">
@@ -1403,6 +1497,7 @@
                 <ScalarProperty Name="level_competences" ColumnName="level_competences" />
                 <ScalarProperty Name="competences_id" ColumnName="competences_id" />
                 <ScalarProperty Name="profil_id" ColumnName="profil_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1413,6 +1508,7 @@
                 <ScalarProperty Name="level_langues" ColumnName="level_langues" />
                 <ScalarProperty Name="langues_id" ColumnName="langues_id" />
                 <ScalarProperty Name="profil_id" ColumnName="profil_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1457,22 +1553,6 @@
             </EndProperty>
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="T_offre_emploi_competences" TypeName="Mobilite_Pro_BDDModel.T_offre_emploi_competences" StoreEntitySet="T_offre_emploi_competences">
-            <EndProperty Name="T_offre_emploi">
-              <ScalarProperty Name="id" ColumnName="offre_emploi_id" />
-            </EndProperty>
-            <EndProperty Name="T_competences">
-              <ScalarProperty Name="id" ColumnName="competences_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="T_offre_emploi_langues" TypeName="Mobilite_Pro_BDDModel.T_offre_emploi_langues" StoreEntitySet="T_offre_emploi_langues">
-            <EndProperty Name="T_offre_emploi">
-              <ScalarProperty Name="id" ColumnName="offre_emploi_id" />
-            </EndProperty>
-            <EndProperty Name="T_langues">
-              <ScalarProperty Name="id" ColumnName="langues_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

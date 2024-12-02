@@ -15,6 +15,7 @@ namespace Projet_MobPro.Controllers
     {
         private Mobilite_Pro_BDDEntities db = new Mobilite_Pro_BDDEntities();
 
+        [Authorize]
         // GET: AspNetUsers
         public ActionResult Index()
         {

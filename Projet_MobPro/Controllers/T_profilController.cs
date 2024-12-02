@@ -59,6 +59,7 @@ namespace Projet_MobPro.Controllers
             return View(t_profil);
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             // Récupération de l'ID de l'utilisateur actuel
@@ -98,6 +99,8 @@ namespace Projet_MobPro.Controllers
             }
 
             ViewBag.NiveauxExperience = t_profil.T_niveau_experience.ToList();
+            ViewBag.Langues = t_profil.T_profil_langues.ToList();
+            ViewBag.Competences = t_profil.T_profil_competences.ToList();
             ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
             ViewBag.ProfilId = t_profil.id;
 

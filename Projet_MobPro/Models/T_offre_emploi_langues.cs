@@ -12,17 +12,14 @@ namespace Projet_MobPro.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class T_profil_competences
+    public partial class T_offre_emploi_langues
     {
         public int id { get; set; }
-        public int profil_id { get; set; }
-        public int competences_id { get; set; }
-        public Nullable<int> level_competences { get; set; }
+        public int offre_emploi_id { get; set; }
+        public int langues_id { get; set; }
         public string commentaire { get; set; }
-        public Nullable<bool> marge_erreur { get; set; }
-        public Nullable<bool> restriction_level_competences { get; set; }
     
-        public virtual T_competences T_competences { get; set; }
-        public virtual T_profil T_profil { get; set; }
+        public virtual T_langues T_langues { get; set; }
+        public virtual T_offre_emploi T_offre_emploi { get; set; }
     }
 }

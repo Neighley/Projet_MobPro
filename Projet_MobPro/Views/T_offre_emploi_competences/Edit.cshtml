@@ -1,4 +1,4 @@
-﻿@model Projet_MobPro.Models.T_profil_langues
+﻿@model Projet_MobPro.Models.T_offre_emploi_competences
 
 @{
     ViewBag.Title = "Edit";
@@ -12,32 +12,24 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>T_profil_langues</h4>
+        <h4>T_offre_emploi_competences</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.profil_id, "profil_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.offre_emploi_id, "offre_emploi_id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("profil_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.profil_id, "", new { @class = "text-danger" })
+                @Html.DropDownList("offre_emploi_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.offre_emploi_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.langues_id, "langues_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.competences_id, "competences_id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("langues_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.langues_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.level_langues, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.level_langues, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.level_langues, "", new { @class = "text-danger" })
+                @Html.DropDownList("competences_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.competences_id, "", new { @class = "text-danger" })
             </div>
         </div>
 

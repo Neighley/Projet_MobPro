@@ -36,6 +36,8 @@ namespace Projet_MobPro.Models
         public virtual DbSet<T_niveau_experience> T_niveau_experience { get; set; }
         public virtual DbSet<T_num_tel> T_num_tel { get; set; }
         public virtual DbSet<T_offre_emploi> T_offre_emploi { get; set; }
+        public virtual DbSet<T_offre_emploi_competences> T_offre_emploi_competences { get; set; }
+        public virtual DbSet<T_offre_emploi_langues> T_offre_emploi_langues { get; set; }
         public virtual DbSet<T_profil> T_profil { get; set; }
         public virtual DbSet<T_profil_competences> T_profil_competences { get; set; }
         public virtual DbSet<T_profil_langues> T_profil_langues { get; set; }

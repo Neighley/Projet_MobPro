@@ -14,6 +14,7 @@ namespace Projet_MobPro.Models
     
     public partial class T_profil_langues
     {
+        public int id { get; set; }
         public int profil_id { get; set; }
         public int langues_id { get; set; }
         public Nullable<int> level_langues { get; set; }
