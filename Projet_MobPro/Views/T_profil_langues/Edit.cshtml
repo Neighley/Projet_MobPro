@@ -17,6 +17,8 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.profil_id)
 
+        @{ ViewBag.id_profil = ViewBag.profilId;}
+
         @Html.HiddenFor(model => model.langues_id)
 
         <div class="form-group">
@@ -44,7 +46,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour", "Details", "T_profil", new { id = ViewBag.id_profil }, null)
 </div>
 
 @section Scripts {

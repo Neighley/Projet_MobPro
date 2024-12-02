@@ -142,8 +142,8 @@
                                 <td>@langues.T_langues.nom_langue</td>
                                 <td>@langues.level_langues</td>
                                 <td>
-                                    @Html.ActionLink("Modifier", "Edit", "T_niveau_experience", new { id = langues.id }, new { @class = "btn-custom-edit" })
-                                    @Html.ActionLink("Supprimer", "Delete", "T_niveau_experience", new { id = langues.id }, new { @class = "btn-custom-delete" })
+                                    @Html.ActionLink("Modifier", "Edit", "T_profil_langues", new { profilId = langues.profil_id, id = langues.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_profil_langues", new { id = langues.id }, new { @class = "btn-custom-delete" })
                                 </td>
                             </tr>
                         }
@@ -183,8 +183,8 @@
                                 <td>@comp.T_competences.nom_competence</td>
                                 <td>@comp.commentaire</td>
                                 <td>
-                                    @Html.ActionLink("Modifier", "Edit", "T_niveau_experience", new { id = comp.id }, new { @class = "btn-custom-edit" })
-                                    @Html.ActionLink("Supprimer", "Delete", "T_niveau_experience", new { id = comp.id }, new { @class = "btn-custom-delete" })
+                                    @Html.ActionLink("Modifier", "Edit", "T_profil_competences", new { id = comp.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_profil_competences", new { id = comp.id }, new { @class = "btn-custom-delete" })
                                 </td>
                             </tr>
                         }

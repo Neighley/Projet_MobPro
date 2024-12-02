@@ -37,8 +37,11 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_profil_competences/Create
-        public ActionResult Create()
+        public ActionResult Create(int? profilId)
         {
+            var profil = db.T_profil.Find(profilId);
+
+            ViewBag.ProfilId = profilId;
             ViewBag.competences_id = new SelectList(db.T_competences, "id", "nom_competence");
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom");
             return View();
@@ -49,17 +52,19 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "profil_id,competences_id,level_competences,commentaire,marge_erreur,restriction_level_competences")] T_profil_competences t_profil_competences)
+        public ActionResult Create(int profilId, [Bind(Include = "profil_id,competences_id,level_competences,commentaire,marge_erreur,restriction_level_competences")] T_profil_competences t_profil_competences)
         {
             if (ModelState.IsValid)
             {
+                t_profil_competences.profil_id = profilId;
                 db.T_profil_competences.Add(t_profil_competences);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_Profil", new { id = profilId });
             }
 
             ViewBag.competences_id = new SelectList(db.T_competences, "id", "nom_competence", t_profil_competences.competences_id);
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_profil_competences.profil_id);
+            ViewBag.id_profil = profilId;
             return View(t_profil_competences);
         }
 

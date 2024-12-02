@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -37,8 +39,11 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_profil_langues/Create
-        public ActionResult Create()
+        public ActionResult Create(int? profilId)
         {
+            var profil = db.T_profil.Find(profilId);
+
+            ViewBag.ProfilId = profilId;
             ViewBag.langues_id = new SelectList(db.T_langues, "id", "nom_langue");
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom");
             return View();
@@ -49,22 +54,24 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
+        public ActionResult Create(int profilId, [Bind(Include = "profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
         {
             if (ModelState.IsValid)
             {
+                t_profil_langues.profil_id = profilId;
                 db.T_profil_langues.Add(t_profil_langues);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_Profil", new { id = ViewBag.id_profil });
             }
 
             ViewBag.langues_id = new SelectList(db.T_langues, "id", "nom_langue", t_profil_langues.langues_id);
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_profil_langues.profil_id);
+            ViewBag.id_profil = profilId;
             return View(t_profil_langues);
         }
 
         // GET: T_profil_langues/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int?profilId, int? id)
         {
             if (id == null)
             {
@@ -75,6 +82,7 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ProfilId = profilId;
             ViewBag.langues_id = new SelectList(db.T_langues, "id", "nom_langue", t_profil_langues.langues_id);
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_profil_langues.profil_id);
             return View(t_profil_langues);
@@ -85,16 +93,17 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
+        public ActionResult Edit(int profilId, [Bind(Include = "id,profil_id,langues_id,level_langues,commentaire")] T_profil_langues t_profil_langues)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(t_profil_langues).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_Profil", new { id = profilId });
             }
             ViewBag.langues_id = new SelectList(db.T_langues, "id", "nom_langue", t_profil_langues.langues_id);
             ViewBag.profil_id = new SelectList(db.T_profil, "id", "nom", t_profil_langues.profil_id);
+            ViewBag.id_profil = profilId;
             return View(t_profil_langues);
         }
 
