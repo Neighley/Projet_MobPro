@@ -1,0 +1,44 @@
+﻿@model Projet_MobPro.Models.T_offre_emploi
+
+@{
+    ViewBag.Title = "Details_Requis";
+}
+<br />
+<h2>Détails de l'offre</h2>
+<hr />
+<p>
+    @Html.ActionLink("Retour", "Index")
+</p>
+<br />
+<h5>Niveaux d'expérience requis :</h5>
+
+@if (ViewBag.NiveauxExperience != null && ViewBag.NiveauxExperience.Count > 0)
+{
+    <div class="form-group">
+        <div class="col-md-10">
+            <br />
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Niveau d'expérience</th>
+                        <th>Domaine d'expertise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var niveau in ViewBag.NiveauxExperience as List<Projet_MobPro.Models.T_niveau_experience>)
+                    {
+                        <tr>
+                            <td>@niveau.nom_niveau_experience</td>
+                            <td>@niveau.T_domaine.domaine</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <br />
+    <p>Aucun niveau d'expérience trouvé.</p>
+}

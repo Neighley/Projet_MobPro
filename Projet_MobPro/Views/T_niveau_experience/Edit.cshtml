@@ -1,48 +1,65 @@
-﻿@model Projet_MobPro.Models.T_niveau_experience
+﻿﻿@model Projet_MobPro.Models.T_niveau_experience
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Modifier</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>T_niveau_experience</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nom_niveau_experience, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nom_niveau_experience, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nom_niveau_experience, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="form-horizontal">
+    <h5>Vérifiez les champs ci-dessous :</h5>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.domaine, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.domaine, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.domaine, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.nom_niveau_experience, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nom_niveau_experience, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nom_niveau_experience, "", new { @class = "text-danger" })
         </div>
     </div>
-}
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.domaine_id, "domaine_id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("domaine_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.domaine_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
+    <!--<div class="form-group">
+        @Html.LabelFor(model => model.profil_id, "profil_id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("profil_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.profil_id, "", new { @class = "text-danger" })
+        </div>
+    </div>-->
+    <!--<div class="form-group">
+        @Html.LabelFor(model => model.offre_emploi_id, "offre_emploi_id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("offre_emploi_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.offre_emploi_id, "", new { @class = "text-danger" })
+        </div>
+    </div>-->
+
+    <input type="hidden" name="profilId" value="@ViewBag.ProfilId" />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Sauvegarder" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+<br />
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour", "Details", "T_profil", new { id = ViewBag.profilId }, null)
 </div>
 
 @section Scripts {

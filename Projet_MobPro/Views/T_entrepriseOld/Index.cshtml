@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Projet_MobPro.Models.T_entreprise>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Entreprises</h2>
+
+<p>
+    @Html.ActionLink("Créer une entreprise", "Create")
+    <br />
+    @Html.ActionLink("Voir mes sites", "Index", "T_site")
+    <br />
+    @Html.ActionLink("Voir mes n° Téléphone", "Index", "T_num_tel")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_num_tel.telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_site.adresse)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_num_tel.telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_site.adresse)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn-custom-edit" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.id }, new { @class = "btn-custom-delete" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,8 +18,69 @@ namespace Projet_MobPro.Controllers
         // GET: T_offre_emploi
         public ActionResult Index()
         {
-            var t_offre_emploi = db.T_offre_emploi.Include(t => t.T_entreprise).Include(t => t.T_site).Include(t => t.T_statut).Include(t => t.T_type_contrat);
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
+            var t_offre_emploi = db.T_offre_emploi.Include(t => t.T_entreprise).Include(t => t.T_site).Include(t => t.T_statut).Include(t => t.T_type_contrat).Include(o => o.T_entreprise.T_num_tel);
             return View(t_offre_emploi.ToList());
+        }
+
+        public ActionResult Affichage()
+        {
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+
+            // Récupération des entreprises liées à l'utilisateur actuel
+            var entreprisesIds = db.T_entreprise
+                            .Where(e => e.AspNetUser_id == currentUserId)
+                            .Select(e => e.id)
+                            .ToList();
+            var offresCount = db.T_offre_emploi
+                .Count(o => o.entreprise_id.HasValue && entreprisesIds.Contains(o.entreprise_id.Value));
+
+            ViewBag.OffresCount = offresCount;
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
+            IEnumerable<T_offre_emploi> t_offre_emploi;
+
+            /* Si role_id == 3, afficher les offres des entreprises de l'utilisateur actuel
+            * Sinon (role_id == 1 ou 2 soit admin ou rh), afficher toutes les offres) */
+            if (currentUserRole == 3)
+            {
+                // Afficher uniquement les offres des entreprises de l'utilisateur connecté
+                t_offre_emploi = db.T_offre_emploi
+                    .Include(t => t.T_entreprise)
+                    .Include(t => t.T_site)
+                    .Include(t => t.T_statut)
+                    .Include(t => t.T_type_contrat)
+                    .Where(o => o.entreprise_id.HasValue && entreprisesIds.Contains(o.entreprise_id.Value))
+                    .ToList();
+            }
+            else
+            {
+                // Afficher toutes les offres pour les autres rôles
+                t_offre_emploi = db.T_offre_emploi
+                    .Include(t => t.T_entreprise)
+                    .Include(t => t.T_site)
+                    .Include(t => t.T_statut)
+                    .Include(t => t.T_type_contrat)
+                    .ToList();
+            }
+
+            return View(t_offre_emploi);
         }
 
         // GET: T_offre_emploi/Details/5
@@ -28,19 +90,84 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_offre_emploi t_offre_emploi = db.T_offre_emploi.Find(id);
+            var t_offre_emploi = db.T_offre_emploi.Include(p => p.T_niveau_experience.Select(n => n.T_domaine)).FirstOrDefault(p => p.id == id);
+            
             if (t_offre_emploi == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.NiveauxExperience = t_offre_emploi.T_niveau_experience.ToList();
+            ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
+            ViewBag.OffreId = t_offre_emploi.id;
             return View(t_offre_emploi);
+        }
+
+        public ActionResult Details_Requis(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var t_offre_emploi = db.T_offre_emploi.Include(p => p.T_niveau_experience.Select(n => n.T_domaine)).FirstOrDefault(p => p.id == id);
+
+            if (t_offre_emploi == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.NiveauxExperience = t_offre_emploi.T_niveau_experience.ToList();
+            ViewBag.Domaines = new SelectList(db.T_domaine, "id", "nom_domaine");
+            ViewBag.OffreId = t_offre_emploi.id;
+            return View(t_offre_emploi);
+        }
+
+        public ActionResult Contact(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            T_offre_emploi offre = db.T_offre_emploi.Find(id);
+            if (offre == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Récupérer les numéros de téléphone de l'entreprise liée à l'offre d'emploi
+            var numTels = db.T_num_tel
+                        .Where(n => n.entreprise_id == offre.entreprise_id)
+                        .ToList();
+
+            ViewBag.NumTel = numTels;
+
+            return View(offre);
         }
 
         // GET: T_offre_emploi/Create
         public ActionResult Create()
         {
-            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
-            ViewBag.site_id = new SelectList(db.T_site, "id", "adresse");
+            var userId = User.Identity.GetUserId();
+            var userEntreprises = db.T_entreprise.Where(e => e.AspNetUser_id == userId).ToList();
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == userId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
+            // Récupération des IDs des entreprises
+            var entrepriseIds = userEntreprises.Select(e => e.id).ToList();
+
+            // Filtrage des sites liés aux entreprises de l'utilisateur
+            var userSites = db.T_site.Where(s => entrepriseIds.Contains(s.entreprise_id ?? 0)).ToList();
+
+            ViewBag.EntrepriseId = new SelectList(userEntreprises, "id", "nom");
+            ViewBag.entreprise_idAdmin = new SelectList(db.T_entreprise, "id", "nom");
+            ViewBag.site_id = new SelectList(userSites, "id", "adresse");
+            ViewBag.site_idAdmin = new SelectList(db.T_site, "id", "adresse");
             ViewBag.statut_id = new SelectList(db.T_statut, "id", "statut");
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat");
             return View();
@@ -57,7 +184,7 @@ namespace Projet_MobPro.Controllers
             {
                 db.T_offre_emploi.Add(t_offre_emploi);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = t_offre_emploi.id });
             }
 
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_offre_emploi.entreprise_id);
@@ -70,6 +197,18 @@ namespace Projet_MobPro.Controllers
         // GET: T_offre_emploi/Edit/5
         public ActionResult Edit(int? id)
         {
+            var currentUserId = User.Identity.GetUserId();
+
+            var currentUser = db.T_entreprise.Where(e => e.AspNetUser_id == currentUserId).ToList();
+            var entrepriseIds = currentUser.Select(e => e.id).ToList();
+            var userSites = db.T_site.Where(s => entrepriseIds.Contains(s.entreprise_id ?? 0)).ToList();
+
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,7 +219,9 @@ namespace Projet_MobPro.Controllers
                 return HttpNotFound();
             }
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_offre_emploi.entreprise_id);
+            ViewBag.entreprise_id2 = new SelectList(currentUser, "id", "nom", t_offre_emploi.entreprise_id);
             ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_offre_emploi.site_id);
+            ViewBag.site_id2 = new SelectList(userSites, "id", "adresse", t_offre_emploi.site_id);
             ViewBag.statut_id = new SelectList(db.T_statut, "id", "statut", t_offre_emploi.statut_id);
             ViewBag.type_contrat_id = new SelectList(db.T_type_contrat, "id", "nom_type_contrat", t_offre_emploi.type_contrat_id);
             return View(t_offre_emploi);
@@ -95,9 +236,27 @@ namespace Projet_MobPro.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUserId = User.Identity.GetUserId();
+                var currentUserRole = db.AspNetUsers
+                                        .Where(u => u.Id == currentUserId)
+                                        .Select(u => u.role_id)
+                                        .FirstOrDefault();
+
+                if (currentUserRole != 1)
+                {
+                    var userEntreprise = db.T_entreprise
+                                           .Where(e => e.AspNetUser_id == currentUserId)
+                                           .Select(e => e.id)
+                                           .FirstOrDefault();
+                    if (userEntreprise != 0)
+                    {
+                        t_offre_emploi.entreprise_id = userEntreprise;
+                    }
+                }
+
                 db.Entry(t_offre_emploi).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Affichage");
             }
             ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_offre_emploi.entreprise_id);
             ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_offre_emploi.site_id);

@@ -178,9 +178,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\T_competencesController.cs" />
+    <Compile Include="Controllers\T_domaineController.cs" />
     <Compile Include="Controllers\T_entrepriseController.cs" />
     <Compile Include="Controllers\T_languesController.cs" />
     <Compile Include="Controllers\T_niveau_experienceController.cs" />
+    <Compile Include="Controllers\T_niveau_experienceOldController.cs" />
     <Compile Include="Controllers\T_num_telController.cs" />
     <Compile Include="Controllers\T_offre_emploiController.cs" />
     <Compile Include="Controllers\T_profilController.cs" />
@@ -193,6 +195,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -224,6 +227,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\T_competences.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_domaine.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_entreprise.cs">
@@ -270,6 +276,10 @@
     <Content Include="App_Data\Mobilite_Pro_BDD_log.ldf">
       <DependentUpon>Mobilite_Pro_BDD.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\ScriptBDD\Add_Constraint_NivExp_in_Toffreemploi.sql" />
+    <Content Include="App_Data\ScriptBDD\Add_Default_Value_role_id.sql" />
+    <Content Include="App_Data\ScriptBDD\Add_donnees_langues.sql" />
+    <Content Include="App_Data\ScriptBDD\Add_Role_In_AspNetUser.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile1.sql" />
     <Content Include="App_Data\ScriptBDD\TextFile2.SQL" />
     <Content Include="App_Data\ScriptBDD\TextFile3.sql" />
@@ -375,46 +385,36 @@
     <Content Include="Views\AspNetUserLogins\Details.cshtml" />
     <Content Include="Views\AspNetUserLogins\Edit.cshtml" />
     <Content Include="Views\AspNetUserLogins\Index.cshtml" />
-    <Content Include="Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Views\AspNetUsers\Edit.cshtml" />
-    <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\T_competences\Create.cshtml" />
     <Content Include="Views\T_competences\Delete.cshtml" />
     <Content Include="Views\T_competences\Details.cshtml" />
     <Content Include="Views\T_competences\Edit.cshtml" />
     <Content Include="Views\T_competences\Index.cshtml" />
-    <Content Include="Views\T_entreprise\Create.cshtml" />
-    <Content Include="Views\T_entreprise\Delete.cshtml" />
-    <Content Include="Views\T_entreprise\Details.cshtml" />
-    <Content Include="Views\T_entreprise\Edit.cshtml" />
-    <Content Include="Views\T_entreprise\Index.cshtml" />
+    <Content Include="Views\T_entrepriseOld\Create.cshtml" />
+    <Content Include="Views\T_entrepriseOld\Delete.cshtml" />
+    <Content Include="Views\T_entrepriseOld\Details.cshtml" />
+    <Content Include="Views\T_entrepriseOld\Edit.cshtml" />
+    <Content Include="Views\T_entrepriseOld\Index.cshtml" />
     <Content Include="Views\T_langues\Create.cshtml" />
     <Content Include="Views\T_langues\Delete.cshtml" />
     <Content Include="Views\T_langues\Details.cshtml" />
     <Content Include="Views\T_langues\Edit.cshtml" />
     <Content Include="Views\T_langues\Index.cshtml" />
-    <Content Include="Views\T_niveau_experience\Create.cshtml" />
-    <Content Include="Views\T_niveau_experience\Delete.cshtml" />
-    <Content Include="Views\T_niveau_experience\Details.cshtml" />
-    <Content Include="Views\T_niveau_experience\Edit.cshtml" />
-    <Content Include="Views\T_niveau_experience\Index.cshtml" />
-    <Content Include="Views\T_num_tel\Create.cshtml" />
-    <Content Include="Views\T_num_tel\Delete.cshtml" />
-    <Content Include="Views\T_num_tel\Details.cshtml" />
-    <Content Include="Views\T_num_tel\Edit.cshtml" />
-    <Content Include="Views\T_num_tel\Index.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Create.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Delete.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Details.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Edit.cshtml" />
+    <Content Include="Views\T_niveau_experienceOld\Index.cshtml" />
+    <Content Include="Views\T_num_telOld\Create.cshtml" />
+    <Content Include="Views\T_num_telOld\Delete.cshtml" />
+    <Content Include="Views\T_num_telOld\Details.cshtml" />
+    <Content Include="Views\T_num_telOld\Edit.cshtml" />
+    <Content Include="Views\T_num_telOld\Index.cshtml" />
     <Content Include="Views\T_offre_emploi\Create.cshtml" />
     <Content Include="Views\T_offre_emploi\Delete.cshtml" />
     <Content Include="Views\T_offre_emploi\Details.cshtml" />
     <Content Include="Views\T_offre_emploi\Edit.cshtml" />
     <Content Include="Views\T_offre_emploi\Index.cshtml" />
-    <Content Include="Views\T_profil\Create.cshtml" />
-    <Content Include="Views\T_profil\Delete.cshtml" />
-    <Content Include="Views\T_profil\Details.cshtml" />
-    <Content Include="Views\T_profil\Edit.cshtml" />
-    <Content Include="Views\T_profil\Index.cshtml" />
     <Content Include="Views\T_profil_competences\Create.cshtml" />
     <Content Include="Views\T_profil_competences\Delete.cshtml" />
     <Content Include="Views\T_profil_competences\Details.cshtml" />
@@ -430,11 +430,11 @@
     <Content Include="Views\T_role\Details.cshtml" />
     <Content Include="Views\T_role\Edit.cshtml" />
     <Content Include="Views\T_role\Index.cshtml" />
-    <Content Include="Views\T_site\Create.cshtml" />
-    <Content Include="Views\T_site\Delete.cshtml" />
-    <Content Include="Views\T_site\Details.cshtml" />
-    <Content Include="Views\T_site\Edit.cshtml" />
-    <Content Include="Views\T_site\Index.cshtml" />
+    <Content Include="Views\T_siteOld\Create.cshtml" />
+    <Content Include="Views\T_siteOld\Delete.cshtml" />
+    <Content Include="Views\T_siteOld\Details.cshtml" />
+    <Content Include="Views\T_siteOld\Edit.cshtml" />
+    <Content Include="Views\T_siteOld\Index.cshtml" />
     <Content Include="Views\T_statut\Create.cshtml" />
     <Content Include="Views\T_statut\Delete.cshtml" />
     <Content Include="Views\T_statut\Details.cshtml" />
@@ -445,6 +445,54 @@
     <Content Include="Views\T_type_contrat\Details.cshtml" />
     <Content Include="Views\T_type_contrat\Edit.cshtml" />
     <Content Include="Views\T_type_contrat\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\T_profilOld\Create.cshtml" />
+    <Content Include="Views\T_profilOld\Delete.cshtml" />
+    <Content Include="Views\T_profilOld\Details.cshtml" />
+    <Content Include="Views\T_profilOld\Edit.cshtml" />
+    <Content Include="Views\T_profilOld\Index.cshtml" />
+    <Content Include="Views\T_niveau_experience\Create.cshtml" />
+    <Content Include="Views\T_niveau_experience\Delete.cshtml" />
+    <Content Include="Views\T_niveau_experience\Details.cshtml" />
+    <Content Include="Views\T_niveau_experience\Edit.cshtml" />
+    <Content Include="Views\T_niveau_experience\Index.cshtml" />
+    <Content Include="Views\T_domaine\Create.cshtml" />
+    <Content Include="Views\T_domaine\Delete.cshtml" />
+    <Content Include="Views\T_domaine\Details.cshtml" />
+    <Content Include="Views\T_domaine\Edit.cshtml" />
+    <Content Include="Views\T_domaine\Index.cshtml" />
+    <Content Include="Views\T_entreprise\Create.cshtml" />
+    <Content Include="Views\T_entreprise\Delete.cshtml" />
+    <Content Include="Views\T_entreprise\Details.cshtml" />
+    <Content Include="Views\T_entreprise\Edit.cshtml" />
+    <Content Include="Views\T_entreprise\Index.cshtml" />
+    <Content Include="Views\T_num_tel\Create.cshtml" />
+    <Content Include="Views\T_num_tel\Delete.cshtml" />
+    <Content Include="Views\T_num_tel\Details.cshtml" />
+    <Content Include="Views\T_num_tel\Edit.cshtml" />
+    <Content Include="Views\T_num_tel\Index.cshtml" />
+    <Content Include="Views\T_site\Create.cshtml" />
+    <Content Include="Views\T_site\Delete.cshtml" />
+    <Content Include="Views\T_site\Details.cshtml" />
+    <Content Include="Views\T_site\Edit.cshtml" />
+    <Content Include="Views\T_site\Index.cshtml" />
+    <Content Include="Views\T_profil\Create.cshtml" />
+    <Content Include="Views\T_profil\Delete.cshtml" />
+    <Content Include="Views\T_profil\Details.cshtml" />
+    <Content Include="Views\T_profil\Edit.cshtml" />
+    <Content Include="Views\T_profil\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\T_profil\Affichage.cshtml" />
+    <Content Include="Views\T_offre_emploi\Affichage.cshtml" />
+    <Content Include="Views\T_niveau_experience\Create_Offre.cshtml" />
+    <Content Include="Views\T_niveau_experience\Edit_Offre.cshtml" />
+    <Content Include="Views\T_niveau_experience\Delete_Offre.cshtml" />
+    <Content Include="Views\T_offre_emploi\Details_Requis.cshtml" />
+    <Content Include="Views\T_offre_emploi\Contact.cshtml" />
     <None Include="Web.Aurelien.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

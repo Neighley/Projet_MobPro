@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails de l'offre</h2>
 
 <div>
-    <h4>T_offre_emploi</h4>
+    <h5>Vos renseignements :</h5>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,13 +18,13 @@
             @Html.DisplayFor(model => model.nom)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+        <!--<dt>
+        @Html.DisplayNameFor(model => model.description)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.description)
+    </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.date_publication)
@@ -34,13 +34,13 @@
             @Html.DisplayFor(model => model.date_publication)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_suppression)
-        </dt>
+        <!--<dt>
+        @Html.DisplayNameFor(model => model.date_suppression)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_suppression)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.date_suppression)
+    </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.ouvert_externe)
@@ -55,7 +55,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.url_site)
+            <a href="@Model.url_site" target="_blank">@Html.DisplayFor(model => model.url_site)</a>
         </dd>
 
         <dt>
@@ -74,13 +74,13 @@
             @Html.DisplayFor(model => model.full_teletravail)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.niveau_experience_id)
-        </dt>
+        <!--<dt>
+        @Html.DisplayNameFor(model => model.niveau_experience_id)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.niveau_experience_id)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.niveau_experience_id)
+    </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.T_entreprise.nom)
@@ -115,8 +115,52 @@
         </dd>
 
     </dl>
+    <br />
+    <h5>Gérer les niveaux d'expérience requis</h5>
+    <a href="@Url.Action("Create_Offre", "T_niveau_experience", new { offreEmploiId = Model.id })" class="btn btn-primary">
+        Ajouter un Niveau d'Expérience
+    </a>
+
+    @if (ViewBag.NiveauxExperience != null && ViewBag.NiveauxExperience.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Niveau d'expérience</th>
+                            <th>Domaine d'expertise</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var niveau in ViewBag.NiveauxExperience as List<Projet_MobPro.Models.T_niveau_experience>)
+                        {
+                            <tr>
+                                <td>@niveau.nom_niveau_experience</td>
+                                <td>@niveau.T_domaine.domaine</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit_Offre", "T_niveau_experience", new { id = niveau.id, offreEmploiId = Model.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete_Offre", "T_niveau_experience", new { id = niveau.id, offreEmploiId = Model.id }, new { @class = "btn-custom-delete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <br />
+        <p>Aucun niveau d'expérience trouvé pour ce profil.</p>
+    }
+
 </div>
+<br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.id }, new { @class = "btn-custom-edit"})
+    <br /><br />
+    @Html.ActionLink("Retour", "Affichage")
 </p>

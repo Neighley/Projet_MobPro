@@ -1,14 +1,14 @@
 ﻿@model Projet_MobPro.Models.IndexViewModel
 @{
-    ViewBag.Title = "Gérer";
+    ViewBag.Title = "Paramètres";
 }
 
 <main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
+    <h2 id="title">@ViewBag.Title</h2>
 
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div>
-        <h4>Modifier vos paramètres de compte</h4>
+        <h4>Modifiez vos paramètres.</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>Mot de passe :</dt>
@@ -24,11 +24,11 @@
                 }
                 ]
             </dd>
-            <dt>Connexions externes :</dt>
+            <!--<dt>Connexions externes :</dt>
             <dd>
                 @Model.Logins.Count [
                 @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
+            </dd>-->
             @*
                 Les numéros de téléphone peuvent être utilisés en tant que second facteur de vérification dans un système d’authentification à 2 facteurs.
              
@@ -57,12 +57,12 @@
                     }
                 </dd>
             *@
-            <dt>Authentification à 2 facteurs :</dt>
+            <!--<dt>Authentification à 2 facteurs :</dt>
             <dd>
                 <p>
                     Aucun fournisseur d’authentification à 2 facteurs n’est configuré. Consultez <a href="https://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
                 pour plus d’informations sur la configuration de cette application ASP.NET et la prise en charge de l’authentification à 2 facteurs.
-                </p>
+                </p>-->
                 @*@if (Model.TwoFactor)
                     {
                         using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))

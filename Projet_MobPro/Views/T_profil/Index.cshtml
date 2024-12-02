@@ -4,12 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Profils</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (ViewBag.CurrentUserRoleId == 1)
+    {
+        @Html.ActionLink("Créer un profil", "Create")
+    }
 </p>
-<table class="table">
+
+<!--<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.nom)
@@ -30,64 +34,101 @@
             @Html.DisplayNameFor(model => model.ville)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ruelle_p)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_niveau_experience.nom_niveau_experience)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_role.nom_role)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
         </th>
+        @if (ViewBag.CurrentUserRoleId == 1)
+        {
+            <th>Actions</th>
+        }
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prenom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_naissance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.adresse)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.code_postal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ville)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ruelle_p)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_niveau_experience.nom_niveau_experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_role.nom_role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_naissance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.adresse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.code_postal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ville)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
+            </td>
+            @if (ViewBag.CurrentUserRoleId == 1)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
+                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
+                </td>
+            }
 
-</table>
+        </tr>
+    }
+
+</table>-->
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@item.prenom @item.nom</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Recherche : @item.T_type_contrat.nom_type_contrat</h6>
+                    <p class="card-text">
+                        <small>
+                            <i class="fas fa-birthday-cake"></i> @(item.date_naissance.HasValue ? item.date_naissance.Value.ToString("dd/MM/yyyy") : "Non renseigné")<br>
+                            <i class="fas fa-map-marker-alt"></i> @item.adresse, @item.code_postal @item.ville<br>
+                            <i class="fas fa-envelope"></i> @(item.AspNetUsers?.Email ?? "Aucun email")
+                        </small>
+                    </p>
+                    <h6 class="mt-3">Niveaux d'expérience :</h6>
+                    @if (item.T_niveau_experience != null && item.T_niveau_experience.Any())
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var niveau in item.T_niveau_experience)
+                            {
+                                <li class="list-group-item">
+                                    <strong>@niveau.nom_niveau_experience</strong> en @niveau.T_domaine.domaine
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>Aucun niveau d'expérience trouvé pour ce profil.</p>
+                    }
+                </div>
+                <div class="card-footer bg-transparent">
+                    @if (ViewBag.CurrentUserRoleId == 1)
+                    {
+                        <div class="btn-group mt-2" role="group">
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn btn-custom-edit" }) ....
+                            @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn btn-custom-delete btn-spacing2" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

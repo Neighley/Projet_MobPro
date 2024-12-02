@@ -18,16 +18,20 @@ namespace Projet_MobPro.Models
         public T_entreprise()
         {
             this.T_offre_emploi = new HashSet<T_offre_emploi>();
+            this.T_num_tel = new HashSet<T_num_tel>();
+            this.T_site = new HashSet<T_site>();
         }
     
         public int id { get; set; }
         public string nom { get; set; }
-        public Nullable<int> num_tel_id { get; set; }
-        public Nullable<int> site_id { get; set; }
+        public string AspNetUser_id { get; set; }
     
-        public virtual T_num_tel T_num_tel { get; set; }
-        public virtual T_site T_site { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_offre_emploi> T_offre_emploi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_num_tel> T_num_tel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_site> T_site { get; set; }
     }
 }

@@ -17,12 +17,15 @@ namespace Projet_MobPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_role()
         {
+            this.AspNetUsers = new HashSet<AspNetUsers>();
             this.T_profil = new HashSet<T_profil>();
         }
     
         public int id { get; set; }
         public string nom_role { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil> T_profil { get; set; }
     }

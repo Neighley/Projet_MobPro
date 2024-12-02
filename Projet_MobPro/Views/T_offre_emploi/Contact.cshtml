@@ -1,0 +1,54 @@
+﻿@model Projet_MobPro.Models.T_offre_emploi
+
+@{
+    ViewBag.Title = "Contact";
+}
+<br />
+<h2>Contacter l'entreprise</h2>
+<hr />
+<p>
+    @Html.ActionLink("Retour", "Index")
+</p>
+<br />
+<h5>Numéros de téléphone :</h5>
+
+@if (ViewBag.NumTel != null && ViewBag.NumTel.Count > 0)
+{
+    <div class="form-group">
+        <div class="col-md-10">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Téléphone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var niveau in ViewBag.NumTel as List<Projet_MobPro.Models.T_num_tel>)
+                    {
+                        <tr>
+                            <td>@niveau.telephone</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <br />
+    <p>Aucun numéro de téléphone n'a été renseigné.</p>
+}
+<br />
+<h5>Site Internet :</h5>
+<dd>
+    @Html.DisplayFor(model => model.url_site)
+    <!-- mettre un lien :) -->
+</dd>
+<br />
+<h5>Location :</h5>
+<dd>
+    @Html.DisplayFor(model => model.T_site.adresse),
+    @Html.DisplayFor(model => model.T_site.code_postal)
+    @Html.DisplayFor(model => model.T_site.ville)
+</dd>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,7 +18,16 @@ namespace Projet_MobPro.Controllers
         // GET: T_site
         public ActionResult Index()
         {
-            return View(db.T_site.ToList());
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+            
+            var entreprise = db.T_entreprise.FirstOrDefault(e => e.AspNetUser_id == currentUserId);
+
+            var t_site = db.T_site
+                            .Include(t => t.T_entreprise)
+                            .Where(t => t.entreprise_id == entreprise.id)
+                            .ToList();
+            return View(t_site);
         }
 
         // GET: T_site/Details/5
@@ -36,8 +46,12 @@ namespace Projet_MobPro.Controllers
         }
 
         // GET: T_site/Create
-        public ActionResult Create()
+        public ActionResult Create(int? entrepriseId)
         {
+            var entreprise = db.T_entreprise.Find(entrepriseId);
+
+            ViewBag.EntrepriseId = entrepriseId;
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom");
             return View();
         }
 
@@ -46,21 +60,25 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,adresse,code_postal,ville")] T_site t_site)
+        public ActionResult Create(int entrepriseId, [Bind(Include = "id,adresse,code_postal,ville,entreprise_id")] T_site t_site)
         {
             if (ModelState.IsValid)
             {
+                t_site.entreprise_id = entrepriseId;
                 db.T_site.Add(t_site);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_entreprise", new { id = entrepriseId});
             }
 
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);
             return View(t_site);
         }
 
         // GET: T_site/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? entrepriseId, int? id)
         {
+            var entreprise = db.T_entreprise.Find(entrepriseId);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -70,6 +88,8 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.EntrepriseId = entrepriseId;
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);
             return View(t_site);
         }
 
@@ -78,14 +98,16 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,adresse,code_postal,ville")] T_site t_site)
+        public ActionResult Edit(int entrepriseId, [Bind(Include = "id,adresse,code_postal,ville,entreprise_id")] T_site t_site)
         {
             if (ModelState.IsValid)
             {
+                t_site.entreprise_id = entrepriseId;
                 db.Entry(t_site).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "T_entreprise", new { id = entrepriseId });
             }
+            ViewBag.entreprise_id = new SelectList(db.T_entreprise, "id", "nom", t_site.entreprise_id);
             return View(t_site);
         }
 
@@ -96,23 +118,27 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_site t_site = db.T_site.Find(id);
+
+            T_site t_site = db.T_site.Include(t => t.T_entreprise).FirstOrDefault(t => t.id == id);
+
             if (t_site == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.EntrepriseId = t_site.entreprise_id;
             return View(t_site);
         }
 
         // POST: T_site/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int entrepriseId)
         {
             T_site t_site = db.T_site.Find(id);
             db.T_site.Remove(t_site);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "T_entreprise", new { id = entrepriseId });
         }
 
         protected override void Dispose(bool disposing)

@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Détails</h2>
 
 <div>
-    <h4>T_entreprise</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,24 +18,98 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.T_num_tel.telephone)
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.T_num_tel.telephone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.T_site.adresse)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.T_site.adresse)
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
         </dd>
 
     </dl>
+    <br />
+    <h5>Gérer mes sites</h5>
+    <a href="@Url.Action("Create", "T_site", new { entrepriseId = Model.id })" class="btn btn-primary">
+        Ajouter un site
+    </a>
+    <br /><br />
+    @if (ViewBag.Sites != null && ViewBag.Sites.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Adresse</th>
+                            <th>Code postal</th>
+                            <th>Ville</th>
+                            <th>Entreprise</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var niveau in ViewBag.Sites as List<Projet_MobPro.Models.T_site>)
+                        {
+                            <tr>
+                                <td>@niveau.adresse</td>
+                                <td>@niveau.code_postal</td>
+                                <td>@niveau.ville</td>
+                                <td>@niveau.entreprise_id</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_site", new { id = niveau.id, entrepriseId = Model.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_site", new { id = niveau.id }, new { @class = "btn-custom-delete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Aucun site trouvé pour ce profil.</p>
+    }
+    <br />
+    <h5>Gérer mes numéros de téléphone</h5>
+    <a href="@Url.Action("Create", "T_num_tel", new { entrepriseId = Model.id })" class="btn btn-primary">
+        Ajouter un téléphone
+    </a>
+    <br /><br />
+    @if (ViewBag.NumTel != null && ViewBag.Sites.Count > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Téléphone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var niveau in ViewBag.NumTel as List<Projet_MobPro.Models.T_num_tel>)
+                        {
+                            <tr>
+                                <td>@niveau.telephone</td>
+                                <td>
+                                    @Html.ActionLink("Modifier", "Edit", "T_num_tel", new { id = niveau.id, entrepriseId = Model.id }, new { @class = "btn-custom-edit" })
+                                    @Html.ActionLink("Supprimer", "Delete", "T_num_tel", new { id = niveau.id }, new { @class = "btn-custom-delete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Aucun téléphone trouvé pour ce profil.</p>
+    }
 </div>
+<br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.id }, new { @class = "btn btn-custom-edit"})
+    <br /><br />
+    @Html.ActionLink("Retour", "Index")
 </p>

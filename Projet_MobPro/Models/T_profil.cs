@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace Projet_MobPro.Models
 {
     using System;
@@ -19,38 +17,31 @@ namespace Projet_MobPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_profil()
         {
+            this.T_niveau_experience = new HashSet<T_niveau_experience>();
             this.T_profil_competences = new HashSet<T_profil_competences>();
             this.T_profil_langues = new HashSet<T_profil_langues>();
         }
     
         public int id { get; set; }
-        [Display(Name = "Nom")]
         public string nom { get; set; }
-        [Display(Name = "Prénom")]
         public string prenom { get; set; }
-        [Display(Name = "Date de naissance")]
         public Nullable<System.DateTime> date_naissance { get; set; }
-        [Display(Name = "Adresse")]
         public string adresse { get; set; }
-        [Display(Name = "Code postal")]
         public string code_postal { get; set; }
-        [Display(Name = "Ville")]
         public string ville { get; set; }
         public string ruelle_p { get; set; }
         public Nullable<int> role_id { get; set; }
-        [Display(Name = "Contrat recherché")]
         public Nullable<int> type_contrat_id { get; set; }
-        [Display(Name = "Niveau d'expérience")]
-        public Nullable<int> niveau_experience_id { get; set; }
         public string AspNetUser_id { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_niveau_experience> T_niveau_experience { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil_competences> T_profil_competences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_profil_langues> T_profil_langues { get; set; }
         public virtual T_role T_role { get; set; }
         public virtual T_type_contrat T_type_contrat { get; set; }
-        public virtual T_niveau_experience T_niveau_experience { get; set; }
     }
 }

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Projet_MobPro.Models.T_offre_emploi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Voir mon offre d'emploi</h2>
+
+<p>
+    @if (ViewBag.OffresCount < 1 && (ViewBag.CurrentUserRoleId == 3 || ViewBag.CurrentUserRoleId == 2))
+    {
+        @Html.ActionLink("Créer mon offre", "Create")
+    }
+    else if (ViewBag.CurrentUserRoleId == 1)
+    {
+        @Html.ActionLink("Créer mon offre", "Create")
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <!--<th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>-->
+        <th>
+            @Html.DisplayNameFor(model => model.date_publication)
+        </th>
+        <!--<th>
+            @Html.DisplayNameFor(model => model.date_suppression)
+        </th>-->
+        <th>
+            @Html.DisplayNameFor(model => model.ouvert_externe)
+        </th>
+        <!--<th>
+            @Html.DisplayNameFor(model => model.url_site)
+        </th>-->
+        <th>
+            @Html.DisplayNameFor(model => model.teletravail_autorise)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.full_teletravail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_entreprise.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_site.adresse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_statut.statut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.date_publication)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.date_suppression)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.ouvert_externe)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.url_site)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.teletravail_autorise)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.full_teletravail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_entreprise.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_site.adresse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_statut.statut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
+            </td>
+            <td>
+                @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Détails", "Details", new { id = item.id }, new { @class = "btn-custom-edit" })
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn-custom-delete" })
+            </td>
+        </tr>
+    }
+
+</table>

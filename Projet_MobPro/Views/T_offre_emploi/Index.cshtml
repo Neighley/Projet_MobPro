@@ -4,102 +4,62 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Voir les offres d'emploi</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (ViewBag.CurrentUserRoleId == 1)
+    {
+        @Html.ActionLink("Créer une offre", "Create")
+    }
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date_publication)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date_suppression)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ouvert_externe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.url_site)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.teletravail_autorise)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.full_teletravail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.niveau_experience_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_entreprise.nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_site.adresse)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_statut.statut)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_publication)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_suppression)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ouvert_externe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.url_site)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.teletravail_autorise)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.full_teletravail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.niveau_experience_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_entreprise.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_site.adresse)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_statut.statut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.T_type_contrat.nom_type_contrat)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
 
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@item.nom</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Entreprise : @item.T_entreprise.nom</h6>
+                    <p class="card-text">
+                        <small>
+                            <i class="fas fa-map-marker-alt"></i> @item.T_site.adresse, @item.T_site.code_postal @item.T_site.ville<br>
+                            <i class="fas fa-calendar-alt"></i><a href="@item.url_site" target="_blank">@item.url_site</a><br />
+                            <i class="fas fa-calendar-alt"></i> Publié le @item.date_publication.Value.ToString("dd/MM/yyyy")
+                        </small>
+                    </p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="fas fa-globe"></i> Recherche : @item.T_type_contrat.nom_type_contrat
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-globe"></i> Ouvert à l'externe : @(item.ouvert_externe.GetValueOrDefault() ? "Oui" : "Non")
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-home"></i> Télétravail : @(item.teletravail_autorise.GetValueOrDefault() ? "Autorisé" : "Non autorisé")
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-laptop-house"></i> Télétravail à temps plein : @(item.full_teletravail.GetValueOrDefault() ? "Oui" : "Non")
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <small class="text-muted" style="color: #6c757d;">Statut : @item.T_statut.statut</small>
+                        <div class="mt-2">
+                            @Html.ActionLink("Contact", "Contact", new { id = item.id }, new { @class = "btn btn-primary btn-spacing" })
+                            @Html.ActionLink("Détails", "Details_Requis", new { id = item.id }, new { @class = "btn btn-custom-edit btn-spacing" })
+
+                            @if (ViewBag.CurrentUserRoleId == 1)
+                            { 
+                            <br />
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.id }, new { @class = "btn btn-custom-edit btn-spacing" })
+                            @Html.ActionLink("Supprimer", "Delete", new { id = item.id }, new { @class = "btn btn-custom-delete btn-spacing" })
+                            }
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

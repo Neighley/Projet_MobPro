@@ -4,11 +4,10 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Supprimer</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Êtes-vous sûr de vouloir supprimer votre profil ?</h3>
 <div>
-    <h4>T_profil</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -59,13 +58,13 @@
             @Html.DisplayFor(model => model.ville)
         </dd>
 
-        <dt>
+        <!--<dt>
             @Html.DisplayNameFor(model => model.ruelle_p)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ruelle_p)
-        </dd>
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.AspNetUsers.Email)
@@ -75,21 +74,13 @@
             @Html.DisplayFor(model => model.AspNetUsers.Email)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.T_niveau_experience.nom_niveau_experience)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.T_niveau_experience.nom_niveau_experience)
-        </dd>
-
-        <dt>
+        <!--<dt>
             @Html.DisplayNameFor(model => model.T_role.nom_role)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.T_role.nom_role)
-        </dd>
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.T_type_contrat.nom_type_contrat)
@@ -105,8 +96,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-custom-delete" />
+            <br /><br />
+            @Html.ActionLink("Retour", "Affichage")
         </div>
     }
 </div>

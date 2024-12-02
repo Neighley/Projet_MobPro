@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Projet_MobPro.Models;
 
 namespace Projet_MobPro.Controllers
@@ -17,8 +18,39 @@ namespace Projet_MobPro.Controllers
         // GET: T_entreprise
         public ActionResult Index()
         {
-            var t_entreprise = db.T_entreprise.Include(t => t.T_num_tel).Include(t => t.T_site);
-            return View(t_entreprise.ToList());
+            // Récupération de l'ID de l'utilisateur actuel
+            var currentUserId = User.Identity.GetUserId();
+
+            // Récupération du nombre d'entreprises créés pour l'utilisateur actuel
+            int entrepriseCount = db.T_entreprise.Count(p => p.AspNetUser_id == currentUserId);
+            ViewBag.EntrepriseCount = entrepriseCount;
+
+            // Récupération du rôle de l'utilisateur
+            var currentUserRole = db.AspNetUsers
+                                    .Where(u => u.Id == currentUserId)
+                                    .Select(u => u.role_id)
+                                    .FirstOrDefault();
+            ViewBag.CurrentUserRoleId = currentUserRole;
+
+            IEnumerable<T_entreprise> t_entreprise;
+
+            if (currentUserRole == 1)
+            {
+                t_entreprise = db.T_entreprise
+                                 .Include(t => t.T_num_tel)
+                                 .Include(t => t.T_site)
+                                 .ToList();
+            }
+            else
+            {
+                t_entreprise = db.T_entreprise
+                                 .Include(t => t.T_num_tel)
+                                 .Include(t => t.T_site)
+                                 .Where(e => e.AspNetUser_id == currentUserId)
+                                 .ToList();
+            }
+
+            return View(t_entreprise);
         }
 
         // GET: T_entreprise/Details/5
@@ -28,19 +60,31 @@ namespace Projet_MobPro.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_entreprise t_entreprise = db.T_entreprise.Find(id);
+            var t_entreprise = db.T_entreprise.Include(p => p.T_site).Include(p => p.T_num_tel).FirstOrDefault(p => p.id == id);
+
+            //T_entreprise t_entreprise = db.T_entreprise.Find(id);
             if (t_entreprise == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Sites = t_entreprise.T_site.ToList();
+            ViewBag.NumTel = t_entreprise.T_num_tel.ToList();
+            ViewBag.EntrepriseId = t_entreprise.id;
             return View(t_entreprise);
         }
 
         // GET: T_entreprise/Create
         public ActionResult Create()
         {
-            ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone");
-            ViewBag.site_id = new SelectList(db.T_site, "id", "adresse");
+            var entreprise = new T_entreprise();
+
+            // Récupération de l'ID de l'utilisateur actuel pour gérer ses droits
+            var currentUserId = User.Identity.GetUserId();
+            var currentUser = db.AspNetUsers.Find(currentUserId);
+            ViewBag.CurrentUserRoleId = currentUser?.role_id ?? 0;
+
+            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.role_id = new SelectList(db.T_role, "id", "nom_role");
             return View();
         }
 
@@ -49,17 +93,19 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom,num_tel_id,site_id")] T_entreprise t_entreprise)
+        public ActionResult Create([Bind(Include = "id,nom,AspNetUser_id")] T_entreprise t_entreprise)
         {
+            var currentUserId = User.Identity.GetUserId();
+            t_entreprise.AspNetUser_id = currentUserId;
+
             if (ModelState.IsValid)
             {
                 db.T_entreprise.Add(t_entreprise);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = t_entreprise.id });
             }
 
-            ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone", t_entreprise.num_tel_id);
-            ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_entreprise.site_id);
+            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_entreprise.AspNetUser_id);
             return View(t_entreprise);
         }
 
@@ -75,8 +121,7 @@ namespace Projet_MobPro.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone", t_entreprise.num_tel_id);
-            ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_entreprise.site_id);
+            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_entreprise.AspNetUser_id);
             return View(t_entreprise);
         }
 
@@ -85,7 +130,7 @@ namespace Projet_MobPro.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom,num_tel_id,site_id")] T_entreprise t_entreprise)
+        public ActionResult Edit([Bind(Include = "id,nom,AspNetUser_id")] T_entreprise t_entreprise)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +138,7 @@ namespace Projet_MobPro.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.num_tel_id = new SelectList(db.T_num_tel, "id", "telephone", t_entreprise.num_tel_id);
-            ViewBag.site_id = new SelectList(db.T_site, "id", "adresse", t_entreprise.site_id);
+            ViewBag.AspNetUser_id = new SelectList(db.AspNetUsers, "Id", "Email", t_entreprise.AspNetUser_id);
             return View(t_entreprise);
         }
 
@@ -119,6 +163,12 @@ namespace Projet_MobPro.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             T_entreprise t_entreprise = db.T_entreprise.Find(id);
+
+            // Si un profil est supprimé, on supprime aussi les sites ET les num_tel
+            var sites = db.T_site.Where(ne => ne.entreprise_id == t_entreprise.id).ToList();
+            db.T_site.RemoveRange(sites);
+            var numtel = db.T_num_tel.Where(ne => ne.entreprise_id == t_entreprise.id).ToList();
+            db.T_num_tel.RemoveRange(numtel);
             db.T_entreprise.Remove(t_entreprise);
             db.SaveChanges();
             return RedirectToAction("Index");

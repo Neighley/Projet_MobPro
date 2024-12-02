@@ -19,6 +19,7 @@ namespace Projet_MobPro.Models
         {
             this.T_competences = new HashSet<T_competences>();
             this.T_langues = new HashSet<T_langues>();
+            this.T_niveau_experience = new HashSet<T_niveau_experience>();
         }
     
         public int id { get; set; }
@@ -44,5 +45,7 @@ namespace Projet_MobPro.Models
         public virtual ICollection<T_competences> T_competences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_langues> T_langues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_niveau_experience> T_niveau_experience { get; set; }
     }
 }
